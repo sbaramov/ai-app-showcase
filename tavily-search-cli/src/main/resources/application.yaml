@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: tavily-search-cli
