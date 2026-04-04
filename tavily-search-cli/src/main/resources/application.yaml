@@ -1,3 +1,6 @@
 spring:
   application:
     name: tavily-search-cli
+  shell:
+    interactive:
+      enabled: true

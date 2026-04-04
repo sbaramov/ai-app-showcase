@@ -99,7 +99,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <envFile>${project.basedir}/../etc/.env.properties</envFile>
+                    <environmentVariables>
+                        <spring.config.location>${project.basedir}/../etc/.env.properties</spring.config.location>
+                        <spring.profiles.active>local</spring.profiles.active>
+                    </environmentVariables>
                 </configuration>
             </plugin>
             <plugin>
@@ -109,6 +112,7 @@
                     <args>
                         <arg>-Xjsr305=strict</arg>
                         <arg>-Xannotation-default-target=param-property</arg>
+                        <arg>-java-parameters</arg>
                     </args>
                     <compilerPlugins>
                         <plugin>spring</plugin>
