@@ -8,14 +8,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="tavily-search-client" />
         <module name="tavily-search-cli" />
+        <module name="deep-search-embabel-backend" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ai-app-showcase" options="" />
-      <module name="tavily-search-cli" options="-parameters" />
-      <module name="tavily-search-client" options="-parameters" />
+      <module name="tavily-search-cli" options="" />
+      <module name="tavily-search-client" options="" />
     </option>
   </component>
 </project>

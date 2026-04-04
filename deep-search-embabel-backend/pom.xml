@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.baramov</groupId>
@@ -9,29 +9,9 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>tavily-search-cli</artifactId>
-    <name>tavily-search-cli</name>
-    <description>A demo client for Tavily Search</description>
-    <url/>
-
-    <licenses>
-        <license/>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>sbaramov</id>
-            <name>Stefan Baramov</name>
-            <email>sbaramov@gmail.com</email>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+    <artifactId>deep-search-embabel-backend</artifactId>
+    <name>deep-search-embabel-backend</name>
+    <description>Deep search backend powered by Embabel Agent Framework and Tavily Search</description>
 
     <dependencies>
         <!-- ======================================= -->
@@ -48,9 +28,16 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <!-- Embabel Agent Framework -->
         <dependency>
-            <groupId>org.springframework.shell</groupId>
-            <artifactId>spring-shell-starter</artifactId>
+            <groupId>com.embabel.agent</groupId>
+            <artifactId>embabel-agent-starter</artifactId>
+            <version>${embabel-agent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.embabel.agent</groupId>
+            <artifactId>embabel-agent-starter-ollama</artifactId>
+            <version>${embabel-agent.version}</version>
         </dependency>
 
         <!-- Internal: Tavily Search Client -->
@@ -63,6 +50,13 @@
             <artifactId>tavily-search-client</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <!-- Spring Web for REST API -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- ======================================= -->
         <!--      Tests                              -->
         <!-- ======================================= -->
@@ -75,11 +69,6 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit5</artifactId>
             <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.shell</groupId>
-            <artifactId>spring-shell-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- ======================================= -->

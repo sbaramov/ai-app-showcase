@@ -12,33 +12,19 @@
 
     <artifactId>tavily-search-client</artifactId>
 
-    <properties>
-        <java.version>25</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- === === Kotlin Config === -->
-        <!-- Source: https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib -->
-        <kotlin.version>2.3.20</kotlin.version>
-        <kotlin.compiler.apiVersion>2.3</kotlin.compiler.apiVersion>
-        <kotlin.compiler.jvmTarget>25</kotlin.compiler.jvmTarget>
-        <kotlin.code.style>official</kotlin.code.style>
-    </properties>
-
     <build>
-        <sourceDirectory>src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
             <!-- Source: https://kotlinlang.org/docs/all-open-plugin.html#maven -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
-
+                <extensions>true</extensions>
                 <configuration>
                     <compilerPlugins>
                         <plugin>spring</plugin>
                     </compilerPlugins>
                 </configuration>
-
                 <dependencies>
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
@@ -58,14 +44,8 @@
 
     <dependencies>
         <!-- ======================================= -->
-        <!--      Main  -->
+        <!--      Main                               -->
         <!-- ======================================= -->
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit5</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
@@ -84,8 +64,14 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <!-- ======================================= -->
-        <!--      Test  -->
+        <!--      Test                               -->
         <!-- ======================================= -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit5</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

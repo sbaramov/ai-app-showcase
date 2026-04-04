@@ -14,9 +14,21 @@
             <id>mavenCentral</id>
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
+        <repository>
+            <id>embabel-releases</id>
+            <url>https://repo.embabel.com/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <id>embabel-snapshots</id>
+            <url>https://repo.embabel.com/artifactory/libs-snapshot</url>
+        </repository>
     </repositories>
 
     <properties>
+        <!-- === General === -->
+        <java.version>25</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- === Dependencies === -->
         <!-- Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
         <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
@@ -31,18 +43,26 @@
         <spring-boot.version>3.5.12</spring-boot.version>
         <!-- Source: https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
         <spring-cloud.version>2025.0.1</spring-cloud.version>
+        <!-- Source: https://mvnrepository.com/artifact/com.embabel.agent/embabel-agent-starter -->
+        <embabel-agent.version>0.3.5</embabel-agent.version>
+        <!-- Source: https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-bom -->
+        <kotlin.version>2.3.20</kotlin.version>
+        <kotlin.compiler.apiVersion>2.3</kotlin.compiler.apiVersion>
+        <kotlin.compiler.jvmTarget>25</kotlin.compiler.jvmTarget>
+        <kotlin.code.style>official</kotlin.code.style>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- === Spring Boot === -->
             <dependency>
-                <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- === Spring Cloud === -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -50,10 +70,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- === Spring Shell === -->
             <dependency>
                 <groupId>org.springframework.shell</groupId>
                 <artifactId>spring-shell-dependencies</artifactId>
                 <version>${spring-shell.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- === Kotlin ===-->
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-bom</artifactId>
+                <version>2.3.20</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -102,5 +131,6 @@
     <modules>
         <module>tavily-search-client</module>
         <module>tavily-search-cli</module>
+        <module>deep-search-embabel-backend</module>
     </modules>
 </project>

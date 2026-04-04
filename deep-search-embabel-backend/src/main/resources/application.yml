@@ -1,0 +1,20 @@
+embabel:
+  agent:
+    platform:
+      models:
+        ollama:
+          base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+  models:
+    default-llm: llama3.1:8b
+    llms:
+      fast: llama3.1:8b
+      best: llama3.1:8b
+
+spring:
+  config:
+    import: optional:file:../etc/.env.properties
+  application:
+    name: deep-search-embabel-backend
+
+server:
+  port: 8081
