@@ -1,15 +1,10 @@
 package org.baramov.search.tavily
 
-import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 
-@FeignClient(
-    name = "tavily",
-    configuration = [TavilyClientConfig::class]
-)
 // @SuppressWarnings("kotlin:S6517")
-interface TavilyClient {
+interface TavilySearchService {
 
     @PostMapping("/search")
     fun search(@RequestBody query: SearchQuery): SearchResult

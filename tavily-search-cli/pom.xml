@@ -49,6 +49,10 @@
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.shell</groupId>
             <artifactId>spring-shell-starter</artifactId>
         </dependency>
@@ -115,7 +119,6 @@
                 </executions>
                 <configuration>
                     <environmentVariables>
-                        <spring.config.location>${project.basedir}/../etc/.env.properties</spring.config.location>
                         <spring.profiles.active>local</spring.profiles.active>
                     </environmentVariables>
                 </configuration>

@@ -3,9 +3,20 @@ package org.baramov.search.tavily
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.json.JsonMapper
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 
+/**
+ * A helper class used when configuration a FeignClient with Spring Cloud OpenFeign.
+ * For example:
+ * ```kotlin
+ * @FeignClient(
+ *     name = "tavily",
+ *     configuration = [TavilyClientConfig::class]
+ * )
+ * interface TavilyClient : TavilySearchService
+ * ```
+ * The class customizes the JSON Converter to use the notation of snake case.
+ */
 open class TavilyClientConfig {
 
     /** Change the field mapping to snake case. */

@@ -1,5 +1,6 @@
 package app.agent
 
+import app.TavilyClient
 import app.domain.DeepSearchResult
 import app.domain.RefinedQuery
 import app.domain.SearchContext
@@ -11,7 +12,8 @@ import com.embabel.agent.api.annotation.Agent
 import com.embabel.agent.api.common.OperationContext
 import org.baramov.search.tavily.SearchDepth
 import org.baramov.search.tavily.SearchQuery
-import org.baramov.search.tavily.TavilyClient
+import org.baramov.search.tavily.TavilyClientConfig
+import org.baramov.search.tavily.TavilySearchService
 
 @Agent(description = "Performs deep, multi-iteration web search with query refinement and result synthesis")
 class DeepSearchAgent(

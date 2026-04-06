@@ -4,7 +4,6 @@ import org.baramov.search.tavily.QuickSearchQuery
 import org.baramov.search.tavily.SearchDepth
 import org.baramov.search.tavily.SearchQuery
 import org.baramov.search.tavily.SearchResult
-import org.baramov.search.tavily.TavilyClient
 import org.springframework.shell.standard.ShellCommandGroup
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod

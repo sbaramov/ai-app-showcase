@@ -1,6 +1,18 @@
 spring:
+  config:
+    import: optional:file:../etc/.env.properties
   application:
     name: tavily-search-cli
   shell:
     interactive:
       enabled: true
+  cloud:
+    openfeign:
+      client:
+        config:
+          tavily:
+            url: "https://api.tavily.com"
+            connect-timeout: 5000
+            read-timeout: 10000
+            default-request-headers:
+              Authorization: "Bearer ${TAVILY_API_KEY}"

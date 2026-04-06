@@ -47,10 +47,10 @@ data class SearchResult(
     val answer: String?,
     val images: List<ResultRelatedImage>,
     val results: List<SearchResultItem>,
-    val responseTime: String,
+    val responseTime: String?,
     val autoParameters: AutoParameters?,
     val usage: Usage?,
-    val requestId: String
+    val requestId: String?
 )
 
 /**

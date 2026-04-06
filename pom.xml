@@ -50,10 +50,26 @@
         <kotlin.compiler.apiVersion>2.3</kotlin.compiler.apiVersion>
         <kotlin.compiler.jvmTarget>25</kotlin.compiler.jvmTarget>
         <kotlin.code.style>official</kotlin.code.style>
+        <!-- Source: https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <commons-lang3.version>3.20.0</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- === Kotlin ===-->
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-bom</artifactId>
+                <version>2.3.20</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- === Apache Commons Lang === -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
             <!-- === Spring Boot === -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -75,14 +91,6 @@
                 <groupId>org.springframework.shell</groupId>
                 <artifactId>spring-shell-dependencies</artifactId>
                 <version>${spring-shell.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- === Kotlin ===-->
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-bom</artifactId>
-                <version>2.3.20</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

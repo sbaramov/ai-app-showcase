@@ -1,3 +1,18 @@
+spring:
+  config:
+    import: optional:file:../etc/.env.properties
+  application:
+    name: deep-search-embabel-backend
+  cloud:
+    openfeign:
+      client:
+        config:
+          tavily:
+            url: "https://api.tavily.com"
+            connect-timeout: 5000
+            read-timeout: 10000
+            default-request-headers:
+              Authorization: "Bearer ${TAVILY_API_KEY}"
 embabel:
   agent:
     platform:
@@ -9,12 +24,6 @@ embabel:
     llms:
       fast: llama3.1:8b
       best: llama3.1:8b
-
-spring:
-  config:
-    import: optional:file:../etc/.env.properties
-  application:
-    name: deep-search-embabel-backend
 
 server:
   port: 8081
