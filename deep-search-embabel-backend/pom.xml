@@ -56,6 +56,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 
         <!-- ======================================= -->
         <!--      Tests                              -->
@@ -74,23 +78,27 @@
         <!-- ======================================= -->
         <!--      Dev Tools                          -->
         <!-- ======================================= -->
+        <!-- Embabel Conflict
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
+        -->
     </dependencies>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
+            <!-- Source: https://mvnrepository.com/artifact/org.graalvm.buildtools/native-maven-plugin -->
+<!--
             <plugin>
-                <!-- Source: https://mvnrepository.com/artifact/org.graalvm.buildtools/native-maven-plugin -->
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
                 <version>1.0.0</version>
             </plugin>
+-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -104,7 +112,6 @@
                 </executions>
                 <configuration>
                     <environmentVariables>
-                        <spring.config.location>${project.basedir}/../etc/.env.properties</spring.config.location>
                         <spring.profiles.active>local</spring.profiles.active>
                     </environmentVariables>
                 </configuration>

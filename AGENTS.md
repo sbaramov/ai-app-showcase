@@ -110,7 +110,7 @@ mvn clean
 - **Packages**: lowercase with dots, matching module purpose:
   - Client: `org.baramov.search.tavily`
   - CLI: `app`
-  - Deep search: `app.domain`, `app.agent`, `app.api`
+  - Deep search: `app.domain`, `app.dr3`, `app.api`
 
 ### Types & Data Modeling
 - Prefer **`data class`** for DTOs and value objects.

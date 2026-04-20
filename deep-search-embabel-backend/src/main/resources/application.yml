@@ -19,11 +19,28 @@ embabel:
       models:
         ollama:
           base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      scanning:
+        bean: true
   models:
-    default-llm: llama3.1:8b
+    default-llm: gemma4:e4b
     llms:
-      fast: llama3.1:8b
-      best: llama3.1:8b
-
+      plan: gemma3:4b
+      search: gemma4:e4b
+      report: gemma4:e4b
 server:
   port: 8081
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+logging:
+  level:
+    org.springframework.messaging: DEBUG
+    org.springframework.messaging.simp: DEBUG
+    org.springframework.web.socket: DEBUG
+    com.embabel.agent: DEBUG
+embabel:
+  observability:
+    enabled: true

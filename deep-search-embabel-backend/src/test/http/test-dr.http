@@ -1,0 +1,36 @@
+### WebSocket STOMP test for Deep Research
+# Note: The IntelliJ HTTP Client doesn't natively speak STOMP protocol yet in the WEBSOCKET tool.
+# STOMP requires a specific framing (CONNECT, SUBSCRIBE, SEND frames).
+# Below is the raw STOMP frame sequence for testing.
+
+WEBSOCKET ws://localhost:8081/ws-research/websocket
+Content-Type: application/json
+
+===
+CONNECT
+accept-version:1.2,1.1,1.0
+heart-beat:10000,10000
+
+^@
+=== wait-for-server
+===
+SUBSCRIBE
+id:sub-0
+destination:/topic/research/progress
+
+^@
+===
+SUBSCRIBE
+id:sub-1
+destination:/topic/research/result
+
+^@
+===
+SEND
+destination:/app/research
+content-type:application/json
+
+{"researchTopic": "What are the latest Java AI application frameworks"}
+^@
+=== wait-for-server
+###
