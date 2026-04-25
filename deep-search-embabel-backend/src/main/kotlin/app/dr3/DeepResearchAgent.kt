@@ -49,40 +49,34 @@ class DeepResearchAgent(
     // =======================================
     //        Search
     // =======================================
-    @Action
-    fun searchPlanToItem(webSearchPlan: WebSearchPlan, context: OperationContext): Stream<WebSearchItem> {
-        return webSearchPlan.searches.stream()
-    }
 
     @Action
-    fun searchPlantToSummary(searchItem: WebSearchItem, context: OperationContext): SearchSummary {
-        log.info("[${context.agentProcess.id}] Executing a search for ${searchItem.query} and creating executive summary")
+    fun executeSearches(webSearchPlan: WebSearchPlan, context: OperationContext): SearchSummaryList {
+        log.info("[${context.agentProcess.id}] Executing ${webSearchPlan.searches.size} searches in parallel")
         context.processContext.onProcessEvent(
             ProgressUpdateEvent(
                 agentProcess = context.agentProcess,
-                name = "Searching: ${searchItem.query}",
+                name = "Executing searches",
                 current = 1,
                 total = 3
             )
         )
-        val summary = context.ai()
-            .withAutoLlm()
-            .withSystemPrompt(appProperties.systemPrompts.search)
-            .withToolObject(searchService)
-            .createObject(
-                "Search term: ${searchItem.query}\nReason for searching: ${searchItem.reason}",
-                SearchSummary::class.java
-            )
-        return summary
-    }
 
-    // =======================================
-    //        Report
-    // =======================================
+        val summaries = context.parallelMap(
+            items = webSearchPlan.searches,
+            maxConcurrency = 3
+        ) { searchItem ->
+            context.ai()
+                .withAutoLlm()
+                .withSystemPrompt(appProperties.systemPrompts.search)
+                .withToolObject(searchService)
+                .createObject(
+                    "Search term: ${searchItem.query}\nReason for searching: ${searchItem.reason}",
+                    SearchSummary::class.java
+                )
+        }
 
-    @Action
-    fun steamOfSearchSummary(stream: Stream<SearchSummary>, context: OperationContext): SearchSummaryList {
-        return SearchSummaryList(stream.toList())
+        return SearchSummaryList(summaries)
     }
 
     @Action
