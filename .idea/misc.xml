@@ -7,7 +7,17 @@
         <option value="$PROJECT_DIR$/tavily-search-client/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/tavily-search-cli/pom.xml" />
+        <option value="$PROJECT_DIR$/../../oss/embabel/embabel-agent-blog-promotor/pom.xml" />
+        <option value="$PROJECT_DIR$/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/../../oss/embabel/embabel-agent/pom.xml" />
+        <option value="$PROJECT_DIR$/../../oss/embabel/embabel-ragbot/pom.xml" />
+        <option value="$PROJECT_DIR$/../../oss/embabel/embabel-tripper/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/demo/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="graalvm-ce-25" project-jdk-type="JavaSDK">

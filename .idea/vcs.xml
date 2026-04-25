@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../../oss/embabel/embabel-agent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../oss/embabel/embabel-agent-blog-promotor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../oss/embabel/embabel-ragbot" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../oss/embabel/embabel-tripper" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>
