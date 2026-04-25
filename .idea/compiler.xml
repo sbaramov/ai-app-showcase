@@ -6,78 +6,86 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="embabel-agent-openai-autoconfigure" />
-        <module name="embabel-agent-shell-autoconfigure" />
         <module name="tavily-search-cli" />
-        <module name="embabel-agent-mcp-security" />
-        <module name="embabel-agent-starter-google-genai" />
-        <module name="embabel-agent-onnx-autoconfigure" />
-        <module name="embabel-agent-lmstudio-autoconfigure" />
-        <module name="embabel-agent-starter-shell" />
-        <module name="tripper" />
-        <module name="embabel-agent-skills" />
-        <module name="embabel-agent-platform-autoconfigure" />
-        <module name="embabel-agent-starter-mcpserver" />
-        <module name="embabel-agent-test" />
-        <module name="embabel-agent-dockermodels-autoconfigure" />
-        <module name="embabel-agent-starter-deepseek" />
-        <module name="embabel-agent-test-common" />
-        <module name="embabel-agent-starter-openai" />
-        <module name="embabel-agent-starter-gemini" />
-        <module name="ragbot" />
-        <module name="embabel-agent-google-genai-autoconfigure" />
-        <module name="embabel-agent-observability" />
-        <module name="embabel-agent-starter-bedrock" />
-        <module name="embabel-agent-a2a" />
-        <module name="embabel-agent-starter-lmstudio" />
-        <module name="embabel-agent-starter-a2a" />
         <module name="deep-search-embabel-backend" />
-        <module name="embabel-agent-starter-minimax" />
-        <module name="agent-blog-promotor" />
-        <module name="embabel-agent-starter" />
-        <module name="embabel-agent-ollama-autoconfigure" />
-        <module name="embabel-agent-starter-anthropic" />
-        <module name="embabel-agent-gemini-autoconfigure" />
-        <module name="embabel-agent-netty-client-autoconfigure" />
-        <module name="embabel-agent-onnx" />
-        <module name="embabel-agent-openai-custom-autoconfigure" />
-        <module name="embabel-agent-rag-lucene" />
-        <module name="embabel-agent-ai" />
-        <module name="embabel-agent-rag-core" />
-        <module name="embabel-agent-starter-mcpserver-security" />
-        <module name="embabel-agent-mcpserver-security-autoconfigure" />
-        <module name="embabel-agent-mcpserver" />
-        <module name="embabel-agent-api" />
-        <module name="embabel-agent-starter-ollama" />
-        <module name="embabel-agent-deepseek-autoconfigure" />
-        <module name="embabel-agent-mcpserver-autoconfigure" />
-        <module name="embabel-agent-observability-autoconfigure" />
-        <module name="embabel-agent-starter-onnx" />
-        <module name="embabel-agent-mistral-ai-autoconfigure" />
-        <module name="embabel-agent-starter-platform" />
-        <module name="embabel-agent-bedrock-autoconfigure" />
-        <module name="embabel-agent-anthropic-autoconfigure" />
         <module name="tavily-search-client" />
-        <module name="embabel-agent-shell" />
-        <module name="embabel-agent-webmvc" />
-        <module name="embabel-agent-starter-mistral-ai" />
-        <module name="embabel-agent-minimax-autoconfigure" />
-        <module name="embabel-agent-test-internal" />
-        <module name="embabel-agent-starter-observability" />
-        <module name="embabel-agent-rag-tika" />
-        <module name="embabel-agent-openai" />
-        <module name="embabel-agent-rag-pipeline" />
-        <module name="embabel-agent-domain" />
-        <module name="embabel-agent-byok" />
-        <module name="embabel-agent-starter-webmvc" />
-        <module name="embabel-agent-code" />
-        <module name="embabel-agent-starter-dockermodels" />
-        <module name="embabel-agent-a2a-autoconfigure" />
-        <module name="embabel-agent-starter-openai-custom" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="agent-blog-promotor" target="21" />
       <module name="demo" target="17" />
+      <module name="embabel-agent-a2a" target="21" />
+      <module name="embabel-agent-a2a-autoconfigure" target="21" />
+      <module name="embabel-agent-ai" target="21" />
+      <module name="embabel-agent-anthropic-autoconfigure" target="21" />
+      <module name="embabel-agent-api" target="21" />
+      <module name="embabel-agent-autoconfigure" target="21" />
+      <module name="embabel-agent-bedrock-autoconfigure" target="21" />
+      <module name="embabel-agent-byok" target="21" />
+      <module name="embabel-agent-code" target="21" />
+      <module name="embabel-agent-common" target="21" />
+      <module name="embabel-agent-deepseek-autoconfigure" target="21" />
+      <module name="embabel-agent-dependencies" target="1.5" />
+      <module name="embabel-agent-dockermodels-autoconfigure" target="21" />
+      <module name="embabel-agent-domain" target="21" />
+      <module name="embabel-agent-gemini-autoconfigure" target="21" />
+      <module name="embabel-agent-google-genai-autoconfigure" target="21" />
+      <module name="embabel-agent-lmstudio-autoconfigure" target="21" />
+      <module name="embabel-agent-mcp" target="21" />
+      <module name="embabel-agent-mcp-security" target="21" />
+      <module name="embabel-agent-mcpserver" target="21" />
+      <module name="embabel-agent-mcpserver-autoconfigure" target="21" />
+      <module name="embabel-agent-mcpserver-security-autoconfigure" target="21" />
+      <module name="embabel-agent-minimax-autoconfigure" target="21" />
+      <module name="embabel-agent-mistral-ai-autoconfigure" target="21" />
+      <module name="embabel-agent-netty-client-autoconfigure" target="21" />
+      <module name="embabel-agent-observability" target="21" />
+      <module name="embabel-agent-observability-autoconfigure" target="21" />
+      <module name="embabel-agent-ollama-autoconfigure" target="21" />
+      <module name="embabel-agent-onnx" target="21" />
+      <module name="embabel-agent-onnx-autoconfigure" target="21" />
+      <module name="embabel-agent-openai" target="21" />
+      <module name="embabel-agent-openai-autoconfigure" target="21" />
+      <module name="embabel-agent-openai-custom-autoconfigure" target="21" />
+      <module name="embabel-agent-parent" target="21" />
+      <module name="embabel-agent-platform-autoconfigure" target="21" />
+      <module name="embabel-agent-rag" target="21" />
+      <module name="embabel-agent-rag-core" target="21" />
+      <module name="embabel-agent-rag-lucene" target="21" />
+      <module name="embabel-agent-rag-pipeline" target="21" />
+      <module name="embabel-agent-rag-tika" target="21" />
+      <module name="embabel-agent-shell" target="21" />
+      <module name="embabel-agent-shell-autoconfigure" target="21" />
+      <module name="embabel-agent-skills" target="21" />
+      <module name="embabel-agent-starter" target="21" />
+      <module name="embabel-agent-starter-a2a" target="21" />
+      <module name="embabel-agent-starter-anthropic" target="21" />
+      <module name="embabel-agent-starter-bedrock" target="21" />
+      <module name="embabel-agent-starter-deepseek" target="21" />
+      <module name="embabel-agent-starter-dockermodels" target="21" />
+      <module name="embabel-agent-starter-gemini" target="21" />
+      <module name="embabel-agent-starter-google-genai" target="21" />
+      <module name="embabel-agent-starter-lmstudio" target="21" />
+      <module name="embabel-agent-starter-mcpserver" target="21" />
+      <module name="embabel-agent-starter-mcpserver-security" target="21" />
+      <module name="embabel-agent-starter-minimax" target="21" />
+      <module name="embabel-agent-starter-mistral-ai" target="21" />
+      <module name="embabel-agent-starter-observability" target="21" />
+      <module name="embabel-agent-starter-ollama" target="21" />
+      <module name="embabel-agent-starter-onnx" target="21" />
+      <module name="embabel-agent-starter-openai" target="21" />
+      <module name="embabel-agent-starter-openai-custom" target="21" />
+      <module name="embabel-agent-starter-platform" target="21" />
+      <module name="embabel-agent-starter-shell" target="21" />
+      <module name="embabel-agent-starter-webmvc" target="21" />
+      <module name="embabel-agent-starters" target="21" />
+      <module name="embabel-agent-test" target="21" />
+      <module name="embabel-agent-test-common" target="21" />
+      <module name="embabel-agent-test-internal" target="21" />
+      <module name="embabel-agent-test-support" target="21" />
+      <module name="embabel-agent-webmvc" target="21" />
+      <module name="ragbot" target="21" />
+      <module name="tripper" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

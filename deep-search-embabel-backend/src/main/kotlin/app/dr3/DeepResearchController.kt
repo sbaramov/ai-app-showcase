@@ -1,14 +1,14 @@
 package app.dr3
 
-import com.embabel.agent.api.channel.OutputChannel
-import com.embabel.agent.api.channel.OutputChannelEvent
-import com.embabel.agent.api.event.progress.OutputChannelHighlightingEventListener
+import com.embabel.agent.api.channel.ProgressOutputChannelEvent
+import com.embabel.agent.api.event.AgentProcessEvent
+import com.embabel.agent.api.event.AgenticEventListener
+import com.embabel.agent.api.event.ProgressUpdateEvent
 import com.embabel.agent.api.invocation.AgentInvocation
 import com.embabel.agent.core.AgentPlatform
 import com.embabel.agent.core.ProcessOptions
 import org.slf4j.LoggerFactory
 import org.springframework.messaging.handler.annotation.MessageMapping
-import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Controller
 
@@ -25,24 +25,40 @@ class DeepResearchController(
     fun handleResearchRequest(request: ResearchRequestMessage) {
         log.info("Received research request for topic: {}", request.researchTopic)
 
-        // Progress listener sends intermediate events to a specific topic
-        val progressListener = OutputChannelHighlightingEventListener(object : OutputChannel {
-            override fun send(event: OutputChannelEvent) {
-                messagingTemplate.convertAndSend("/topic/research/progress", event)
-            }
-        })
+        val progressListener = ProgressEventListener(messagingTemplate)
 
-        // TODO val resultType = ResearchReport::class.java
-        val resultType = WebSearchPlan::class.java
+        val resultType = ResearchReport::class.java
 
         val researchReportNext = AgentInvocation
             .create(agentPlatform, resultType)
             .withProcessOptions(ProcessOptions(listeners = listOf(progressListener)))
-            .invokeAsync(UserResearchRequest(request.researchTopic, 3)) // TODO Parameterize this
+            .invokeAsync(UserResearchRequest(request.researchTopic))
 
         // When finished, send the final report to the result topic
         researchReportNext.thenApply { researchReport ->
             messagingTemplate.convertAndSend("/topic/research/result", researchReport)
+        }
+    }
+
+    /**
+     * Event listener that forwards progress updates to WebSocket clients.
+     */
+    private class ProgressEventListener(
+        private val messagingTemplate: SimpMessagingTemplate
+    ) : AgenticEventListener {
+
+        override fun onProcessEvent(event: AgentProcessEvent) {
+            when (event) {
+                is ProgressUpdateEvent -> {
+                    messagingTemplate.convertAndSend(
+                        "/topic/research/progress",
+                        ProgressOutputChannelEvent(
+                            processId = event.processId,
+                            message = "${event.name} (${event.current}/${event.total})"
+                        )
+                    )
+                }
+            }
         }
     }
 

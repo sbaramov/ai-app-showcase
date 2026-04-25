@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent-blog-promotor/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent-blog-promotor/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-a2a/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/embabel-agent-a2a-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/embabel-agent-mcpserver-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/embabel-agent-mcpserver-security-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/embabel-agent-netty-client-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/embabel-agent-observability-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/embabel-agent-platform-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/embabel-agent-shell-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-anthropic-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-bedrock-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-deepseek-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-dockermodels-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-gemini-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-google-genai-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-lmstudio-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-minimax-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-mistral-ai-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-ollama-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-onnx-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-openai-autoconfigure/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/models/embabel-agent-openai-custom-autoconfigure/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-autoconfigure/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-code/src/main/java" charset="UTF-8" />
@@ -40,7 +17,6 @@
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-mcp/embabel-agent-mcpserver/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-mcp/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-mcp/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-observability/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-onnx/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-openai/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-rag/embabel-agent-rag-core/src/main/java" charset="UTF-8" />
@@ -76,13 +52,10 @@
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-starters/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-test-support/embabel-agent-test-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-test-support/embabel-agent-test-internal/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-test-support/embabel-agent-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-test-support/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/embabel-agent-test-support/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-agent/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-ragbot/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../oss/embabel/embabel-tripper/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/deep-search-embabel-backend/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/deep-search-embabel-backend/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/demo/src/main/kotlin" charset="UTF-8" />

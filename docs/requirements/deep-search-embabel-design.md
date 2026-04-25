@@ -36,7 +36,7 @@ deep-search-embabel-backend/
 ├── src/
 │   ├── main/kotlin/
 │   │   └── app/
-│   │       ├── DeepSearchApplication.kt          # Spring Boot entry point
+│   │       ├── DeepResearchApplication.kt          # Spring Boot entry point
 │   │       ├── config/
 │   │       │   └── EmbabelConfig.kt              # Embabel platform configuration
 │   │       ├── agent/
@@ -56,7 +56,7 @@ deep-search-embabel-backend/
 │   │           └── SearchController.kt           # REST API endpoint
 │   └── test/kotlin/
 │       └── app/
-│           └── DeepSearchApplicationTests.kt
+│           └── DeepResearchApplicationTests.kt
 ```
 
 ### 3.2 Dependencies
