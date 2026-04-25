@@ -8,6 +8,7 @@ Multi-module Maven project (Kotlin, JVM 25) providing a Tavily Search API client
 - `tavily-search-client` — Reusable Spring Cloud OpenFeign client library
 - `tavily-search-cli` — Spring Shell CLI application
 - `deep-search-embabel-backend` — Embabel Agent Framework REST API for deep search
+- `deep-search-embabel-jsclient` - a simple JS script to test search function of the `deep-search-embabel-backend`
 
 **Tech stack:** Kotlin 2.3.20, Spring Boot 3.5.12, Spring Shell 3.4.2, Spring Cloud 2025.0.1, Embabel Agent 0.3.4-SNAPSHOT, JUnit 5
 

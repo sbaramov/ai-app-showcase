@@ -14,11 +14,9 @@
 
     <build>
         <plugins>
-            <!-- Source: https://kotlinlang.org/docs/all-open-plugin.html#maven -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <compilerPlugins>
