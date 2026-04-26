@@ -4,6 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties(prefix = "app")
 data class AppProperties(
+    val allowedOriginPatterns: List<String> = listOf("*"),
     val systemPrompts: SystemPrompts = SystemPrompts()
 ) {
     data class SystemPrompts(
