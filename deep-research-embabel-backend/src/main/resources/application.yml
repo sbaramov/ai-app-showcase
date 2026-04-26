@@ -2,7 +2,7 @@ spring:
   config:
     import: optional:file:../etc/.env.properties
   application:
-    name: deep-search-embabel-backend
+    name: deep-research-embabel-backend
   cloud:
     openfeign:
       client:

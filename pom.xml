@@ -204,6 +204,6 @@
     <modules>
         <module>tavily-search-client</module>
         <module>tavily-search-cli</module>
-        <module>deep-search-embabel-backend</module>
+        <module>deep-research-embabel-backend</module>
     </modules>
 </project>

@@ -9,7 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>deep-search-embabel-backend</artifactId>
+    <artifactId>deep-research-embabel-backend</artifactId>
     <packaging>jar</packaging>
 
     <name>Deep Research Backend</name>

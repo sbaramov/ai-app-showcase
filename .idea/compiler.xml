@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="tavily-search-cli" />
-        <module name="deep-search-embabel-backend" />
         <module name="tavily-search-client" />
+        <module name="tavily-search-cli" />
+        <module name="deep-research-embabel-backend" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

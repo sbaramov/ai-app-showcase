@@ -4,7 +4,7 @@
 
 A Spring Boot application leveraging the **Embabel Agent Framework** to provide intelligent, goal-driven deep search capabilities. The application uses the existing `tavily-search-client` library as a tool for executing web searches within agentic workflows.
 
-**Module name:** `deep-search-embabel-backend`
+**Module name:** `deep-research-embabel-backend`
 
 **Tech stack:**
 - Kotlin 2.3.20, JVM 25
@@ -31,7 +31,7 @@ A Spring Boot application leveraging the **Embabel Agent Framework** to provide 
 ### 3.1 Module Structure
 
 ```
-deep-search-embabel-backend/
+deep-research-embabel-backend/
 ├── pom.xml                          # Maven module, child of ai-app-showcase
 ├── src/
 │   ├── main/kotlin/
@@ -339,16 +339,16 @@ Model selection in code uses `context.ai().withLlm("ollama/gemma3:12b")` for com
 
 ```bash
 # From project root
-mvn clean install -pl deep-search-embabel-backend -am
+mvn clean install -pl deep-research-embabel-backend -am
 
 # Run the application
-mvn spring-boot:run -pl deep-search-embabel-backend
+mvn spring-boot:run -pl deep-research-embabel-backend
 
 # Run tests
-mvn test -pl deep-search-embabel-backend
+mvn test -pl deep-research-embabel-backend
 
 # Run single test
-mvn test -pl deep-search-embabel-backend -Dtest=DeepSearchApplicationTests
+mvn test -pl deep-research-embabel-backend -Dtest=DeepSearchApplicationTests
 ```
 
 ## 10. References
