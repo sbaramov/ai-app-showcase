@@ -38,12 +38,6 @@ importers:
       '@fontsource/inter':
         specifier: ^5.2.8
         version: 5.2.8
-      '@stomp/ng2-stompjs':
-        specifier: ^8.0.0
-        version: 8.0.0
-      '@stomp/rx-stomp':
-        specifier: ^2.3.0
-        version: 2.3.0(@stomp/stompjs@7.3.0)(rxjs@7.8.2)(uuid@11.1.0)
       '@stomp/stompjs':
         specifier: ^7.3.0
         version: 7.3.0
@@ -1330,23 +1324,6 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@stomp/ng2-stompjs@8.0.0':
-    resolution: {integrity: sha512-1TTwdK7aUaRLfewG2FOqd3ZeIyIchKwOBzJytvUckjrBbpdeAXLXY0mCBFczoY16fSsxiAnZfJffFicStD+Dug==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-
-  '@stomp/rx-stomp@1.2.0':
-    resolution: {integrity: sha512-QLzPe3q0EwLB+cVWdUFEO4z5tyR+kPnXJANKN2UvB7Spz/oViHF959cydmXdQWaK7NHp86VO54TgFfXbHVnSLg==}
-
-  '@stomp/rx-stomp@2.3.0':
-    resolution: {integrity: sha512-Vt6CNHm0GuEeDz6iTb+fH1E1Vw8s5hEGqlhFMuqfkFdgoiJMVqsPUpIfF8POSYYjIHd/AJ/P55v6JgPsrFOKhA==}
-    peerDependencies:
-      '@stomp/stompjs': ^7.2.0
-      rxjs: ^7.2.0
-      uuid: '>=9.0.0 <12.0.0'
-
-  '@stomp/stompjs@6.1.2':
-    resolution: {integrity: sha512-FHDTrIFM5Ospi4L3Xhj6v2+NzCVAeNDcBe95YjUWhWiRMrBF6uN3I7AUOlRgT6jU/2WQvvYK8ZaIxFfxFp+uHQ==}
-
   '@stomp/stompjs@7.3.0':
     resolution: {integrity: sha512-nKMLoFfJhrQAqkvvKd1vLq/cVBGCMwPRCD0LqW7UT1fecRx9C3GoKEIR2CYwVuErGeZu8w0kFkl2rlhPlqHVgQ==}
 
@@ -1437,9 +1414,6 @@ packages:
   algoliasearch@5.48.1:
     resolution: {integrity: sha512-Rf7xmeuIo7nb6S4mp4abW2faW8DauZyE2faBIKFaUfP3wnpOvNSbiI5AwVhqBNj0jPgBWEvhyCu0sLjN2q77Rg==}
     engines: {node: '>= 14.0.0'}
-
-  angular2-uuid@1.1.1:
-    resolution: {integrity: sha512-6AXPyii9q8KBFGagybLNVmdGJLPcVZAhmv3odNGSJIA18LuJ3xOe6uN9GvjlQsGfdmYeuxlsGnFEUu7gPhkc+g==}
 
   ansi-escapes@7.3.0:
     resolution: {integrity: sha512-BvU8nYgGQBxcmMuEeUEmNTvrMVjJNSH7RgW24vXexN4Ven6qCvy4TntnvlnwnMLTVlcRQQdbRY8NKnaIoeWDNg==}
@@ -2528,9 +2502,6 @@ packages:
     resolution: {integrity: sha512-bLVMLPtstlZ4iMQHpFHTR7GAGj2jxi8Dg0s2h2MafAE4uSWF98FC/3MomU51iQAMf8/qDUbKWf5GxuvvVcXEhw==}
     engines: {node: '>=20'}
 
-  tslib@1.14.1:
-    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -2568,10 +2539,6 @@ packages:
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
-
-  uuid@11.1.0:
-    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
-    hasBin: true
 
   validate-npm-package-name@7.0.2:
     resolution: {integrity: sha512-hVDIBwsRruT73PbK7uP5ebUt+ezEtCmzZz3F59BSr2F6OVFnJ/6h8liuvdLrQ88Xmnk6/+xGGuq+pG9WwTuy3A==}
@@ -3854,24 +3821,6 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@stomp/ng2-stompjs@8.0.0':
-    dependencies:
-      '@stomp/rx-stomp': 1.2.0
-      tslib: 1.14.1
-
-  '@stomp/rx-stomp@1.2.0':
-    dependencies:
-      '@stomp/stompjs': 6.1.2
-      angular2-uuid: 1.1.1
-
-  '@stomp/rx-stomp@2.3.0(@stomp/stompjs@7.3.0)(rxjs@7.8.2)(uuid@11.1.0)':
-    dependencies:
-      '@stomp/stompjs': 7.3.0
-      rxjs: 7.8.2
-      uuid: 11.1.0
-
-  '@stomp/stompjs@6.1.2': {}
-
   '@stomp/stompjs@7.3.0': {}
 
   '@tufjs/canonical-json@2.0.0': {}
@@ -3989,8 +3938,6 @@ snapshots:
       '@algolia/requester-browser-xhr': 5.48.1
       '@algolia/requester-fetch': 5.48.1
       '@algolia/requester-node-http': 5.48.1
-
-  angular2-uuid@1.1.1: {}
 
   ansi-escapes@7.3.0:
     dependencies:
@@ -5218,8 +5165,6 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  tslib@1.14.1: {}
-
   tslib@2.8.1: {}
 
   tuf-js@4.1.0:
@@ -5251,8 +5196,6 @@ snapshots:
       browserslist: 4.28.2
       escalade: 3.2.0
       picocolors: 1.1.1
-
-  uuid@11.1.0: {}
 
   validate-npm-package-name@7.0.2: {}
 

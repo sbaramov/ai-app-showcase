@@ -27,7 +27,6 @@ export class ReportDisplayComponent implements OnInit, OnDestroy {
   formattedReport = '';
 
   ngOnInit(): void {
-    this._researchService.connectReport();
     this._researchService.report$.subscribe({
       next: (report) => {
         if (report) {

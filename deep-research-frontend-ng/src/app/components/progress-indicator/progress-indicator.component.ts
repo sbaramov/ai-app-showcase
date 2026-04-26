@@ -19,12 +19,10 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy {
   progressValue = 0;
 
   ngOnInit(): void {
-    this._researchService.connectProgress();
     this._researchService.progress$.subscribe({
       next: (messages) => {
         if (messages.length > 0) {
-          const latest = messages[messages.length - 1];
-          this.progressMessages = [latest, ...this.progressMessages].slice(0, 20);
+          this.progressMessages = messages;
           this.progressValue = Math.min(this.progressValue + 5, 100);
         }
       },

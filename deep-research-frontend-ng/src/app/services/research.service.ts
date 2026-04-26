@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Client, IMessage, IFrame } from '@stomp/stompjs';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -21,7 +21,7 @@ export interface ProgressOutputChannelEvent {
 @Injectable({
   providedIn: 'root',
 })
-export class ResearchService {
+export class ResearchService implements OnDestroy {
   private reportSubject = new BehaviorSubject<ResearchReport | null>(null);
   report$ = this.reportSubject.asObservable();
 
@@ -31,22 +31,30 @@ export class ResearchService {
   private isConnectedSubject = new BehaviorSubject<boolean>(false);
   isConnected$ = this.isConnectedSubject.asObservable();
 
-  private stompClient: Client | null = null;
+  private stompClient: Client;
 
   constructor() {
     this.stompClient = new Client({
       brokerURL: environment.wsUrl,
-      heartbeatIncoming: 0,
-      heartbeatOutgoing: 10000,
-      reconnectDelay: 1000,
-      connectionTimeout: 1000,
-      onConnect: (frame: IFrame) => {
+      onConnect: () => {
+        console.log('Connected to STOMP broker');
         this.isConnectedSubject.next(true);
+
+        this.stompClient.subscribe('/topic/research/progress', (message: IMessage) => {
+          const event: ProgressOutputChannelEvent = JSON.parse(message.body);
+          this.progressSubject.next([event, ...this.progressSubject.value].slice(0, 20));
+        });
+
+        this.stompClient.subscribe('/topic/research/result', (message: IMessage) => {
+          const report: ResearchReport = JSON.parse(message.body);
+          this.reportSubject.next(report);
+        });
       },
       onStompError: (frame: IFrame) => {
-        console.error('STOMP error:', frame.body);
+        console.error('STOMP error:', frame.headers['message'] || frame.body);
       },
-      onDisconnect: (frame: IFrame) => {
+      onDisconnect: () => {
+        console.log('Disconnected from STOMP broker');
         this.isConnectedSubject.next(false);
       },
     });
@@ -54,44 +62,19 @@ export class ResearchService {
     this.stompClient.activate();
   }
 
+  ngOnDestroy(): void {
+    this.stompClient.deactivate();
+  }
+
   startResearch(topic: string): void {
-    if (!this.stompClient || !this.isConnectedSubject.value) {
+    if (!this.isConnectedSubject.value) {
       console.error('Not connected to STOMP broker');
       return;
     }
 
-    const message: ResearchRequestMessage = {
-      researchTopic: topic,
-    };
-
     this.stompClient.publish({
       destination: '/app/research',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    });
-  }
-
-  connectProgress(): void {
-    if (!this.stompClient || !this.isConnectedSubject.value) {
-      return;
-    }
-
-    this.stompClient.subscribe('/topic/research/progress', (message: IMessage) => {
-      const event: ProgressOutputChannelEvent = JSON.parse(message.body);
-      this.progressSubject.next([event]);
-    });
-  }
-
-  connectReport(): void {
-    if (!this.stompClient || !this.isConnectedSubject.value) {
-      return;
-    }
-
-    this.stompClient.subscribe('/topic/research/result', (message: IMessage) => {
-      const report: ResearchReport = JSON.parse(message.body);
-      this.reportSubject.next(report);
+      body: JSON.stringify({ researchTopic: topic }),
     });
   }
 
