@@ -24,12 +24,9 @@
       [disabled]="searchForm.invalid || isSearching"
     >
       @if (isSearching) {
-        <mat-icon>search</mat-icon>
-        Researching...
-      } @else {
-        <mat-icon>search</mat-icon>
-        Search
+        <ng-container><mat-icon>search</mat-icon></ng-container>
       }
+      {{ isSearching ? 'Researching...' : 'Search' }}
     </button>
 
     @if (isFormSubmitted) {
