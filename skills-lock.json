@@ -1,6 +1,21 @@
 {
   "version": 1,
   "skills": {
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "computedHash": "c19a532a3777698b80b35270939a1dc559da451381971b3e1e78174d1ab54863"
+    },
+    "algorithmic-art": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "b2ca295de7f9c86c444f1fa21239e22e0eb7013ced1c652169b9402cc96ff744"
+    },
+    "angular-core-implementation": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "74582a5db0da18edef94efc61ce5a0ad64b494a46135588521cf3106e99a4146"
+    },
     "angular-developer": {
       "source": "angular/skills",
       "sourceType": "github",
@@ -11,10 +26,140 @@
       "sourceType": "github",
       "computedHash": "819b6e2f51a7778777f40c9f12653dbdc46189a917feac73455ec69fb5c83822"
     },
+    "angular-new-app": {
+      "source": "angular/skills",
+      "sourceType": "github",
+      "computedHash": "49bd84ab08bd3498c52f476bed48fbb942dc6dbc0925607e84549adbed34bccf"
+    },
+    "brand-guidelines": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "e48840db6ea772ceecdb68b4e50f8cc77e2534b7580aeaf4a6fe6ee7bd845d7d"
+    },
+    "canvas-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "3fa7ea60170023ad8268bf9fd734ea75dd404279a2ef8ddf5abaa1102ad8e5f4"
+    },
+    "claude-api": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "fe6c64489b954a17d24e3828f79165b230b2a24224d6310ad995061264ca2a3b"
+    },
+    "deployment": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "3d9f9379c2f506dcd8610c0b997719cc5487896bd1aa67186cd6c1833f546acf"
+    },
+    "doc-coauthoring": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "b964e4c3ffe13f66f76dd7919073e60c7aec622cd8a8363bb36323188100cf8e"
+    },
+    "docx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "6962db07127ee540a56e4677f65576d0727668a1d67f7da8bc978f10791c2bfe"
+    },
+    "forms-implementation": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "b17281622eee3c79423f2a873d1256fc230454b2424bf3baa845da295512a7be"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
+    },
+    "http-client": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "b63dbadf6ba356e957ceed1acd421c6355b8e4fa817c9386175239679b3178db"
+    },
+    "internal-comms": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "0bdc8867452b7ab9ef6167f6b0db2025ce5fb03773d3f85efcef2dfeb9d4976d"
+    },
+    "mcp-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "826e46adf81e1372282e205c34e1a2ee876e72148007726e4a2512599d2fef7b"
+    },
+    "pdf": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "cfbc539377088ca7e44a813b30c306327385bbd973cd7a721e1743f60837dd62"
+    },
+    "performance": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "75c5ad59df1915ad31676f19b184c8f2ea36a58f8f08b6ec349d94f62c8c4aac"
+    },
+    "pptx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "6b8b859d26f93aa059c9870d1ab76b44ab69e3d6757ce4a03cc94cb760888073"
+    },
+    "routing-performance-implementation": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "c53378ada765cc98c8d8f60647a8b031c5823e56ea7bd115036ebdf666adc704"
+    },
+    "rxjs-implementation": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "1f874b12e9a3ae07ceac7c48c132b2ef37441d07632f234ee0ec20d8c0441e41"
+    },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "computedHash": "5ea13a6d9f0d4bb694405d79acd00cadec0d21bb138c4dd10fcf3c500cb835c2"
+    },
+    "slack-gif-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "fab4fcfcaed371071069d61a3ab94dff15d10d36403ff269d147ea986cd98083"
+    },
+    "state-implementation": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "b476bedffb00db603b6f894fafa8a98873ee5ce0b987f3421d553b4b0e0ffcd3"
+    },
+    "template-skill": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "38c88f722b574a922311d334a70c2008a2a5b896f06eaa75516d716e5725b26f"
+    },
+    "testing-deployment-implementation": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "d2556c50e9234316c7519181c390e58a88fa7b609ad7022c112e19e852553e22"
+    },
+    "theme-factory": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "598ddfa9784ae2a8c55be5dbb047b98564d875dea6f4669168a87ae1ea1a4ed3"
+    },
+    "typescript-implementation": {
+      "source": "pluginagentmarketplace/custom-plugin-angular",
+      "sourceType": "github",
+      "computedHash": "e2d6feae19150db9062c9804e19de02cbcb04703f6be51ddc99f804187987595"
+    },
+    "web-artifacts-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "d52d422ead3fa26859a6af129609841a8536b230a2d649f86e61771d063e05e2"
+    },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "ad5b1fc52807e9afa4635e59218a026b164dc58b6c3f41b0f7c644dcd6ccf572"
+    },
+    "xlsx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "efd0c8011cf0677d8075cf93867ecec804f9a8754a777e1d2fdb46197e9c247f"
     }
   }
 }

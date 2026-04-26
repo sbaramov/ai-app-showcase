@@ -1,0 +1,30 @@
+# Angular Routing Configuration Template
+routes:
+  - path: ""
+    component: HomeComponent
+    title: "Home"
+  - path: "dashboard"
+    component: DashboardComponent
+    canActivate: [AuthGuard]
+    title: "Dashboard"
+  - path: "users"
+    loadChildren: "./users/users.routes"
+    data:
+      preload: true
+  - path: "admin"
+    loadChildren: "./admin/admin.routes"
+    canActivate: [AdminGuard]
+  - path: "**"
+    component: NotFoundComponent
+
+guards:
+  - name: AuthGuard
+    type: CanActivate
+    redirect: /login
+  - name: AdminGuard
+    type: CanActivate
+    redirect: /unauthorized
+
+preloading:
+  strategy: selective
+  routes: [users]
