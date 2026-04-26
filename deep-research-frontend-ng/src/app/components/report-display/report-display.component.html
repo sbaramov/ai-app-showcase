@@ -1,0 +1,37 @@
+@if (report) {
+  <div class="report-container">
+    <mat-card>
+      <mat-card-title>Research Report</mat-card-title>
+      <mat-card-content>
+        <pre class="report-content">{{ formattedReport }}</pre>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button
+          mat-button
+          matTooltip="Copy report to clipboard"
+          (click)="copyToClipboard()"
+        >
+          <mat-icon>content_copy</mat-icon>
+          Copy
+        </button>
+        <button
+          mat-button
+          matTooltip="Download as Markdown"
+          (click)="downloadMarkdown()"
+        >
+          <mat-icon>file_download</mat-icon>
+          Download
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+} @else {
+  <div class="no-report">
+    <mat-card>
+      <mat-card-title>No report available</mat-card-title>
+      <mat-card-content>
+        Run a search to generate a report.
+      </mat-card-content>
+    </mat-card>
+  </div>
+}

@@ -1,0 +1,26 @@
+.report-container {
+  margin: 1rem 0;
+}
+
+mat-card {
+  background: #2d2d2d;
+  color: #e0e0e0;
+  border-radius: 8px;
+}
+
+.report-content {
+  background: #1a1a1a;
+  color: #e0e0e0;
+  padding: 1rem;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.no-report {
+  margin: 1rem 0;
+}
