@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Client, IMessage, IFrame } from '@stomp/stompjs';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface ResearchRequestMessage {
   researchTopic: string;
@@ -34,7 +35,7 @@ export class ResearchService {
 
   constructor() {
     this.stompClient = new Client({
-      brokerURL: 'ws://localhost:8081/ws-research',
+      brokerURL: environment.wsUrl,
       heartbeatIncoming: 0,
       heartbeatOutgoing: 10000,
       reconnectDelay: 1000,
