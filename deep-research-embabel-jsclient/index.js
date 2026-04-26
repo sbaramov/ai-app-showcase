@@ -4,7 +4,7 @@ const WebSocket = require("ws");
 Object.assign(global, { WebSocket });
 
 const client = new Client({
-  brokerURL: "ws://localhost:8081/ws-research/websocket",
+  brokerURL: "ws://localhost:8081/ws-research",
   onConnect: () => {
     console.log("Connected");
 

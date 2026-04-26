@@ -1,5 +1,6 @@
 package app
 
+import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Configuration
 import org.springframework.messaging.simp.config.MessageBrokerRegistry
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker
@@ -8,7 +9,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
-class WebSocketConfig : WebSocketMessageBrokerConfigurer {
+class WebSocketConfig(private val appProperties: AppProperties) : WebSocketMessageBrokerConfigurer {
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
         // prefix for messages from server to client
         registry.enableSimpleBroker("/topic")
@@ -17,9 +18,14 @@ class WebSocketConfig : WebSocketMessageBrokerConfigurer {
     }
 
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        // register the endpoint where the client connects
+        // register the endpoint where the client connects (raw WebSocket, no SockJS)
         registry.addEndpoint("/ws-research")
-            .setAllowedOrigins("*")
-            .withSockJS()
+            .setAllowedOriginPatterns(*appProperties.allowedOriginPatterns.toTypedArray())
+
+        log.info("WebSockets configured with allowed origin patterns: ${appProperties.allowedOriginPatterns}")
+    }
+
+    companion object {
+        private val log = LoggerFactory.getLogger(WebSocketConfig::class.java)
     }
 }
