@@ -47,3 +47,7 @@ hs_err_pid*
 replay_pid*
 
 /etc/.env.properties
+
+### Playwright
+.playwright-mcp/
+
