@@ -633,7 +633,7 @@ Expected: Build succeeds without errors
 
 - [ ] **Step 2: Start the backend**
 
-Run from project root: `mvn spring-boot:run -pl deep-research-embabel-backend`
+Run from `deep-research-embabel-backend` directory: `cd deep-research-embabel-backend && mvn spring-boot:run`
 Expected: Backend compiles and starts on http://localhost:8080 (or configured port)
 
 - [ ] **Step 3: Run the application**

@@ -35,8 +35,8 @@ mvn test -pl tavily-search-client
 # Run the CLI application
 mvn spring-boot:run -pl tavily-search-cli
 
-# Run the deep search backend
-mvn spring-boot:run -pl deep-research-embabel-backend
+# Run the deep search backend (from module directory)
+cd deep-research-embabel-backend && mvn spring-boot:run
 
 # Clean build artifacts
 mvn clean
