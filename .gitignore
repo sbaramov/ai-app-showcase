@@ -51,3 +51,6 @@ replay_pid*
 ### Playwright
 .playwright-mcp/
 
+### Worktrees
+.worktrees/
+
