@@ -7,20 +7,15 @@ import { ResearchReport } from './research.service';
 export class ReportService {
   formatReport(report: ResearchReport): string {
     let output = '';
-    output += '### Short Summary\n';
     output += `${report.shortSummary}\n\n`;
     output += '---\n\n';
-    output += '### Research Report\n';
+    output += '## Research Report\n\n';
     output += report.markdownReport;
 
-    if (report.followUpQuestions && report.followUpQuestions.length > 0) {
-      output += '\n\n---\n\n';
-      output += '### Follow-up Questions\n';
-      report.followUpQuestions.forEach((question, index) => {
-        output += `${index + 1}. ${question}\n`;
-      });
-    }
-
     return output;
+  }
+
+  formatFollowUpQuestions(questions: string[] | undefined): string[] {
+    return questions || [];
   }
 }
