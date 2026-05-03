@@ -26,8 +26,8 @@ describe('ReportService', () => {
     const formatted = service.formatReport(report);
     expect(formatted).toContain('This is a summary.');
     expect(formatted).toContain('# Detailed Report');
+    expect(formatted).toContain('---');
     expect(formatted).not.toContain('### Short Summary');
-    expect(formatted).not.toContain('---');
   });
 
   it('returns empty array for undefined follow-up questions', () => {

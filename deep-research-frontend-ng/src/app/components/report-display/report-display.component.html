@@ -9,12 +9,10 @@
       
       <mat-card-content>
         <app-markdown-renderer [content]="markdownContent" />
-      </mat-card-content>
-      
-      <mat-card-content>
+        
         @if (followUpQuestions.length > 0) {
           <div class="follow-up-section">
-            <p class="follow-up-label">Follow-up Questions:</p>
+            <span class="follow-up-label">Follow up with:</span>
             <div class="follow-up-chips">
               @for (question of followUpQuestions; track $index) {
                 <button
