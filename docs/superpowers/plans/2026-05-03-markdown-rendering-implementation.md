@@ -631,12 +631,17 @@ git commit -m "test: add tests for markdown rendering and follow-up questions"
 Run: `ng build`
 Expected: Build succeeds without errors
 
-- [ ] **Step 2: Run the application**
+- [ ] **Step 2: Start the backend**
 
-Run: `ng serve`
+Run from project root: `mvn spring-boot:run -pl deep-research-embabel-backend`
+Expected: Backend compiles and starts on http://localhost:8080 (or configured port)
+
+- [ ] **Step 3: Run the application**
+
+Run from `deep-research-frontend-ng` directory: `ng serve`
 Expected: Application compiles and serves on http://localhost:4200
 
-- [ ] **Step 3: Manual testing**
+- [ ] **Step 4: Manual testing**
 
 1. Open http://localhost:4200 in browser
 2. Enter a search query and trigger search
