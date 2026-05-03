@@ -18,7 +18,7 @@ embabel:
     platform:
       models:
         openai:
-          max-attempts: 3
+          max-attempts: 5
       scanning:
         bean: true
   models:
