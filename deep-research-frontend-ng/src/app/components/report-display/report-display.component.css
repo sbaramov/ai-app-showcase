@@ -8,17 +8,30 @@ mat-card {
   border-radius: 8px;
 }
 
-.report-content {
-  background: #1a1a1a;
-  color: #e0e0e0;
-  padding: 1rem;
-  border-radius: 4px;
-  white-space: pre-wrap;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-height: 500px;
-  overflow-y: auto;
+.follow-up-section {
+  margin-top: 1rem;
+}
+
+.follow-up-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.follow-up-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.follow-up-chips button.mat-chip:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+mat-progress-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .no-report {

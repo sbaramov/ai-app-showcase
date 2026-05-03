@@ -2,14 +2,40 @@
   <div class="report-container">
     <mat-card>
       <mat-card-title>Research Report</mat-card-title>
+      
+      @if (isLoading) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      
       <mat-card-content>
-        <pre class="report-content">{{ formattedReport }}</pre>
+        <app-markdown-renderer [content]="markdownContent" />
       </mat-card-content>
+      
+      <mat-card-content>
+        @if (followUpQuestions.length > 0) {
+          <div class="follow-up-section">
+            <p class="follow-up-label">Follow-up Questions:</p>
+            <div class="follow-up-chips">
+              @for (question of followUpQuestions; track $index) {
+                <button
+                  mat-chip
+                  (click)="onFollowUpQuestionSelected(question)"
+                  [disabled]="isLoading"
+                >
+                  {{ question }}
+                </button>
+              }
+            </div>
+          </div>
+        }
+      </mat-card-content>
+      
       <mat-card-actions align="end">
         <button
           mat-button
           matTooltip="Copy report to clipboard"
           (click)="copyToClipboard()"
+          [disabled]="isLoading"
         >
           <mat-icon>content_copy</mat-icon>
           Copy
@@ -18,6 +44,7 @@
           mat-button
           matTooltip="Download as Markdown"
           (click)="downloadMarkdown()"
+          [disabled]="isLoading"
         >
           <mat-icon>file_download</mat-icon>
           Download
