@@ -6,25 +6,37 @@ describe('ReportService', () => {
   let service: ReportService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [ReportService]
+    });
     service = TestBed.inject(ReportService);
   });
 
-  it('should be created', () => {
+  it('can instantiate service', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should format markdown report', () => {
+  it('formats report with merged summary', () => {
     const report: ResearchReport = {
-      shortSummary: 'Test summary',
-      markdownReport: '## Test\nContent here',
+      shortSummary: 'This is a summary.',
+      markdownReport: '# Detailed Report\nThis is the report content.',
       followUpQuestions: ['Question 1', 'Question 2']
     };
+
     const formatted = service.formatReport(report);
-    expect(formatted).toContain('Short Summary');
-    expect(formatted).toContain('Test summary');
-    expect(formatted).toContain('Research Report');
-    expect(formatted).toContain('Follow-up Questions');
-    expect(formatted).toContain('Question 1');
+    expect(formatted).toContain('This is a summary.');
+    expect(formatted).toContain('# Detailed Report');
+    expect(formatted).not.toContain('### Short Summary');
+    expect(formatted).not.toContain('---');
+  });
+
+  it('returns empty array for undefined follow-up questions', () => {
+    const questions = service.formatFollowUpQuestions(undefined);
+    expect(questions).toEqual([]);
+  });
+
+  it('returns questions array for valid input', () => {
+    const questions = service.formatFollowUpQuestions(['Q1', 'Q2']);
+    expect(questions).toEqual(['Q1', 'Q2']);
   });
 });
