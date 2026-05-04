@@ -56,8 +56,24 @@ spring:
 logging:
   level:
     org.springframework.messaging: INFO
-    org.springframework.web.socket: DEBUG
+    org.springframework.web.socket: INFO
     com.embabel.agent: INFO
 embabel:
   observability:
     enabled: true
+---
+spring:
+  config:
+    activate:
+      on-profile: "gemma4"
+embabel:
+  models:
+    default-llm: "gemma4:31b-cloud"
+---
+spring:
+  config:
+    activate:
+      on-profile: "qwen3.5"
+embabel:
+  models:
+    default-llm: "qwen3.5:397b-cloud"
