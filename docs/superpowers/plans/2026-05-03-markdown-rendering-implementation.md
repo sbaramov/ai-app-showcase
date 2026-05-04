@@ -634,8 +634,8 @@ Expected: Build succeeds without errors
 - [ ] **Step 2: Start the backend**
 
 Run from `deep-research-embabel-backend` directory: `cd deep-research-embabel-backend && mvn spring-boot:run`
-Expected: Backend compiles and starts on http://localhost:8080 (or configured port)
-Verify health endpoint: curl http://localhost:8080/actuator/health
+Expected: Backend compiles and starts on http://localhost:8081 (or configured port)
+Verify health endpoint: curl http://localhost:8081/actuator/health
 Expected: HTTP 200 OK with JSON response `{"status":"UP"}`
 
 - [ ] **Step 3: Run the application**

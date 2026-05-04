@@ -231,7 +231,7 @@ export interface ResearchReport {
 })
 export class ResearchService {
   private readonly _stompConfig = {
-    brokerURL: 'ws://localhost:8080/ws-research/websocket',
+    brokerURL: 'ws://localhost:8081/ws-research/websocket',
     headers: {
       login: '',
       passcode: ''
@@ -1236,8 +1236,8 @@ Create `src/environments/environment.ts`:
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
-  wsUrl: 'ws://localhost:8080/ws-research/websocket'
+  apiUrl: 'http://localhost:8081',
+  wsUrl: 'ws://localhost:8081/ws-research/websocket'
 };
 ```
 
@@ -1284,7 +1284,7 @@ pnpm build
 # Run all tests
 pnpm test
 
-# Start dev server (backend must be running on :8080)
+# Start dev server (backend must be running on :8081)
 pnpm start
 ```
 
