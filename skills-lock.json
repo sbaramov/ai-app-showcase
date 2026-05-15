@@ -9,7 +9,8 @@
     "angular-developer": {
       "source": "angular/skills",
       "sourceType": "github",
-      "computedHash": "b7764c591c965d85f95f1d4f6d3620b6ab92a1b1fedbcdead7d59e946fc3fd2e"
+      "skillPath": "angular-developer/SKILL.md",
+      "computedHash": "36f7f57e1485c994de62eae5b00f54c12f81d1d16661afa6d3c214dd9bcf7269"
     },
     "angular-material": {
       "source": "pluginagentmarketplace/custom-plugin-angular",
