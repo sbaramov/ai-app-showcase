@@ -23,5 +23,7 @@ The core architecture is based on the Microservice Pattern where:
 * `deep-research-embabel-backend` uses Ollama as an inference engine and LLM provider
 
 
-
+## Commit Rules
+* Always Use conventional commits when writing the commit message
+* Always squash the commit together as long as these are part of a single session and use simple summarizing message with the core essence of the task
 
