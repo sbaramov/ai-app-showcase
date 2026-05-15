@@ -2,12 +2,6 @@
   margin: 1rem 0;
 }
 
-mat-card {
-  background: #2d2d2d;
-  color: #e0e0e0;
-  border-radius: 8px;
-}
-
 .follow-up-section {
   margin-top: 1rem;
 }
@@ -21,11 +15,6 @@ mat-card {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.follow-up-chips button.mat-chip:hover:not([disabled]) {
-  background-color: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
 }
 
 mat-progress-bar {

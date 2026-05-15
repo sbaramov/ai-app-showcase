@@ -1,9 +1,7 @@
 .progress-container {
-  background: #2d2d2d;
   border-radius: 8px;
   margin: 1rem 0;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .progress-header {
@@ -15,7 +13,6 @@
 
 .progress-header span {
   font-weight: 600;
-  color: #e0e0e0;
 }
 
 mat-list {

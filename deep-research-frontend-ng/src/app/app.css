@@ -5,21 +5,19 @@
 }
 
 .app-header {
-  background: #1a1a1a;
   padding: 1rem 2rem;
-  border-bottom: 1px solid #333;
   text-align: center;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
 }
 
 .app-header h1 {
   margin: 0 0 0.5rem 0;
-  color: #e0e0e0;
   font-size: 1.5rem;
 }
 
 .app-header p {
   margin: 0;
-  color: #909090;
+  opacity: 0.7;
   font-size: 0.9rem;
 }
 

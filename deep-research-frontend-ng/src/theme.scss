@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+
+// Define Deep Purple Amber theme using the v21 theming system
+$theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$violet-palette,
+    tertiary: mat.$orange-palette,
+  ),
+  density: (
+    scale: -2, // Compact for research tool
+  ),
+  typography: (
+    brand-family: 'Inter',
+    plain-family: 'Inter',
+  ),
+));
+
+// Apply theme to all Material components
+:root {
+  @include mat.all-component-themes($theme);
+  @include mat.system-level-colors($theme);
+  @include mat.system-level-typography($theme);
+}
+
+// Apply typography to body
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+// Ensure proper background inheritance
+html {
+  color-scheme: dark;
+}
