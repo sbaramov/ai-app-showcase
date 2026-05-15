@@ -1,10 +1,11 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { ResearchService, ProgressOutputChannelEvent } from '../../services/research.service';
+import { ResearchService } from '../../services/research.service';
 
 @Component({
   selector: 'app-progress-indicator',
@@ -12,32 +13,13 @@ import { ResearchService, ProgressOutputChannelEvent } from '../../services/rese
   templateUrl: './progress-indicator.component.html',
   styleUrl: './progress-indicator.component.css'
 })
-export class ProgressIndicatorComponent implements OnInit, OnDestroy {
+export class ProgressIndicatorComponent {
   private readonly _researchService = inject(ResearchService);
 
-  progressMessages: ProgressOutputChannelEvent[] = [];
-  progressValue = 0;
-
-  ngOnInit(): void {
-    this._researchService.progress$.subscribe({
-      next: (messages) => {
-        if (messages.length > 0) {
-          this.progressMessages = messages;
-          this.progressValue = Math.min(this.progressValue + 5, 100);
-        }
-      },
-      error: (error) => {
-        console.error('Progress subscription error:', error);
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    // Subscription cleanup handled by service
-  }
+  readonly progressMessages = toSignal(this._researchService.progress$, { initialValue: [] });
+  readonly progressValue = computed(() => Math.min(this.progressMessages().length * 5, 100));
 
   clearProgress(): void {
-    this.progressMessages = [];
-    this.progressValue = 0;
+    this._researchService.clearProgress();
   }
 }

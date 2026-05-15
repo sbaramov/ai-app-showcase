@@ -1,4 +1,5 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReportService } from '../../services/report.service';
-import { ResearchService, ResearchReport } from '../../services/research.service';
+import { ResearchService } from '../../services/research.service';
 import { MarkdownRendererComponent } from '../markdown-renderer/markdown-renderer.component';
 
 @Component({
@@ -25,51 +26,36 @@ import { MarkdownRendererComponent } from '../markdown-renderer/markdown-rendere
   templateUrl: './report-display.component.html',
   styleUrl: './report-display.component.css'
 })
-export class ReportDisplayComponent implements OnInit, OnDestroy {
+export class ReportDisplayComponent {
   private readonly _reportService = inject(ReportService);
   private readonly _researchService = inject(ResearchService);
 
-  report: ResearchReport | null = null;
-  markdownContent = '';
-  followUpQuestions: string[] = [];
-  isLoading = false;
-
-  ngOnInit(): void {
-    this._researchService.report$.subscribe({
-      next: (report) => {
-        if (report) {
-          this.report = report;
-          const summary = this._reportService.formatReport(report);
-          this.markdownContent = summary;
-          this.followUpQuestions = this._reportService.formatFollowUpQuestions(report.followUpQuestions);
-          this.isLoading = false;
-        }
-      },
-      error: (error) => {
-        console.error('Report subscription error:', error);
-        this.isLoading = false;
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    // Subscription cleanup handled by service
-  }
+  readonly report = toSignal(this._researchService.report$, { initialValue: null });
+  readonly markdownContent = computed(() => {
+    const r = this.report();
+    return r ? this._reportService.formatReport(r) : '';
+  });
+  readonly followUpQuestions = computed(() =>
+    this._reportService.formatFollowUpQuestions(this.report()?.followUpQuestions)
+  );
+  readonly isLoading = signal(false);
 
   onFollowUpQuestionSelected(question: string): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this._researchService.startResearch(question);
   }
 
   copyToClipboard(): void {
-    if (this.markdownContent) {
-      navigator.clipboard.writeText(this.markdownContent);
+    const content = this.markdownContent();
+    if (content) {
+      navigator.clipboard.writeText(content);
     }
   }
 
   downloadMarkdown(): void {
-    if (this.report && this.markdownContent) {
-      const blob = new Blob([this.markdownContent], { type: 'text/markdown' });
+    const content = this.markdownContent();
+    if (this.report() && content) {
+      const blob = new Blob([content], { type: 'text/markdown' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;

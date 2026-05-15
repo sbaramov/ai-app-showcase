@@ -1,4 +1,4 @@
-@if (progressMessages.length > 0) {
+@if (progressMessages().length > 0) {
   <div class="progress-container">
     <div class="progress-header">
       <span>Research Progress</span>
@@ -9,12 +9,12 @@
 
     <mat-progress-bar
       mode="determinate"
-      [value]="progressValue"
+      [value]="progressValue()"
       color="accent"
     ></mat-progress-bar>
 
     <mat-list>
-      @for (message of progressMessages; track message.processId + message.message) {
+      @for (message of progressMessages(); track message.processId + message.message) {
         <mat-list-item>
           <mat-icon matListItemIcon>circle</mat-icon>
           <span matListItemTitle>{{ message.message }}</span>

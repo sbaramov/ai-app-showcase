@@ -82,6 +82,10 @@ export class ResearchService implements OnDestroy {
     this.reportSubject.next(null);
   }
 
+  clearProgress(): void {
+    this.progressSubject.next([]);
+  }
+
   isConnected(): boolean {
     return this.isConnectedSubject.value;
   }

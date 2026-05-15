@@ -1,24 +1,24 @@
-@if (report) {
+@if (report()) {
   <div class="report-container">
     <mat-card>
       <mat-card-title>Research Report</mat-card-title>
       
-      @if (isLoading) {
+      @if (isLoading()) {
         <mat-progress-bar mode="indeterminate" />
       }
       
       <mat-card-content>
-        <app-markdown-renderer [content]="markdownContent" />
+        <app-markdown-renderer [content]="markdownContent()" />
         
-        @if (followUpQuestions.length > 0) {
+        @if (followUpQuestions().length > 0) {
           <div class="follow-up-section">
             <span class="follow-up-label">Follow up with:</span>
             <div class="follow-up-chips">
-              @for (question of followUpQuestions; track $index) {
+              @for (question of followUpQuestions(); track $index) {
                 <button
                   mat-chip
                   (click)="onFollowUpQuestionSelected(question)"
-                  [disabled]="isLoading"
+                  [disabled]="isLoading()"
                 >
                   {{ question }}
                 </button>
@@ -33,7 +33,7 @@
           mat-button
           matTooltip="Copy report to clipboard"
           (click)="copyToClipboard()"
-          [disabled]="isLoading"
+          [disabled]="isLoading()"
         >
           <mat-icon>content_copy</mat-icon>
           Copy
@@ -42,7 +42,7 @@
           mat-button
           matTooltip="Download as Markdown"
           (click)="downloadMarkdown()"
-          [disabled]="isLoading"
+          [disabled]="isLoading()"
         >
           <mat-icon>file_download</mat-icon>
           Download
