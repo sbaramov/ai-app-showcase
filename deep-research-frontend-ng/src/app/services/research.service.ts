@@ -46,6 +46,7 @@ export class ResearchService implements OnDestroy {
         });
 
         this.stompClient.subscribe('/topic/research/result', (message: IMessage) => {
+          this.progressSubject.next([]);
           const report: ResearchReport = JSON.parse(message.body);
           this.reportSubject.next(report);
         });
@@ -72,9 +73,10 @@ export class ResearchService implements OnDestroy {
       return;
     }
 
+    const message: ResearchRequestMessage = { researchTopic: topic };
     this.stompClient.publish({
       destination: '/app/research',
-      body: JSON.stringify({ researchTopic: topic }),
+      body: JSON.stringify(message),
     });
   }
 
