@@ -53,6 +53,13 @@ A backend component/server provide a deep research functionality.
 - Get results via `process.resultOfType(T::class.java)`.
 - Use `context.ai().withLlm("ollama/gemma3:12b").createObject(prompt, T::class.java)` for structured LLM output.
 - Use `T::class.java` (not `T::class`) when passing `Class<T>` to Embabel APIs.
+- **Do not override `embabel.models.default-llm`** with a non-existent model name — Embabel will fail to start if the named model is not registered. If an agent action never calls `context.ai()`, no model config is needed at all.
+- **Do not add `spring.ai.*` properties** to tune Embabel behaviour — Embabel manages Spring AI internally; direct `spring.ai` overrides conflict with its configuration.
+- Spring profile expressions for `@Profile` use `&` and `!` operators (e.g., `@Profile("!test & !mock")`).
+
+### Spring Profiles
+- `local` — enables Embabel observability and verbose WebSocket/messaging logging.
+- `mock` — activates `MockDeepResearchAgent` instead of the real agent; no LLM or Tavily API key required. Use for frontend development.
 
 ### Error Handling
 - Let Spring / OpenFeign propagate HTTP errors; do not swallow exceptions.

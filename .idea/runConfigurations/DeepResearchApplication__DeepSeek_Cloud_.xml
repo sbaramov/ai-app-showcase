@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DeepResearchApplication (DeepSeek-Cloud)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="local,deepseek" />
+    <module name="deep-research-embabel-backend" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="app.DeepResearchApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

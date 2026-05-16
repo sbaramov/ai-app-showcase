@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Simple Deep Research Test Client" type="NodeJSConfigurationType" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/deep-research-embabel-jsclient">
+    <method v="2" />
+  </configuration>
+</component>

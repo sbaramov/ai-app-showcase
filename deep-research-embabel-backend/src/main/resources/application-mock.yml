@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: mock
+embabel:
+  agent:
+    platform:
+      models:
+        openai:
+          max-attempts: 1

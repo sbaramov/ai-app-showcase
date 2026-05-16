@@ -15,7 +15,7 @@ import java.util.stream.Stream
     name = "Deep Research Agent",
     description = "An agent to research a given topic and product a detailed report."
 )
-@Profile("!test")
+@Profile("!test & !mock")
 class DeepResearchAgent(
     val appProperties: AppProperties,
     val searchService: SearchTool
