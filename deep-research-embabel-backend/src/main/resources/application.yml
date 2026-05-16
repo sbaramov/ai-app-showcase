@@ -77,3 +77,11 @@ spring:
 embabel:
   models:
     default-llm: "qwen3.5:397b-cloud"
+---
+spring:
+  config:
+    activate:
+      on-profile: "deepseek"
+embabel:
+  models:
+    default-llm: "deepseek-v4-flash:cloud"
