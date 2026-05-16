@@ -17,6 +17,12 @@
       "sourceType": "github",
       "computedHash": "819b6e2f51a7778777f40c9f12653dbdc46189a917feac73455ec69fb5c83822"
     },
+    "playwright-explore-website": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-explore-website/SKILL.md",
+      "computedHash": "ac361696198c2db22a0f9d3aa456d2f83c9f0110bf00d6ca529f735395fe3a5c"
+    },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
