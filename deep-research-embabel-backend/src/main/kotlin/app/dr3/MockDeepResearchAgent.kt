@@ -5,19 +5,29 @@ import com.embabel.agent.api.annotation.Action
 import com.embabel.agent.api.annotation.Agent
 import com.embabel.agent.api.common.OperationContext
 import com.embabel.agent.api.event.ProgressUpdateEvent
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Profile
 
 @Agent(
     name = "Mock Deep Research Agent",
     description = "An agent to research a given topic and product a detailed report."
 )
-@Profile("mock || test")
+@Profile("mock")
 class MockDeepResearchAgent {
+
+    constructor() {
+        log.info("Using MockDeepResearchAgent for deep research")
+    }
+
+    companion object {
+        val log: Logger = LoggerFactory.getLogger(MockDeepResearchAgent::class.java)
+    }
 
     @Action
     fun planSearch(userInput: UserResearchRequest, context: OperationContext): WebSearchPlan {
         context.processContext.onProcessEvent(
-            ProgressUpdateEvent(agentProcess = context.agentProcess, name = "Planning search queries", current = 0, total = 3)
+            ProgressUpdateEvent(agentProcess = context.agentProcess, name = "Planning search queries", current = 1, total = 3)
         )
         return WebSearchPlan(
             searches = listOf(
@@ -31,7 +41,7 @@ class MockDeepResearchAgent {
     @Action
     fun executeSearches(webSearchPlan: WebSearchPlan, context: OperationContext): SearchSummaryList {
         context.processContext.onProcessEvent(
-            ProgressUpdateEvent(agentProcess = context.agentProcess, name = "Executing searches", current = 1, total = 3)
+            ProgressUpdateEvent(agentProcess = context.agentProcess, name = "Executing searches", current = 2, total = 3)
         )
         Thread.sleep(800)
         val summaries = webSearchPlan.searches.map { item ->
@@ -53,7 +63,7 @@ class MockDeepResearchAgent {
         context: OperationContext
     ): ResearchReport {
         context.processContext.onProcessEvent(
-            ProgressUpdateEvent(agentProcess = context.agentProcess, name = "Generating final report", current = 2, total = 3)
+            ProgressUpdateEvent(agentProcess = context.agentProcess, name = "Generating final report", current = 3, total = 3)
         )
         Thread.sleep(1000)
         val topic = userResearchRequest.researchTopic

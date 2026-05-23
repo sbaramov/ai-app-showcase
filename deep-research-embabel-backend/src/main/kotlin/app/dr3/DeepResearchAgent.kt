@@ -15,7 +15,7 @@ import java.util.stream.Stream
     name = "Deep Research Agent",
     description = "An agent to research a given topic and product a detailed report."
 )
-@Profile("!test & !mock")
+@Profile("!(test | mock)")
 class DeepResearchAgent(
     val appProperties: AppProperties,
     val searchService: SearchTool
@@ -32,7 +32,7 @@ class DeepResearchAgent(
             ProgressUpdateEvent(
                 agentProcess = context.agentProcess,
                 name = "Planning search queries",
-                current = 0,
+                current = 1,
                 total = 3
             )
         )
@@ -57,7 +57,7 @@ class DeepResearchAgent(
             ProgressUpdateEvent(
                 agentProcess = context.agentProcess,
                 name = "Executing searches",
-                current = 1,
+                current = 2,
                 total = 3
             )
         )
@@ -95,7 +95,7 @@ class DeepResearchAgent(
             ProgressUpdateEvent(
                 agentProcess = context.agentProcess,
                 name = "Generating final report",
-                current = 2,
+                current = 3,
                 total = 3
             )
         )
