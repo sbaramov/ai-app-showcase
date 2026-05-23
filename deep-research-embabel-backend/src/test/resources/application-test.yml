@@ -1,0 +1,9 @@
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    url: jdbc:tc:postgresql:17:///deep_research
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+embabel:
+  models:
+    default-llm: gemma4:e4b

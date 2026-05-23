@@ -1,5 +1,6 @@
 package app.dr3
 
+import app.session.SessionService
 import com.embabel.agent.api.channel.ProgressOutputChannelEvent
 import com.embabel.agent.api.event.AgentProcessEvent
 import com.embabel.agent.api.event.AgenticEventListener
@@ -11,62 +12,64 @@ import org.slf4j.LoggerFactory
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Controller
+import java.util.UUID
+import java.util.concurrent.CompletableFuture
 
-/**
- * Controller for deep research using STOMP over WebSockets.
- */
 @Controller
 class DeepResearchController(
     private val agentPlatform: AgentPlatform,
-    private val messagingTemplate: SimpMessagingTemplate
+    private val messagingTemplate: SimpMessagingTemplate,
+    private val sessionService: SessionService
 ) {
 
     @MessageMapping("/research")
-    fun handleResearchRequest(request: ResearchRequestMessage) {
+    fun handleResearchRequest(request: ResearchRequestMessage): CompletableFuture<ResearchReport> {
         log.info("Received research request for topic: {}", request.researchTopic)
 
-        val progressListener = ProgressEventListener(messagingTemplate)
+        val session = if (request.sessionId == null) {
+            sessionService.createSession(request.researchTopic)
+        } else {
+            null // existing session — no creation needed
+        }
+        val sessionId = request.sessionId ?: session!!.id!!
 
-        val resultType = ResearchReport::class.java
-
-        val researchReportNext = AgentInvocation
-            .create(agentPlatform, resultType)
-            .withProcessOptions(ProcessOptions(listeners = listOf(progressListener)))
+        val future = AgentInvocation
+            .create(agentPlatform, ResearchReport::class.java)
+            .withProcessOptions(ProcessOptions(listeners = listOf(ProgressEventListener(messagingTemplate))))
             .invokeAsync(UserResearchRequest(request.researchTopic))
 
-        // When finished, send the final report to the result topic
-        researchReportNext.thenApply { researchReport ->
-            messagingTemplate.convertAndSend("/topic/research/result", researchReport)
+        future.thenApply { report ->
+            sessionService.addEntry(sessionId, request.researchTopic, report)
+            messagingTemplate.convertAndSend("/topic/research/result", ResearchResultMessage(sessionId, report))
         }
+
+        return future
     }
 
-    /**
-     * Event listener that forwards progress updates to WebSocket clients.
-     */
     private class ProgressEventListener(
         private val messagingTemplate: SimpMessagingTemplate
     ) : AgenticEventListener {
-
         override fun onProcessEvent(event: AgentProcessEvent) {
-            when (event) {
-                is ProgressUpdateEvent -> {
-                    messagingTemplate.convertAndSend(
-                        "/topic/research/progress",
-                        ProgressOutputChannelEvent(
-                            processId = event.processId,
-                            message = "${event.name} (${event.current}/${event.total})"
-                        )
+            if (event is ProgressUpdateEvent) {
+                messagingTemplate.convertAndSend(
+                    "/topic/research/progress",
+                    ProgressOutputChannelEvent(
+                        processId = event.processId,
+                        message = "${event.name} (${event.current}/${event.total})"
                     )
-                }
+                )
             }
         }
     }
 
-    /**
-     * Data class for incoming research requests via STOMP.
-     */
     data class ResearchRequestMessage(
-        val researchTopic: String = ""
+        val researchTopic: String = "",
+        val sessionId: UUID? = null
+    )
+
+    data class ResearchResultMessage(
+        val sessionId: UUID,
+        val report: ResearchReport
     )
 
     companion object {

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Profile
     name = "Mock Deep Research Agent",
     description = "An agent to research a given topic and product a detailed report."
 )
-@Profile("mock")
+@Profile("mock || test")
 class MockDeepResearchAgent {
 
     @Action

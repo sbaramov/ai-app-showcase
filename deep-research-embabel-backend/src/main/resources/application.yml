@@ -3,6 +3,12 @@ spring:
     import: optional:file:../etc/.env.properties
   application:
     name: deep-research-embabel-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/deep_research
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  flyway:
+    enabled: true
   cloud:
     openfeign:
       client:
@@ -22,7 +28,8 @@ embabel:
       scanning:
         bean: true
   models:
-    default-llm: gemma4:e4b
+    default-llm: ministral-3:8b
+    default-embedding-model: qwen3-embedding
 server:
   port: 8081
 

@@ -1,0 +1,17 @@
+package app.session
+
+import org.springframework.data.jdbc.repository.query.Query
+import org.springframework.data.repository.CrudRepository
+import java.util.UUID
+
+interface ResearchSessionRepository : CrudRepository<ResearchSession, UUID> {
+    @Query("SELECT id, name, created_at, updated_at, (SELECT COUNT(*) FROM research_entry e WHERE e.session_id = s.id) AS entry_count FROM research_session s ORDER BY created_at DESC")
+    fun findAllSummaries(): List<ResearchSessionSummaryRow>
+}
+
+data class ResearchSessionSummaryRow(
+    val id: UUID,
+    val name: String,
+    val createdAt: java.time.Instant,
+    val entryCount: Int
+)
