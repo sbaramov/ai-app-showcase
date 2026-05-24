@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +19,7 @@ import { ResearchService } from '../../services/research.service';
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.css'
 })
-export class SearchBoxComponent {
+export class SearchBoxComponent implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _researchService = inject(ResearchService);
 
@@ -27,16 +27,23 @@ export class SearchBoxComponent {
     topic: ['', [Validators.required, Validators.minLength(3)]]
   });
 
-  isSearching = false;
-  isFormSubmitted = false;
+  isSearching = signal(false);
+  isFormSubmitted = signal(false);
+
+  ngOnInit(): void {
+    // handle search complete
+    this._researchService.report$.subscribe((v) => {
+      this.isSearching.set(false)
+    })
+  }
 
   onSubmit(): void {
     if (this.searchForm.invalid) {
       return;
     }
 
-    this.isSearching = true;
-    this.isFormSubmitted = true;
+    this.isSearching.set(true);
+    this.isFormSubmitted.set(true);
 
     const topic = this.searchForm.controls.topic.value;
     if (topic) {
@@ -45,8 +52,9 @@ export class SearchBoxComponent {
   }
 
   onReset(): void {
+    // TODO Call the server and reset/delete search
     this.searchForm.reset();
-    this.isSearching = false;
-    this.isFormSubmitted = false;
+    this.isSearching.set(false);
+    this.isFormSubmitted.set(false);
   }
 }

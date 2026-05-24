@@ -1,20 +1,105 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ReportDisplayComponent } from './components/report-display/report-display.component';
-import { MarkdownRendererComponent } from './components/markdown-renderer/markdown-renderer.component';
+import { SessionSidebarComponent } from './components/session-sidebar/session-sidebar.component';
+import { SessionEntryListComponent } from './components/session-entry-list/session-entry-list.component';
+import { SessionService, ResearchEntry } from './services/session.service';
+import { ResearchService, ResearchReport } from './services/research.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   imports: [
+    CommonModule,
     SearchBoxComponent,
     ProgressIndicatorComponent,
     ReportDisplayComponent,
-    MarkdownRendererComponent
+    SessionSidebarComponent,
+    SessionEntryListComponent,
   ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
+export class App implements OnDestroy {
+  private readonly _sessionService = inject(SessionService);
+  private readonly _researchService = inject(ResearchService);
+
   protected readonly title = signal('Deep Research');
+
+  readonly selectedSessionId = signal<string | null>(null);
+  readonly sessionEntries = signal<ResearchEntry[]>([]);
+  readonly selectedEntry = signal<ResearchEntry | null>(null);
+  readonly isLoadingEntries = signal(false);
+
+  /** Historical report from a selected entry, parsed from reportJson */
+  readonly historicalReport = signal<ResearchReport | null>(null);
+
+  private readonly _subscriptions = new Subscription();
+
+  constructor() {
+    // When a live research completes, clear historical mode and refresh sessions
+    this._subscriptions.add(
+      this._researchService.sessionCompleted$.subscribe(() => {
+        this.selectedSessionId.set(null);
+        this.sessionEntries.set([]);
+        this.selectedEntry.set(null);
+        this.historicalReport.set(null);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
+  }
+
+  onSessionSelected(sessionId: string): void {
+    this.selectedSessionId.set(sessionId);
+    this.historicalReport.set(null);
+    this._loadSessionEntries(sessionId);
+  }
+
+  onNewSession(): void {
+    this.selectedSessionId.set(null);
+    this.sessionEntries.set([]);
+    this.selectedEntry.set(null);
+    this.historicalReport.set(null);
+    this._researchService.clearReport();
+    this._researchService.clearProgress();
+  }
+
+  onEntrySelected(entry: ResearchEntry): void {
+    this.selectedEntry.set(entry);
+    try {
+      const report: ResearchReport = JSON.parse(entry.reportJson);
+      this.historicalReport.set(report);
+    } catch (e) {
+      console.error('Failed to parse report JSON for entry', entry.id, e);
+      this.historicalReport.set(null);
+    }
+  }
+
+  private _loadSessionEntries(sessionId: string): void {
+    this.isLoadingEntries.set(true);
+    this.selectedEntry.set(null);
+    this.historicalReport.set(null);
+
+    this._sessionService.getSessionEntries(sessionId).subscribe({
+      next: (entries) => {
+        this.sessionEntries.set(entries);
+        this.isLoadingEntries.set(false);
+
+        // Auto-select the first entry if available
+        if (entries.length > 0) {
+          this.onEntrySelected(entries[0]);
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load session entries', err);
+        this.sessionEntries.set([]);
+        this.isLoadingEntries.set(false);
+      },
+    });
+  }
 }

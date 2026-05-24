@@ -1,7 +1,13 @@
-.app-container {
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-width: 0;
 }
 
 .app-header {
@@ -28,4 +34,41 @@
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+}
+
+.session-context {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  background: var(--mat-sys-surface-container);
+  border-radius: 8px;
+}
+
+.session-badge {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.clear-session-btn {
+  background: none;
+  border: 1px solid var(--mat-sys-primary);
+  color: var(--mat-sys-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.2s;
+}
+
+.clear-session-btn:hover {
+  background: var(--mat-sys-primary-container);
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
 }

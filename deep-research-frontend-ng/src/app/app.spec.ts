@@ -1,10 +1,45 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { of, Subject } from 'rxjs';
 import { App } from './app';
+import { ResearchService } from './services/research.service';
+import { SessionService } from './services/session.service';
 
 describe('App', () => {
+  let reportSubject = new Subject<any>();
+  let progressSubject = new Subject<any>();
+  let isConnectedSubject = new Subject<boolean>();
+  let sessionCompletedSubject = new Subject<string>();
+
+  const mockResearchService = {
+    report$: reportSubject.asObservable(),
+    progress$: progressSubject.asObservable(),
+    isConnected$: isConnectedSubject.asObservable(),
+    sessionCompleted$: sessionCompletedSubject.asObservable(),
+    startResearch: vi.fn(),
+    clearReport: vi.fn(),
+    clearProgress: vi.fn(),
+    isConnected: vi.fn(() => false),
+  };
+
+  const mockSessionService = {
+    listSessions: vi.fn(() => of([])),
+    renameSession: vi.fn(() => of(undefined)),
+    getSessionEntries: vi.fn(() => of([])),
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideAnimationsAsync(),
+        { provide: ResearchService, useValue: mockResearchService },
+        { provide: SessionService, useValue: mockSessionService },
+      ],
     }).compileComponents();
   });
 
@@ -14,9 +49,9 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render title', () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Deep Research');
   });

@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Client, IMessage, IFrame } from '@stomp/stompjs';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface ResearchRequestMessage {
@@ -11,6 +11,11 @@ export interface ResearchReport {
   shortSummary: string;
   markdownReport: string;
   followUpQuestions?: string[];
+}
+
+export interface ResearchResultMessage {
+  sessionId: string;
+  report: ResearchReport;
 }
 
 export interface ProgressOutputChannelEvent {
@@ -31,6 +36,10 @@ export class ResearchService implements OnDestroy {
   private isConnectedSubject = new BehaviorSubject<boolean>(false);
   isConnected$ = this.isConnectedSubject.asObservable();
 
+  /** Emits the sessionId when a live research session completes */
+  private sessionCompletedSubject = new Subject<string>();
+  sessionCompleted$ = this.sessionCompletedSubject.asObservable();
+
   private stompClient: Client;
 
   constructor() {
@@ -47,8 +56,10 @@ export class ResearchService implements OnDestroy {
 
         this.stompClient.subscribe('/topic/research/result', (message: IMessage) => {
           this.progressSubject.next([]);
-          const report: ResearchReport = JSON.parse(message.body);
-          this.reportSubject.next(report);
+          const reportMessage: ResearchResultMessage = JSON.parse(message.body);
+          this.reportSubject.next(reportMessage.report);
+          // Emit sessionId so consumers (sidebar) can refresh
+          this.sessionCompletedSubject.next(reportMessage.sessionId);
         });
       },
       onStompError: (frame: IFrame) => {
@@ -65,6 +76,7 @@ export class ResearchService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.stompClient.deactivate();
+    this.sessionCompletedSubject.complete();
   }
 
   startResearch(topic: string): void {

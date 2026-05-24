@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReportService } from '../../services/report.service';
-import { ResearchService } from '../../services/research.service';
+import { ResearchService, ResearchReport } from '../../services/research.service';
 import { MarkdownRendererComponent } from '../markdown-renderer/markdown-renderer.component';
 
 @Component({
@@ -30,15 +30,27 @@ export class ReportDisplayComponent {
   private readonly _reportService = inject(ReportService);
   private readonly _researchService = inject(ResearchService);
 
-  readonly report = toSignal(this._researchService.report$, { initialValue: null });
+  /** Historical report passed from a session entry view. Takes priority over live stream. */
+  readonly historicalReport = input<ResearchReport | null>(null);
+
+  readonly liveReport = toSignal(this._researchService.report$, { initialValue: null });
+  readonly isLoading = signal(false);
+
+  /** Active report: prefers historical input over live stream */
+  readonly report = computed<ResearchReport | null>(() => {
+    const historical = this.historicalReport();
+    if (historical) return historical;
+    return this.liveReport();
+  });
+
   readonly markdownContent = computed(() => {
     const r = this.report();
     return r ? this._reportService.formatReport(r) : '';
   });
+
   readonly followUpQuestions = computed(() =>
     this._reportService.formatFollowUpQuestions(this.report()?.followUpQuestions)
   );
-  readonly isLoading = signal(false);
 
   onFollowUpQuestionSelected(question: string): void {
     this.isLoading.set(true);

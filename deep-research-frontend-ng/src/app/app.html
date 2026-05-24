@@ -1,12 +1,39 @@
-<div class="app-container">
-  <header class="app-header">
-    <h1>{{ title() }}</h1>
-    <p>Deep research using <strong>Tavily Search API</strong> with Embabel Agent</p>
-  </header>
+<div class="app-shell">
+  <app-session-sidebar
+    [selectedSessionId]="selectedSessionId()"
+    (sessionSelected)="onSessionSelected($event)"
+    (newSessionRequested)="onNewSession()"
+  />
 
-  <main class="app-content">
-    <app-search-box></app-search-box>
-    <app-progress-indicator></app-progress-indicator>
-    <app-report-display></app-report-display>
+  <main class="app-main">
+    <header class="app-header">
+      <h1>{{ title() }}</h1>
+      <p>Deep research using <strong>Tavily Search API</strong> with Embabel Agent</p>
+    </header>
+
+    <div class="app-content">
+      <app-search-box />
+
+      @if (selectedSessionId()) {
+        <div class="session-context">
+          <span class="session-badge">Viewing session</span>
+          <button class="clear-session-btn" (click)="onNewSession()">
+            Start new research
+          </button>
+        </div>
+      }
+
+      <app-progress-indicator />
+
+      @if (selectedSessionId() && sessionEntries().length > 0) {
+        <app-session-entry-list
+          [entries]="sessionEntries()"
+          [selectedEntryId]="selectedEntry()?.id ?? null"
+          (entrySelected)="onEntrySelected($event)"
+        />
+      }
+
+      <app-report-display [historicalReport]="historicalReport()" />
+    </div>
   </main>
 </div>

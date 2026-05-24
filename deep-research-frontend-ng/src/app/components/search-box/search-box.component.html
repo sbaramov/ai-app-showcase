@@ -21,15 +21,15 @@
       mat-raised-button
       color="primary"
       (click)="onSubmit()"
-      [disabled]="searchForm.invalid || isSearching"
+      [disabled]="searchForm.invalid || isSearching()"
     >
-      @if (isSearching) {
+      @if (isSearching()) {
         <ng-container><mat-icon>search</mat-icon></ng-container>
       }
-      {{ isSearching ? 'Researching...' : 'Search' }}
+      {{ isSearching() ? 'Researching...' : 'Search' }}
     </button>
 
-    @if (isFormSubmitted) {
+    @if (isFormSubmitted()) {
       <button
         mat-stroked-button
         (click)="onReset()"

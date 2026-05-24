@@ -1,0 +1,26 @@
+@if (entries().length === 0) {
+  <div class="no-entries">
+    <mat-icon>article</mat-icon>
+    <p>No entries in this session</p>
+  </div>
+} @else {
+  <div class="entry-list-container">
+    <h3>Session Entries</h3>
+    <mat-nav-list role="list">
+      @for (entry of entries(); track entry.id) {
+        <mat-list-item
+          class="entry-item"
+          [class.selected]="entry.id === selectedEntryId()"
+          (click)="onSelectEntry(entry)"
+          role="listitem"
+          tabindex="0"
+          (keydown.enter)="onSelectEntry(entry)"
+          (keydown.space)="onSelectEntry(entry)"
+        >
+          <mat-icon matListItemIcon>description</mat-icon>
+          <span matListItemTitle>{{ entry.query }}</span>
+        </mat-list-item>
+      }
+    </mat-nav-list>
+  </div>
+}

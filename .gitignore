@@ -1,6 +1,8 @@
 ### Configuration
 **/.env.properties
 .aiassistant/
+.hermes/plans/
+
 
 ### Maven template
 target/
@@ -51,6 +53,7 @@ replay_pid*
 
 ### Playwright
 .playwright-mcp/
+.playwright-cli/
 
 ### Worktrees
 .worktrees/
