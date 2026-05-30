@@ -24,9 +24,11 @@ embabel:
     platform:
       models:
         openai:
-          max-attempts: 5
+          max-attempts: 3
       scanning:
         bean: true
+    logging:
+      personality: hitchhiker
   models:
     default-llm: ministral-3:8b
     default-embedding-model: qwen3-embedding
@@ -60,6 +62,7 @@ app:
       for 5-10 pages of content, at least 1000 words.
       
       **ALWAYS** escape double quotes with backslash.
+      **DO NOT** use any line feed (LF) or carriage return (CR) character in the output text.
 management:
   tracing:
     enabled: true

@@ -3,6 +3,7 @@
     <option name="ACTIVE_PROFILES" value="local,deepseek" />
     <module name="deep-research-embabel-backend" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="app.DeepResearchApplication" />
+    <option name="WORKING_DIRECTORY" value="file://$ProjectFileDir$/deep-research-embabel-backend" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
