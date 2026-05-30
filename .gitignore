@@ -1,5 +1,6 @@
 ### Configuration
 **/.env.properties
+/.env
 .aiassistant/
 .hermes/plans/
 
@@ -60,3 +61,4 @@ replay_pid*
 
 ### Superpowers
 .superpowers
+/prompts.md

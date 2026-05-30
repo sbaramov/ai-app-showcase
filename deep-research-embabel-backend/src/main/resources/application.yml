@@ -1,6 +1,6 @@
 spring:
   config:
-    import: optional:file:../etc/.env.properties
+    import: optional:file:${user.dir}/../etc/.env.properties
   application:
     name: deep-research-embabel-backend
   datasource:
@@ -30,6 +30,9 @@ embabel:
   models:
     default-llm: ministral-3:8b
     default-embedding-model: qwen3-embedding
+  observability:
+    enabled: true
+    service-name: deep-research
 server:
   port: 8081
 
@@ -55,6 +58,25 @@ app:
       
       The final output should be in markdown format, and it should be lengthy and detailed. Aim 
       for 5-10 pages of content, at least 1000 words.
+      
+      **ALWAYS** escape double quotes with backslash.
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  langfuse:
+    enabled: true
+    endpoint: "${EMBABEL_LANGFUSE_BASE_URL}/api/public/otel"
+#    endpoint: "${EMBABEL_LANGFUSE_BASE_URL}"
+    public-key: "${EMBABEL_LANGFUSE_PROJECT_PUBLIC_KEY}"
+    secret-key: "${EMBABEL_LANGFUSE_PROJECT_SECRET_KEY}"
+#  otlp:
+#    tracing:
+#      endpoint: http://localhost:3000/api/public/otel/v1/traces
+#      transport: http/protobuf
+#      headers:
+#        x-langfuse-ingestion-version: "4"
 ---
 spring:
   config:
@@ -65,9 +87,6 @@ logging:
     org.springframework.messaging: INFO
     org.springframework.web.socket: INFO
     com.embabel.agent: INFO
-embabel:
-  observability:
-    enabled: true
 ---
 spring:
   config:

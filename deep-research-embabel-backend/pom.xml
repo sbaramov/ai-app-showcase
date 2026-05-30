@@ -64,6 +64,33 @@
             <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
 
+        <!-- Observability -->
+        <dependency>
+            <groupId>com.embabel.agent</groupId>
+            <artifactId>embabel-agent-starter-observability</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.quantpulsar</groupId>
+            <artifactId>opentelemetry-exporter-langfuse</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+
+        <!-- OpenTelemetry OTLP tracing export -->
+        <!-- Bridges Micrometer Observation API (used by Embabel) to OpenTelemetry -->
+<!--
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-otel</artifactId>
+        </dependency>
+-->
+        <!-- Exports OpenTelemetry spans to LangFuse via OTLP HTTP -->
+<!--
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-otlp</artifactId>
+        </dependency>
+-->
+
         <!-- Spring Web for REST API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
