@@ -77,19 +77,15 @@
 
         <!-- OpenTelemetry OTLP tracing export -->
         <!-- Bridges Micrometer Observation API (used by Embabel) to OpenTelemetry -->
-<!--
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-otel</artifactId>
         </dependency>
--->
         <!-- Exports OpenTelemetry spans to LangFuse via OTLP HTTP -->
-<!--
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-exporter-otlp</artifactId>
         </dependency>
--->
 
         <!-- Spring Web for REST API -->
         <dependency>
