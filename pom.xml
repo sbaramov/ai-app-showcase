@@ -40,13 +40,13 @@
         <!-- Source: https://mvnrepository.com/artifact/org.springframework.shell/spring-shell-dependencies -->
         <spring-shell.version>3.4.2</spring-shell.version>
         <!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
-        <spring-boot.version>3.5.12</spring-boot.version>
+        <spring-boot.version>3.5.14</spring-boot.version>
         <!-- Source: https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-        <spring-cloud.version>2025.0.1</spring-cloud.version>
+        <spring-cloud.version>2025.0.2</spring-cloud.version>
         <!-- Source: https://mvnrepository.com/artifact/com.embabel.agent/embabel-agent-starter -->
         <embabel-agent.version>0.3.5</embabel-agent.version>
         <!-- Source: https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-bom -->
-        <kotlin.version>2.3.20</kotlin.version>
+        <kotlin.version>2.3.21</kotlin.version>
         <kotlin.compiler.apiVersion>2.3</kotlin.compiler.apiVersion>
         <kotlin.compiler.jvmTarget>25</kotlin.compiler.jvmTarget>
         <kotlin.code.style>official</kotlin.code.style>
