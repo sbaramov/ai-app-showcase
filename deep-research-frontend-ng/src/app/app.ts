@@ -7,6 +7,7 @@ import { SessionSidebarComponent } from './components/session-sidebar/session-si
 import { SessionEntryListComponent } from './components/session-entry-list/session-entry-list.component';
 import { SessionService, ResearchEntry } from './services/session.service';
 import { ResearchService, ResearchReport } from './services/research.service';
+import { ThemeService } from './services/theme.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,6 +26,10 @@ import { Subscription } from 'rxjs';
 export class App implements OnDestroy {
   private readonly _sessionService = inject(SessionService);
   private readonly _researchService = inject(ResearchService);
+  // Eagerly inject ThemeService so it initialises and applies the saved/system
+  // theme as soon as the root component is constructed — before any child
+  // component renders.
+  private readonly _themeService = inject(ThemeService);
 
   protected readonly title = signal('Deep Research');
 

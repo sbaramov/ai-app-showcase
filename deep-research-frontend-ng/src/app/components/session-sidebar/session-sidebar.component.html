@@ -1,70 +1,115 @@
 @if (isCollapsed()) {
   <div class="sidebar-collapsed" role="complementary" aria-label="Sessions sidebar">
-    <button mat-icon-button (click)="toggleCollapse()" aria-label="Expand sidebar" matTooltip="Expand sidebar">
-      <mat-icon>chevron_right</mat-icon>
-    </button>
+    <div class="sidebar-collapsed-top">
+      <button mat-icon-button (click)="toggleCollapse()" aria-label="Expand sidebar" matTooltip="Expand sidebar">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+    <div class="sidebar-collapsed-bottom">
+      <button mat-icon-button [matMenuTriggerFor]="collapsedThemeMenu" aria-label="Theme selection" [matTooltip]="getThemeLabel()">
+        <mat-icon>{{ getThemeIcon() }}</mat-icon>
+      </button>
+      <mat-menu #collapsedThemeMenu="matMenu">
+        <button mat-menu-item (click)="setThemeMode('light')">
+          <mat-icon>light_mode</mat-icon>
+          <span>Light Theme</span>
+        </button>
+        <button mat-menu-item (click)="setThemeMode('dark')">
+          <mat-icon>dark_mode</mat-icon>
+          <span>Dark Theme</span>
+        </button>
+        <button mat-menu-item (click)="setThemeMode('system')">
+          <mat-icon>settings_suggest</mat-icon>
+          <span>System Theme</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 } @else {
   <div class="sidebar-expanded" role="complementary" aria-label="Sessions sidebar">
-    <div class="sidebar-header">
-      <h2>Sessions</h2>
-      <div class="sidebar-header-actions">
-        <button mat-icon-button (click)="onRefresh()" aria-label="Refresh sessions" matTooltip="Refresh">
-          <mat-icon>refresh</mat-icon>
-        </button>
-        <button mat-icon-button (click)="toggleCollapse()" aria-label="Collapse sidebar" matTooltip="Collapse sidebar">
-          <mat-icon>chevron_left</mat-icon>
-        </button>
+    <div class="sidebar-main">
+      <div class="sidebar-header">
+        <h2>Sessions</h2>
+        <div class="sidebar-header-actions">
+          <button mat-icon-button (click)="onRefresh()" aria-label="Refresh sessions" matTooltip="Refresh">
+            <mat-icon>refresh</mat-icon>
+          </button>
+          <button mat-icon-button (click)="toggleCollapse()" aria-label="Collapse sidebar" matTooltip="Collapse sidebar">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+        </div>
       </div>
+
+      @if (selectedSessionId()) {
+        <button mat-stroked-button color="primary" class="new-session-btn" (click)="onNewSession()">
+          <mat-icon>add</mat-icon>
+          New Session
+        </button>
+      }
+
+      @if (isLoading()) {
+        <div class="sidebar-loading">
+          <mat-icon class="spinner">sync</mat-icon>
+          <span>Loading...</span>
+        </div>
+      } @else if (sessions().length === 0) {
+        <div class="sidebar-empty">
+          <mat-icon>search_off</mat-icon>
+          <p>No sessions yet</p>
+          <p class="hint">Start a research to create one</p>
+        </div>
+      } @else {
+        <mat-nav-list role="list" class="session-list">
+          @for (session of sessions(); track session.id) {
+            <mat-list-item
+              class="session-item"
+              [class.selected]="session.id === selectedSessionId()"
+              (click)="onSessionClick(session.id)"
+              role="listitem"
+              tabindex="0"
+              (keydown.enter)="onSessionClick(session.id)"
+              (keydown.space)="onSessionClick(session.id)"
+            >
+              <span matListItemTitle class="session-name">{{ session.name }}</span>
+              <span matListItemLine class="session-meta">
+                {{ session.entryCount }} entr{{ session.entryCount === 1 ? 'y' : 'ies' }}
+              </span>
+              <button
+                mat-icon-button
+                class="rename-btn"
+                (click)="$event.stopPropagation(); onRename(session)"
+                aria-label="Rename session"
+                matTooltip="Rename"
+                matListItemMeta
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-list-item>
+          }
+        </mat-nav-list>
+      }
     </div>
 
-    @if (selectedSessionId()) {
-      <button mat-stroked-button color="primary" class="new-session-btn" (click)="onNewSession()">
-        <mat-icon>add</mat-icon>
-        New Session
+    <!-- Theme selection settings in Expanded Sidebar footer -->
+    <div class="sidebar-footer">
+      <button mat-button class="theme-toggle-btn" [matMenuTriggerFor]="expandedThemeMenu">
+        <mat-icon>{{ getThemeIcon() }}</mat-icon>
+        <span>{{ getThemeLabel() }}</span>
       </button>
-    }
-
-    @if (isLoading()) {
-      <div class="sidebar-loading">
-        <mat-icon class="spinner">sync</mat-icon>
-        <span>Loading...</span>
-      </div>
-    } @else if (sessions().length === 0) {
-      <div class="sidebar-empty">
-        <mat-icon>search_off</mat-icon>
-        <p>No sessions yet</p>
-        <p class="hint">Start a research to create one</p>
-      </div>
-    } @else {
-      <mat-nav-list role="list" class="session-list">
-        @for (session of sessions(); track session.id) {
-          <mat-list-item
-            class="session-item"
-            [class.selected]="session.id === selectedSessionId()"
-            (click)="onSessionClick(session.id)"
-            role="listitem"
-            tabindex="0"
-            (keydown.enter)="onSessionClick(session.id)"
-            (keydown.space)="onSessionClick(session.id)"
-          >
-            <span matListItemTitle class="session-name">{{ session.name }}</span>
-            <span matListItemLine class="session-meta">
-              {{ session.entryCount }} entr{{ session.entryCount === 1 ? 'y' : 'ies' }}
-            </span>
-            <button
-              mat-icon-button
-              class="rename-btn"
-              (click)="$event.stopPropagation(); onRename(session)"
-              aria-label="Rename session"
-              matTooltip="Rename"
-              matListItemMeta
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-          </mat-list-item>
-        }
-      </mat-nav-list>
-    }
+      <mat-menu #expandedThemeMenu="matMenu">
+        <button mat-menu-item (click)="setThemeMode('light')">
+          <mat-icon>light_mode</mat-icon>
+          <span>Light Theme</span>
+        </button>
+        <button mat-menu-item (click)="setThemeMode('dark')">
+          <mat-icon>dark_mode</mat-icon>
+          <span>Dark Theme</span>
+        </button>
+        <button mat-menu-item (click)="setThemeMode('system')">
+          <mat-icon>settings_suggest</mat-icon>
+          <span>System Theme</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 }
