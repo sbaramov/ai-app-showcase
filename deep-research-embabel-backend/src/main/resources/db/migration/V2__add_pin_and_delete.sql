@@ -1,0 +1,2 @@
+ALTER TABLE research_session ADD COLUMN pinned BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE research_session ADD COLUMN marked_for_deletion BOOLEAN NOT NULL DEFAULT FALSE;

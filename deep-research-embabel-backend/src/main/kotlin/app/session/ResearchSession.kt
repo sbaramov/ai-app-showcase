@@ -9,6 +9,8 @@ import java.util.UUID
 data class ResearchSession(
     @Id val id: UUID? = null,
     val name: String,
+    val pinned: Boolean = false,
+    val markedForDeletion: Boolean = false,
     val createdAt: Instant = Instant.now(),
     val updatedAt: Instant = Instant.now()
 )
@@ -25,6 +27,7 @@ data class ResearchEntry(
 data class ResearchSessionSummary(
     val id: UUID,
     val name: String,
+    val pinned: Boolean,
     val createdAt: Instant,
     val entryCount: Int
 )

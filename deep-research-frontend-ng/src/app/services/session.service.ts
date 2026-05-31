@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 export interface ResearchSessionSummary {
   id: string;
   name: string;
+  pinned: boolean;
   createdAt: string;
   entryCount: number;
 }
@@ -31,6 +32,20 @@ export class SessionService {
 
   renameSession(id: string, name: string): Observable<void> {
     return this._http.patch<void>(`${this._apiUrl}/api/sessions/${id}`, { name });
+  }
+
+  pinSession(id: string, pinned: boolean): Observable<void> {
+    return this._http.put<void>(`${this._apiUrl}/api/sessions/${id}/pin`, null, {
+      params: { pinned: String(pinned) }
+    });
+  }
+
+  deleteSession(id: string): Observable<void> {
+    return this._http.delete<void>(`${this._apiUrl}/api/sessions/${id}`);
+  }
+
+  restoreSession(id: string): Observable<void> {
+    return this._http.put<void>(`${this._apiUrl}/api/sessions/${id}/restore`, null);
   }
 
   getSessionEntries(id: string): Observable<ResearchEntry[]> {

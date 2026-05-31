@@ -8,9 +8,12 @@ import org.springframework.boot.runApplication
 import org.springframework.cloud.openfeign.EnableFeignClients
 import org.springframework.cloud.openfeign.FeignClient
 
+import org.springframework.scheduling.annotation.EnableScheduling
+
 @SpringBootApplication
 @EnableFeignClients(clients = [TavilyClient::class])
 @EnableConfigurationProperties(AppProperties::class)
+@EnableScheduling
 class DeepResearchApplication
 
 fun main(args: Array<String>) {

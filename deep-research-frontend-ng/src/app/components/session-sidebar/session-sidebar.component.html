@@ -60,7 +60,11 @@
         </div>
       } @else {
         <mat-nav-list role="list" class="session-list">
-          @for (session of sessions(); track session.id) {
+          @for (session of sessions(); track session.id; let idx = $index) {
+            @if (idx > 0 && !session.pinned && sessions()[idx - 1].pinned) {
+              <mat-divider class="session-divider"></mat-divider>
+            }
+
             <mat-list-item
               class="session-item"
               [class.selected]="session.id === selectedSessionId()"
@@ -70,25 +74,48 @@
               (keydown.enter)="onSessionClick(session.id)"
               (keydown.space)="onSessionClick(session.id)"
             >
-              <span matListItemTitle class="session-name">{{ session.name }}</span>
+              <span matListItemTitle class="session-name-wrapper">
+                <span class="session-name">{{ session.name }}</span>
+                @if (session.pinned) {
+                  <mat-icon class="pinned-icon">push_pin</mat-icon>
+                }
+              </span>
               <span matListItemLine class="session-meta">
                 {{ session.entryCount }} entr{{ session.entryCount === 1 ? 'y' : 'ies' }}
               </span>
               <button
                 mat-icon-button
-                class="rename-btn"
-                (click)="$event.stopPropagation(); onRename(session)"
-                aria-label="Rename session"
-                matTooltip="Rename"
+                [matMenuTriggerFor]="sessionMenu"
+                [matMenuTriggerData]="{ session: session }"
+                (click)="$event.stopPropagation()"
+                aria-label="Session options"
+                matTooltip="Options"
                 matListItemMeta
               >
-                <mat-icon>edit</mat-icon>
+                <mat-icon>more_vert</mat-icon>
               </button>
             </mat-list-item>
           }
         </mat-nav-list>
       }
     </div>
+
+    <mat-menu #sessionMenu="matMenu">
+      <ng-template matMenuContent let-session="session">
+        <button mat-menu-item (click)="onRename(session)">
+          <mat-icon>edit</mat-icon>
+          <span>Rename</span>
+        </button>
+        <button mat-menu-item (click)="onTogglePin(session)">
+          <mat-icon>push_pin</mat-icon>
+          <span>{{ session.pinned ? 'Unpin Session' : 'Pin Session' }}</span>
+        </button>
+        <button mat-menu-item (click)="onDelete(session)" class="delete-menu-item">
+          <mat-icon color="warn">delete</mat-icon>
+          <span class="warn-text">Delete Session</span>
+        </button>
+      </ng-template>
+    </mat-menu>
 
     <!-- Theme selection settings in Expanded Sidebar footer -->
     <div class="sidebar-footer">

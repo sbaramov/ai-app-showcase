@@ -12,6 +12,8 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.patch
+import org.springframework.test.web.servlet.put
+import org.springframework.test.web.servlet.delete
 import java.time.Instant
 import java.util.UUID
 
@@ -26,7 +28,7 @@ class SessionControllerTest {
     fun `GET sessions returns list`() {
         val id = UUID.randomUUID()
         every { sessionService.listSessions() } returns listOf(
-            ResearchSessionSummary(id = id, name = "Test", createdAt = Instant.now(), entryCount = 2)
+            ResearchSessionSummary(id = id, name = "Test", pinned = false, createdAt = Instant.now(), entryCount = 2)
         )
 
         mockMvc.get("/api/sessions").andExpect {
@@ -60,5 +62,41 @@ class SessionControllerTest {
             status { isOk() }
             jsonPath("$[0].query") { value("test query") }
         }
+    }
+
+    @Test
+    fun `PUT pin toggles pinned status`() {
+        val id = UUID.randomUUID()
+        justRun { sessionService.pinSession(id, true) }
+
+        mockMvc.put("/api/sessions/$id/pin?pinned=true").andExpect {
+            status { isOk() }
+        }
+
+        verify { sessionService.pinSession(id, true) }
+    }
+
+    @Test
+    fun `DELETE session marks it for deletion`() {
+        val id = UUID.randomUUID()
+        justRun { sessionService.markSessionForDeletion(id, true) }
+
+        mockMvc.delete("/api/sessions/$id").andExpect {
+            status { isOk() }
+        }
+
+        verify { sessionService.markSessionForDeletion(id, true) }
+    }
+
+    @Test
+    fun `PUT restore unmarks session for deletion`() {
+        val id = UUID.randomUUID()
+        justRun { sessionService.markSessionForDeletion(id, false) }
+
+        mockMvc.put("/api/sessions/$id/restore").andExpect {
+            status { isOk() }
+        }
+
+        verify { sessionService.markSessionForDeletion(id, false) }
     }
 }

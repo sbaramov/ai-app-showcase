@@ -135,13 +135,41 @@
   opacity: 0.7;
 }
 
-.rename-btn {
+/* Show options menu button on hover */
+.session-item [matListItemMeta] {
   opacity: 0;
   transition: opacity 0.2s;
 }
 
-.session-item:hover .rename-btn {
+.session-item:hover [matListItemMeta] {
   opacity: 1;
+}
+
+.session-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.pinned-icon {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  color: var(--mat-sys-primary);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.session-divider {
+  margin: 0.25rem 0 !important;
+  border-top-color: var(--mat-sys-outline-variant) !important;
+  border-top-style: dashed !important;
+}
+
+.warn-text {
+  color: var(--mat-sys-error) !important;
 }
 
 .sidebar-footer {

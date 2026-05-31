@@ -7,6 +7,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { SessionService, ResearchSessionSummary } from '../../services/session.service';
 import { RenameSessionDialogComponent } from '../rename-session-dialog/rename-session-dialog.component';
@@ -25,6 +27,8 @@ import { Subscription } from 'rxjs';
     MatTooltipModule,
     MatDialogModule,
     MatMenuModule,
+    MatSnackBarModule,
+    MatDividerModule,
   ],
   templateUrl: './session-sidebar.component.html',
   styleUrl: './session-sidebar.component.css',
@@ -35,6 +39,7 @@ export class SessionSidebarComponent implements OnInit, OnDestroy {
   private readonly _themeService = inject(ThemeService);
   private readonly _researchService = inject(ResearchService);
   private readonly _dialog = inject(MatDialog);
+  private readonly _snackBar = inject(MatSnackBar);
 
   readonly selectedSessionId = input<string | null>(null);
 
@@ -93,6 +98,51 @@ export class SessionSidebarComponent implements OnInit, OnDestroy {
           error: (err) => console.error('Failed to rename session', err),
         });
       }
+    });
+  }
+
+  onTogglePin(session: ResearchSessionSummary): void {
+    this._sessionService.pinSession(session.id, !session.pinned).subscribe({
+      next: () => this._loadSessions(),
+      error: (err) => console.error('Failed to toggle pin session', err),
+    });
+  }
+
+  onDelete(session: ResearchSessionSummary): void {
+    const previousSessions = this.sessions();
+    // Optimistic UI update: filter out from local list
+    this.sessions.update((list) => list.filter((s) => s.id !== session.id));
+
+    const isCurrent = session.id === this.selectedSessionId();
+    if (isCurrent) {
+      this.newSessionRequested.emit();
+    }
+
+    this._sessionService.deleteSession(session.id).subscribe({
+      next: () => {
+        const snackBarRef = this._snackBar.open('Session deleted', 'Undo', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+
+        snackBarRef.onAction().subscribe(() => {
+          this._sessionService.restoreSession(session.id).subscribe({
+            next: () => {
+              this._loadSessions();
+              if (isCurrent) {
+                this.sessionSelected.emit(session.id);
+              }
+            },
+            error: (err) => console.error('Failed to restore session', err),
+          });
+        });
+      },
+      error: (err) => {
+        console.error('Failed to delete session', err);
+        // Rollback optimistic update
+        this.sessions.set(previousSessions);
+      },
     });
   }
 
