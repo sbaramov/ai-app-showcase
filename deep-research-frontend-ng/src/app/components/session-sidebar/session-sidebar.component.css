@@ -101,6 +101,7 @@
 .session-item {
   cursor: pointer;
   border-radius: 0;
+  position: relative !important;
 }
 
 .session-item.selected {
@@ -136,20 +137,26 @@
 }
 
 /* Show options menu button on hover, aligned vertically to the center */
-.session-item [matListItemMeta] {
+.session-item .mdc-list-item__end {
   opacity: 0;
   transition: opacity 0.2s;
-  align-self: center !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  position: absolute !important;
+  right: 4px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  z-index: 2;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.session-item:hover [matListItemMeta] {
+.session-item:hover .mdc-list-item__end {
   opacity: 1;
 }
 
 /* Make more_vert vertical dots button larger */
-.session-item [matListItemMeta] mat-icon {
+.session-item .mdc-list-item__end mat-icon {
   font-size: 26px !important;
   width: 26px !important;
   height: 26px !important;
@@ -161,6 +168,7 @@
   gap: 0.5rem;
   width: 100%;
   min-width: 0;
+  padding-right: 32px !important;
 }
 
 .pinned-icon {
