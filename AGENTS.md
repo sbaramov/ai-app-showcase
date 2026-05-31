@@ -50,3 +50,43 @@ You MUST call `library` first to get a valid ID unless the user provides one dir
 For version-specific docs, use `/org/project/version` from the `library` output (e.g., `/vercel/next.js/v14.3.0`).
 
 If a command fails with a quota error, inform the user and suggest `npx ctx7@latest login` or setting `CONTEXT7_API_KEY` env var for higher limits. Do not silently fall back to training data.
+
+---
+## Angular Testing Guidelines (Vitest & JIT)
+
+Since this project uses Vitest (which runs inside pure Node contexts without the Angular CLI stylesheet compilation asset pipelining), JIT compilation errors can occur when importing Standalone components with relative `templateUrl` or `styleUrls` decorators in spec suites.
+
+### JIT Template Overrides
+Always pre-override component templates inside your `beforeEach` block BEFORE compiling modules with `TestBed.configureTestingModule`:
+
+```ts
+beforeEach(async () => {
+  // Override relative URLs for Standalone components to prevent Vitest compilation crashes
+  TestBed.overrideComponent(SessionSidebarComponent, {
+    set: {
+      templateUrl: '',
+      template: '<div class="sidebar-expanded"></div>', // Simple test-harness placeholder
+      styleUrls: [],
+      styles: []
+    }
+  });
+
+  await TestBed.configureTestingModule({
+    imports: [SessionSidebarComponent],
+    providers: [ ... ]
+  }).compileComponents();
+});
+```
+
+### Browser Mocking in Vitest
+If components access browser-level properties (such as `localStorage` or `sessionStorage`), mock them explicitly in `beforeEach` using `vi.stubGlobal`:
+
+```ts
+beforeEach(() => {
+  vi.stubGlobal('localStorage', {
+    getItem: vi.fn(),
+    setItem: vi.fn(),
+    clear: vi.fn(),
+  });
+});
+```

@@ -89,3 +89,35 @@ You can use `<style>` elements directly in a component's template. View encapsul
 ## External Styles
 
 Using `<link>` or `@import` in CSS is treated as external styles. **External styles are not affected by emulated view encapsulation.**
+
+## Styling Third-Party & JIT-Generated Components
+
+When customizing elements inside third-party component libraries (like Angular Material's `<mat-list-item>`), standard scoped component selectors often fail under default `Emulated` View Encapsulation.
+
+### The Cause
+The Angular compiler appends unique scoping attributes (like `_ngcontent-c123`) strictly to elements physically declared in your component HTML template. It does **not** append scoping attributes to children nodes generated at runtime by imported directives or libraries (like `.mdc-list-item__content` or `.mdc-list-item__end`).
+
+### The Clean Solution (Bypassing `::ng-deep`)
+Instead of using the deprecated and discouraged `::ng-deep` shadow-piercing combinator, target **template-defined sibling/child elements** that you physically declared in your template, and apply offsets (`margin-left`, `margin-right`, etc.) directly to them:
+
+```html
+<!-- HTML Template -->
+<mat-list-item [class.pinned]="session.pinned">
+  <!-- Template-defined element (gets scoped _ngcontent) -->
+  <span matListItemTitle class="session-name-wrapper">
+    <span class="session-name">{{ session.name }}</span>
+  </span>
+  <span matListItemLine class="session-meta">
+    {{ session.entryCount }} entries
+  </span>
+</mat-list-item>
+```
+
+```css
+/* CSS Stylesheet */
+/* Target elements that are in our template directly to honor view encapsulation */
+.session-item.pinned .session-name-wrapper,
+.session-item.pinned .session-meta {
+  margin-left: 32px !important; /* Shifts text cleanly and preserves scoping! */
+}
+```
