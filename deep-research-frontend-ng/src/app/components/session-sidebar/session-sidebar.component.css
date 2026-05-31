@@ -138,7 +138,8 @@
 
 /* Always visible options menu button, aligned vertically to the center, non-transparent background */
 .session-item .mdc-list-item__end {
-  opacity: 1 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
   position: absolute !important;
   right: 4px !important;
   top: 50% !important;
@@ -152,6 +153,7 @@
   border-radius: 50%;
   width: 36px;
   height: 36px;
+  transition: opacity 0.2s ease-in-out !important;
 }
 
 /* Match background state of the parent list item */
@@ -161,6 +163,14 @@
 
 .session-item.selected .mdc-list-item__end {
   background: var(--mat-sys-primary-container) !important;
+}
+
+/* Show context menu button on hover, focus-within, or when expanded */
+.session-item:hover .mdc-list-item__end,
+.session-item:focus-within .mdc-list-item__end,
+.session-item .mdc-list-item__end[aria-expanded="true"] {
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* Make more_vert vertical dots button larger */
@@ -179,14 +189,28 @@
   padding-right: 32px !important;
 }
 
-.pinned-icon {
-  font-size: 14px !important;
-  width: 14px !important;
-  height: 14px !important;
+/* Pinned icon styles - positioned absolutely on the left and vertically centered */
+.session-item.pinned .pinned-icon {
+  position: absolute !important;
+  left: 10px !important;
+  top: 50% !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+  margin: 0 !important;
+  z-index: 2;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 26px !important;
+  width: 26px !important;
+  height: 26px !important;
   color: var(--mat-sys-primary);
-  transform: rotate(45deg);
   flex-shrink: 0;
-  margin-right: 2px !important;
+}
+
+/* Shift all item content text to the right for pinned items to cleanly clear the pin icon */
+.session-item.pinned .session-name-wrapper,
+.session-item.pinned .session-meta {
+  margin-left: 32px !important;
 }
 
 .session-divider {
