@@ -1,54 +1,71 @@
-@if (report()) {
-  <div class="report-container">
-    <mat-card>
-      <mat-card-title>Research Report</mat-card-title>
-      
-      @if (isLoading()) {
-        <mat-progress-bar mode="indeterminate" />
-      }
-      
-      <mat-card-content>
-        <app-markdown-renderer [content]="markdownContent()" />
-        
-        @if (followUpQuestions().length > 0) {
-          <div class="follow-up-section">
-            <span class="follow-up-label">Follow up with:</span>
-            <div class="follow-up-chips">
-              @for (question of followUpQuestions(); track $index) {
-                <button
-                  mat-chip
-                  (click)="onFollowUpQuestionSelected(question)"
-                  [disabled]="isLoading()"
-                >
-                  {{ question }}
-                </button>
-              }
+@if (reportsToRender().length > 0) {
+  <div class="reports-thread">
+    @for (item of reportsToRender(); track item.id; let idx = $index) {
+      <div [id]="'entry-' + item.id" class="report-entry-wrapper">
+        <mat-card class="report-card">
+          
+          <div class="report-card-header">
+            <div class="header-left">
+              <span class="step-badge">Step {{ idx + 1 }}</span>
+              <h2 class="step-query">{{ item.query }}</h2>
             </div>
+            <span class="step-date">{{ item.createdAt | date:'mediumTime' }}</span>
           </div>
-        }
-      </mat-card-content>
-      
-      <mat-card-actions align="end">
-        <button
-          mat-button
-          matTooltip="Copy report to clipboard"
-          (click)="copyToClipboard()"
-          [disabled]="isLoading()"
-        >
-          <mat-icon>content_copy</mat-icon>
-          Copy
-        </button>
-        <button
-          mat-button
-          matTooltip="Download as Markdown"
-          (click)="downloadMarkdown()"
-          [disabled]="isLoading()"
-        >
-          <mat-icon>file_download</mat-icon>
-          Download
-        </button>
-      </mat-card-actions>
-    </mat-card>
+
+          @if (isLoading() && idx === reportsToRender().length - 1) {
+            <mat-progress-bar mode="indeterminate" color="accent" />
+          }
+
+          <mat-card-content>
+            <app-markdown-renderer [content]="item.markdown" />
+
+            @if (item.followUpQuestions.length > 0) {
+              <div class="follow-up-section">
+                <span class="follow-up-label">Follow up with:</span>
+                <mat-chip-set class="follow-up-chips">
+                  @for (question of item.followUpQuestions; track $index) {
+                    <button
+                      mat-chip
+                      [class.used-chip]="!!getUsedEntry(question)"
+                      [class.unused-chip]="!getUsedEntry(question)"
+                      (click)="onFollowUpQuestionSelected(question)"
+                      [disabled]="isLoading()"
+                      [matTooltip]="getUsedEntry(question) ? 'Jump back to: ' + getUsedEntry(question)?.query : 'Start deep research on this topic'"
+                    >
+                      <mat-icon matChipAvatar class="chip-icon">
+                        {{ getUsedEntry(question) ? 'visibility' : 'search' }}
+                      </mat-icon>
+                      {{ question }}
+                    </button>
+                  }
+                </mat-chip-set>
+              </div>
+            }
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <button
+              mat-button
+              matTooltip="Copy this report card to clipboard"
+              (click)="copyToClipboard(item.markdown)"
+              [disabled]="isLoading()"
+            >
+              <mat-icon>content_copy</mat-icon>
+              Copy
+            </button>
+            <button
+              mat-button
+              matTooltip="Download this report card as Markdown"
+              (click)="downloadMarkdown(item.query, item.markdown)"
+              [disabled]="isLoading()"
+            >
+              <mat-icon>file_download</mat-icon>
+              Download
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    }
   </div>
 } @else {
   <div class="no-report">

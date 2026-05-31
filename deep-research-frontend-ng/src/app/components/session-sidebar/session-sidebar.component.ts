@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, input, output, computed } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal, input, output, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,8 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { SessionService, ResearchSessionSummary } from '../../services/session.service';
 import { RenameSessionDialogComponent } from '../rename-session-dialog/rename-session-dialog.component';
 import { ThemeService, ThemeMode } from '../../services/theme.service';
+import { ResearchService } from '../../services/research.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-session-sidebar',
@@ -28,9 +30,10 @@ import { ThemeService, ThemeMode } from '../../services/theme.service';
   styleUrl: './session-sidebar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SessionSidebarComponent implements OnInit {
+export class SessionSidebarComponent implements OnInit, OnDestroy {
   private readonly _sessionService = inject(SessionService);
   private readonly _themeService = inject(ThemeService);
+  private readonly _researchService = inject(ResearchService);
   private readonly _dialog = inject(MatDialog);
 
   readonly selectedSessionId = input<string | null>(null);
@@ -45,8 +48,20 @@ export class SessionSidebarComponent implements OnInit {
   // Exposed theme states directly from state service
   readonly activeThemeMode = computed(() => this._themeService.themeMode());
 
+  private readonly _subscriptions = new Subscription();
+
   ngOnInit(): void {
     this._loadSessions();
+
+    this._subscriptions.add(
+      this._researchService.sessionCompleted$.subscribe(() => {
+        this._loadSessions();
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
   }
 
   toggleCollapse(): void {

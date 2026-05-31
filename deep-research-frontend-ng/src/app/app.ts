@@ -44,13 +44,11 @@ export class App implements OnDestroy {
   private readonly _subscriptions = new Subscription();
 
   constructor() {
-    // When a live research completes, clear historical mode and refresh sessions
+    // When a live research completes, transition to the completed session and load its entries
     this._subscriptions.add(
-      this._researchService.sessionCompleted$.subscribe(() => {
-        this.selectedSessionId.set(null);
-        this.sessionEntries.set([]);
-        this.selectedEntry.set(null);
-        this.historicalReport.set(null);
+      this._researchService.sessionCompleted$.subscribe((sessionId) => {
+        this.selectedSessionId.set(sessionId);
+        this._loadSessionEntries(sessionId);
       })
     );
   }
@@ -79,6 +77,14 @@ export class App implements OnDestroy {
     try {
       const report: ResearchReport = JSON.parse(entry.reportJson);
       this.historicalReport.set(report);
+
+      // Smoothly scroll to the corresponding entry in the main view
+      setTimeout(() => {
+        const element = document.getElementById('entry-' + entry.id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50);
     } catch (e) {
       console.error('Failed to parse report JSON for entry', entry.id, e);
       this.historicalReport.set(null);

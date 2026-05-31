@@ -32,6 +32,15 @@ describe('SessionSidebarComponent', () => {
       })),
     };
 
+    TestBed.overrideComponent(SessionSidebarComponent, {
+      set: {
+        templateUrl: '',
+        template: '<div class="sidebar-expanded"></div>',
+        styleUrls: [],
+        styles: []
+      }
+    });
+
     await TestBed.configureTestingModule({
       imports: [SessionSidebarComponent],
       providers: [

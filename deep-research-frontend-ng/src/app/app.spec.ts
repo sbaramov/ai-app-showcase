@@ -6,6 +6,8 @@ import { of, Subject } from 'rxjs';
 import { App } from './app';
 import { ResearchService } from './services/research.service';
 import { SessionService } from './services/session.service';
+import { ThemeService } from './services/theme.service';
+import { signal } from '@angular/core';
 
 describe('App', () => {
   let reportSubject = new Subject<any>();
@@ -30,7 +32,21 @@ describe('App', () => {
     getSessionEntries: vi.fn(() => of([])),
   };
 
+  const mockThemeService = {
+    themeMode: signal('system'),
+    setTheme: vi.fn(),
+  };
+
   beforeEach(async () => {
+    TestBed.overrideComponent(App, {
+      set: {
+        templateUrl: '',
+        template: '<div class="app-shell"><h1>Deep Research</h1></div>',
+        styleUrls: [],
+        styles: []
+      }
+    });
+
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [
@@ -39,6 +55,7 @@ describe('App', () => {
         provideAnimationsAsync(),
         { provide: ResearchService, useValue: mockResearchService },
         { provide: SessionService, useValue: mockSessionService },
+        { provide: ThemeService, useValue: mockThemeService },
       ],
     }).compileComponents();
   });

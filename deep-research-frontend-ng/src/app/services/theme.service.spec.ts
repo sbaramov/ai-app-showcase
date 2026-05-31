@@ -10,7 +10,7 @@ describe('ThemeService', () => {
     mockLocalStorage = {};
 
     // Mock localStorage
-    global.localStorage = {
+    vi.stubGlobal('localStorage', {
       getItem: vi.fn((key: string) => mockLocalStorage[key] ?? null),
       setItem: vi.fn((key: string, val: string) => {
         mockLocalStorage[key] = val;
@@ -23,7 +23,7 @@ describe('ThemeService', () => {
       }),
       length: 0,
       key: vi.fn(() => null),
-    };
+    });
 
     // Mock matchMedia for system preference detection
     vi.stubGlobal(

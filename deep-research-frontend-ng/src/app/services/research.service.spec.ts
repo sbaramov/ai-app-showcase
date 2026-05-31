@@ -32,8 +32,25 @@ describe('ResearchService', () => {
     expect(progressValue).toEqual([]);
   });
 
-  it('should have isConnected$ as BehaviorSubject', () => {
-    expect(service['isConnected$']).toBeDefined();
-    expect(service['isConnected$'] instanceof BehaviorSubject).toBe(true);
+  it('should have isConnectedSubject as BehaviorSubject', () => {
+    expect(service['isConnectedSubject']).toBeDefined();
+    expect(service['isConnectedSubject'] instanceof BehaviorSubject).toBe(true);
+  });
+
+  it('should send sessionId when startResearch is called with sessionId', () => {
+    const publishSpy = vi.spyOn(service['stompClient'], 'publish').mockImplementation(() => {});
+    service['isConnectedSubject'].next(true);
+
+    service.startResearch('Quantum Physics', 'some-session-uuid');
+
+    expect(publishSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        destination: '/app/research',
+        body: JSON.stringify({
+          researchTopic: 'Quantum Physics',
+          sessionId: 'some-session-uuid',
+        }),
+      })
+    );
   });
 });

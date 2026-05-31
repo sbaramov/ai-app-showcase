@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 
 export interface ResearchRequestMessage {
   researchTopic: string;
+  sessionId?: string;
 }
 
 export interface ResearchReport {
@@ -79,13 +80,16 @@ export class ResearchService implements OnDestroy {
     this.sessionCompletedSubject.complete();
   }
 
-  startResearch(topic: string): void {
+  startResearch(topic: string, sessionId?: string): void {
     if (!this.isConnectedSubject.value) {
       console.error('Not connected to STOMP broker');
       return;
     }
 
-    const message: ResearchRequestMessage = { researchTopic: topic };
+    const message: ResearchRequestMessage = {
+      researchTopic: topic,
+      ...(sessionId ? { sessionId } : {}),
+    };
     this.stompClient.publish({
       destination: '/app/research',
       body: JSON.stringify(message),

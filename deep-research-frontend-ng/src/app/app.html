@@ -12,7 +12,7 @@
     </header>
 
     <div class="app-content">
-      <app-search-box />
+      <app-search-box [sessionId]="selectedSessionId()" />
 
       @if (selectedSessionId()) {
         <div class="session-context">
@@ -33,7 +33,10 @@
         />
       }
 
-      <app-report-display [historicalReport]="historicalReport()" />
+      <app-report-display
+        [entries]="sessionEntries()"
+        [selectedSessionId]="selectedSessionId()"
+      />
     </div>
   </main>
 </div>

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal, input} from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,6 +22,8 @@ import { ResearchService } from '../../services/research.service';
 export class SearchBoxComponent implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _researchService = inject(ResearchService);
+
+  readonly sessionId = input<string | null>(null);
 
   searchForm = this._fb.nonNullable.group({
     topic: ['', [Validators.required, Validators.minLength(3)]]
@@ -47,7 +49,7 @@ export class SearchBoxComponent implements OnInit {
 
     const topic = this.searchForm.controls.topic.value;
     if (topic) {
-      this._researchService.startResearch(topic);
+      this._researchService.startResearch(topic, this.sessionId() ?? undefined);
     }
   }
 
