@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "intellij-idea": {
+      "type": "streamable-http",
+      "serverUrl": "http://127.0.0.1:64342/stream",
+      "headers": {}
+    },
+    "angular-cli": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@angular/cli",
+        "mcp"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--isolated",
+        "--config",
+        "/home/sbaramov/.playwright/cli.config.json"
+      ]
+    }
+  }
+}
