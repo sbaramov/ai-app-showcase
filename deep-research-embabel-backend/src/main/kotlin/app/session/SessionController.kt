@@ -12,7 +12,7 @@ class SessionController(private val sessionService: SessionService) {
     fun listSessions(): List<ResearchSessionSummary> = sessionService.listSessions()
 
     @PatchMapping("/{id}")
-    fun renameSession(@PathVariable id: UUID, @RequestBody body: RenameRequest): ResponseEntity<Void> {
+    fun renameSession(@PathVariable id: UUID, @RequestBody body: RenameRequest): ResponseEntity<Unit> {
         sessionService.renameSession(id, body.name)
         return ResponseEntity.ok().build()
     }
