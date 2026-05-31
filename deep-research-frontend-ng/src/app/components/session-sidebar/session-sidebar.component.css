@@ -135,14 +135,24 @@
   opacity: 0.7;
 }
 
-/* Show options menu button on hover */
+/* Show options menu button on hover, aligned vertically to the center */
 .session-item [matListItemMeta] {
   opacity: 0;
   transition: opacity 0.2s;
+  align-self: center !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .session-item:hover [matListItemMeta] {
   opacity: 1;
+}
+
+/* Make more_vert vertical dots button larger */
+.session-item [matListItemMeta] mat-icon {
+  font-size: 26px !important;
+  width: 26px !important;
+  height: 26px !important;
 }
 
 .session-name-wrapper {
