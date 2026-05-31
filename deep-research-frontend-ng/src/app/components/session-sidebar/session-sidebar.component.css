@@ -136,10 +136,9 @@
   opacity: 0.7;
 }
 
-/* Show options menu button on hover, aligned vertically to the center */
+/* Always visible options menu button, aligned vertically to the center, non-transparent background */
 .session-item .mdc-list-item__end {
-  opacity: 0;
-  transition: opacity 0.2s;
+  opacity: 1 !important;
   position: absolute !important;
   right: 4px !important;
   top: 50% !important;
@@ -149,10 +148,19 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  background: var(--mat-sys-surface-container) !important;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
 }
 
+/* Match background state of the parent list item */
 .session-item:hover .mdc-list-item__end {
-  opacity: 1;
+  background: var(--mat-sys-surface-container-high) !important;
+}
+
+.session-item.selected .mdc-list-item__end {
+  background: var(--mat-sys-primary-container) !important;
 }
 
 /* Make more_vert vertical dots button larger */
@@ -178,6 +186,7 @@
   color: var(--mat-sys-primary);
   transform: rotate(45deg);
   flex-shrink: 0;
+  margin-right: 2px !important;
 }
 
 .session-divider {
