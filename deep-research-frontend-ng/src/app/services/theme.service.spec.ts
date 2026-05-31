@@ -2,8 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { PLATFORM_ID } from '@angular/core';
 import { ThemeService, ThemeMode } from './theme.service';
 
-declare var global: any;
-
 describe('ThemeService', () => {
   let service: ThemeService;
   let mockLocalStorage: Record<string, string>;

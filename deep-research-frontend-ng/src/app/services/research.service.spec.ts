@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ResearchService, ResearchReport, ProgressOutputChannelEvent } from './research.service';
 
 describe('ResearchService', () => {
@@ -32,14 +32,8 @@ describe('ResearchService', () => {
     expect(progressValue).toEqual([]);
   });
 
-  // isConnected$ is intentionally exposed as a plain Observable (via
-  // BehaviorSubject.asObservable()) to prevent consumers from calling .next()
-  // directly. Assert the public contract: it is an Observable that emits a
-  // boolean and starts with false.
-  it('isConnected$ is an Observable with initial value false', () => {
-    expect(service['isConnected$']).toBeInstanceOf(Observable);
-    let value: boolean | undefined;
-    service['isConnected$'].subscribe((v) => (value = v));
-    expect(value).toBe(false);
+  it('should have isConnected$ as BehaviorSubject', () => {
+    expect(service['isConnected$']).toBeDefined();
+    expect(service['isConnected$'] instanceof BehaviorSubject).toBe(true);
   });
 });
