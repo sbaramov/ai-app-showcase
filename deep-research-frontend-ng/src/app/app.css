@@ -9,13 +9,15 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  overflow-y: auto;   /* Main content area is the only scroll region */
+  height: 100%;
+  overflow: hidden;   /* Outer main area never scrolls directly */
 }
 
 .app-header {
   padding: 1rem 2rem;
   text-align: center;
   border-bottom: 1px solid var(--mat-sys-outline-variant);
+  flex-shrink: 0;
 }
 
 .app-header h1 {
@@ -31,11 +33,15 @@
 
 .app-content {
   flex: 1;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden;   /* Sub-containers control scrolling */
+  position: relative;
+  padding: 1rem;
 }
 
 .session-context {
@@ -67,6 +73,95 @@
 
 .clear-session-btn:hover {
   background: var(--mat-sys-primary-container);
+}
+
+/* ==========================================================================
+   State-Specific Layout Rules
+   ========================================================================== */
+
+/* State 1: New Search / Session Starts (Centered Search Box) */
+.state-new-search .app-content {
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.state-new-search .main-display-area {
+  display: none;
+}
+
+.state-new-search .search-box-container {
+  width: 100%;
+  max-width: 600px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* State 2: Deep Research in Progress (Centered Spinner, Bottom Search Box) */
+.state-searching .app-content,
+.state-results .app-content {
+  justify-content: space-between;
+}
+
+.state-searching .main-display-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.state-searching .search-box-container {
+  width: 100%;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface-container-low);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* State 3: Results Present (Scrollable Reports, Bottom Toolbar Search Box) */
+.state-results .main-display-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.state-results .results-scroll-container {
+  flex: 1;
+  overflow-y: auto; /* Scroll is here! */
+  padding-right: 0.5rem;
+}
+
+.state-results .search-box-container {
+  width: 100%;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface-container-low);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  flex-shrink: 0;
+}
+
+/* Centered loading spinner animation container */
+.centered-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.searching-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {

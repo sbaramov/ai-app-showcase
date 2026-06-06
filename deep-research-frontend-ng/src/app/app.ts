@@ -1,7 +1,8 @@
-import { Component, inject, signal, OnDestroy } from '@angular/core';
+import { Component, inject, signal, computed, OnDestroy } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
-import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ReportDisplayComponent } from './components/report-display/report-display.component';
 import { SessionSidebarComponent } from './components/session-sidebar/session-sidebar.component';
 import { SessionEntryListComponent } from './components/session-entry-list/session-entry-list.component';
@@ -14,8 +15,8 @@ import { Subscription } from 'rxjs';
   selector: 'app-root',
   imports: [
     CommonModule,
+    MatProgressSpinnerModule,
     SearchBoxComponent,
-    ProgressIndicatorComponent,
     ReportDisplayComponent,
     SessionSidebarComponent,
     SessionEntryListComponent,
@@ -37,6 +38,18 @@ export class App implements OnDestroy {
   readonly sessionEntries = signal<ResearchEntry[]>([]);
   readonly selectedEntry = signal<ResearchEntry | null>(null);
   readonly isLoadingEntries = signal(false);
+
+  readonly isSearching = toSignal(this._researchService.isSearching$, { initialValue: false });
+
+  readonly appState = computed(() => {
+    if (this.isSearching()) {
+      return 'searching';
+    }
+    if (this.sessionEntries().length > 0) {
+      return 'results';
+    }
+    return 'new-search';
+  });
 
   /** Historical report from a selected entry, parsed from reportJson */
   readonly historicalReport = signal<ResearchReport | null>(null);

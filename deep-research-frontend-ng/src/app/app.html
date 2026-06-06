@@ -5,38 +5,51 @@
     (newSessionRequested)="onNewSession()"
   />
 
-  <main class="app-main">
+  <main class="app-main" [class]="'state-' + appState()">
     <header class="app-header">
       <h1>{{ title() }}</h1>
       <p>Deep research using <strong>Tavily Search API</strong> with Embabel Agent</p>
     </header>
 
     <div class="app-content">
-      <app-search-box [sessionId]="selectedSessionId()" />
+      <!-- Main display area (centers content or scrolls results) -->
+      <div class="main-display-area">
+        @if (appState() === 'searching') {
+          <div class="centered-spinner-container">
+            <mat-spinner diameter="60" color="primary"></mat-spinner>
+            <span class="searching-text">Researching topic...</span>
+          </div>
+        } @else if (appState() === 'results') {
+          <div class="results-scroll-container">
+            @if (selectedSessionId()) {
+              <div class="session-context">
+                <span class="session-badge">Viewing session</span>
+                <button class="clear-session-btn" (click)="onNewSession()">
+                  Start new research
+                </button>
+              </div>
+            }
 
-      @if (selectedSessionId()) {
-        <div class="session-context">
-          <span class="session-badge">Viewing session</span>
-          <button class="clear-session-btn" (click)="onNewSession()">
-            Start new research
-          </button>
-        </div>
-      }
+            @if (selectedSessionId() && sessionEntries().length > 0) {
+              <app-session-entry-list
+                [entries]="sessionEntries()"
+                [selectedEntryId]="selectedEntry()?.id ?? null"
+                (entrySelected)="onEntrySelected($event)"
+              />
+            }
 
-      <app-progress-indicator />
+            <app-report-display
+              [entries]="sessionEntries()"
+              [selectedSessionId]="selectedSessionId()"
+            />
+          </div>
+        }
+      </div>
 
-      @if (selectedSessionId() && sessionEntries().length > 0) {
-        <app-session-entry-list
-          [entries]="sessionEntries()"
-          [selectedEntryId]="selectedEntry()?.id ?? null"
-          (entrySelected)="onEntrySelected($event)"
-        />
-      }
-
-      <app-report-display
-        [entries]="sessionEntries()"
-        [selectedSessionId]="selectedSessionId()"
-      />
+      <!-- Search box container (centered in new-search, at bottom in searching/results) -->
+      <div class="search-box-container">
+        <app-search-box [sessionId]="selectedSessionId()" />
+      </div>
     </div>
   </main>
 </div>

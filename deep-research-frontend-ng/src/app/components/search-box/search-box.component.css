@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search-field {
@@ -13,8 +15,36 @@
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: flex-end; /* Right-align search button */
 }
 
 button {
   min-width: 120px;
+}
+
+/* ==========================================================================
+   Toolbar Style Overrides (Searching and Results States)
+   ========================================================================== */
+:host-context(.state-searching) .search-container,
+:host-context(.state-results) .search-container {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+:host-context(.state-searching) .search-field,
+:host-context(.state-results) .search-field {
+  flex: 1;
+}
+
+:host-context(.state-searching) .button-group,
+:host-context(.state-results) .button-group {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+:host-context(.state-searching) mat-hint,
+:host-context(.state-results) mat-hint {
+  display: none !important;
 }

@@ -37,6 +37,9 @@ export class ResearchService implements OnDestroy {
   private isConnectedSubject = new BehaviorSubject<boolean>(false);
   isConnected$ = this.isConnectedSubject.asObservable();
 
+  private isSearchingSubject = new BehaviorSubject<boolean>(false);
+  isSearching$ = this.isSearchingSubject.asObservable();
+
   /** Emits the sessionId when a live research session completes */
   private sessionCompletedSubject = new Subject<string>();
   sessionCompleted$ = this.sessionCompletedSubject.asObservable();
@@ -57,6 +60,7 @@ export class ResearchService implements OnDestroy {
 
         this.stompClient.subscribe('/topic/research/result', (message: IMessage) => {
           this.progressSubject.next([]);
+          this.isSearchingSubject.next(false);
           const reportMessage: ResearchResultMessage = JSON.parse(message.body);
           this.reportSubject.next(reportMessage.report);
           // Emit sessionId so consumers (sidebar) can refresh
@@ -65,10 +69,12 @@ export class ResearchService implements OnDestroy {
       },
       onStompError: (frame: IFrame) => {
         console.error('STOMP error:', frame.headers['message'] || frame.body);
+        this.isSearchingSubject.next(false);
       },
       onDisconnect: () => {
         console.log('Disconnected from STOMP broker');
         this.isConnectedSubject.next(false);
+        this.isSearchingSubject.next(false);
       },
     });
 
@@ -86,6 +92,8 @@ export class ResearchService implements OnDestroy {
       return;
     }
 
+    this.isSearchingSubject.next(true);
+
     const message: ResearchRequestMessage = {
       researchTopic: topic,
       ...(sessionId ? { sessionId } : {}),
@@ -98,10 +106,12 @@ export class ResearchService implements OnDestroy {
 
   clearReport(): void {
     this.reportSubject.next(null);
+    this.isSearchingSubject.next(false);
   }
 
   clearProgress(): void {
     this.progressSubject.next([]);
+    this.isSearchingSubject.next(false);
   }
 
   isConnected(): boolean {

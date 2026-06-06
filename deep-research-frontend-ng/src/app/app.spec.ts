@@ -13,12 +13,14 @@ describe('App', () => {
   let reportSubject = new Subject<any>();
   let progressSubject = new Subject<any>();
   let isConnectedSubject = new Subject<boolean>();
+  let isSearchingSubject = new Subject<boolean>();
   let sessionCompletedSubject = new Subject<string>();
 
   const mockResearchService = {
     report$: reportSubject.asObservable(),
     progress$: progressSubject.asObservable(),
     isConnected$: isConnectedSubject.asObservable(),
+    isSearching$: isSearchingSubject.asObservable(),
     sessionCompleted$: sessionCompletedSubject.asObservable(),
     startResearch: vi.fn(),
     clearReport: vi.fn(),

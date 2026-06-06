@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +11,6 @@ import { ReportService } from '../../services/report.service';
 import { ResearchService, ResearchReport } from '../../services/research.service';
 import { ResearchEntry } from '../../services/session.service';
 import { MarkdownRendererComponent } from '../markdown-renderer/markdown-renderer.component';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-report-display',
@@ -28,7 +27,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './report-display.component.html',
   styleUrl: './report-display.component.css'
 })
-export class ReportDisplayComponent implements OnInit, OnDestroy {
+export class ReportDisplayComponent {
   private readonly _reportService = inject(ReportService);
   private readonly _researchService = inject(ResearchService);
 
@@ -36,9 +35,7 @@ export class ReportDisplayComponent implements OnInit, OnDestroy {
   readonly entries = input<ResearchEntry[]>([]);
 
   readonly liveReport = toSignal(this._researchService.report$, { initialValue: null });
-  readonly isLoading = signal(false);
-
-  private readonly _subscriptions = new Subscription();
+  readonly isLoading = toSignal(this._researchService.isSearching$, { initialValue: false });
 
   /** Parsed research entries from the session */
   readonly parsedEntries = computed(() => {
@@ -87,18 +84,6 @@ export class ReportDisplayComponent implements OnInit, OnDestroy {
     return [];
   });
 
-  ngOnInit(): void {
-    this._subscriptions.add(
-      this._researchService.report$.subscribe(() => {
-        this.isLoading.set(false);
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this._subscriptions.unsubscribe();
-  }
-
   /** Checks if a follow-up question has already been researched in the active session */
   getUsedEntry(question: string): ResearchEntry | null {
     const normalizedQ = question.trim().toLowerCase();
@@ -115,7 +100,6 @@ export class ReportDisplayComponent implements OnInit, OnDestroy {
       }
     } else {
       // Trigger new deep research under the current session context
-      this.isLoading.set(true);
       this._researchService.startResearch(question, this.selectedSessionId() ?? undefined);
     }
   }
