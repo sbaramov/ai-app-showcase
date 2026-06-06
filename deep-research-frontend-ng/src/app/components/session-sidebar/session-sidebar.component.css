@@ -102,6 +102,14 @@
   cursor: pointer;
   border-radius: 0;
   position: relative !important;
+  min-height: 40px !important;
+  height: 40px !important;
+}
+
+/* Center single-line list item content vertically */
+.session-item .mdc-list-item__content {
+  align-self: center !important;
+  padding: 0 !important;
 }
 
 .session-item.selected {
@@ -141,7 +149,7 @@
   opacity: 0 !important;
   pointer-events: none !important;
   position: absolute !important;
-  right: 4px !important;
+  right: 6px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   margin: 0 !important;
@@ -151,8 +159,8 @@
   justify-content: center !important;
   background: var(--mat-sys-surface-container) !important;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   transition: opacity 0.2s ease-in-out !important;
 }
 
@@ -173,11 +181,11 @@
   pointer-events: auto !important;
 }
 
-/* Make more_vert vertical dots button larger */
+/* Context menu icon size */
 .session-item .mdc-list-item__end mat-icon {
-  font-size: 26px !important;
-  width: 26px !important;
-  height: 26px !important;
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .session-name-wrapper {
@@ -200,17 +208,16 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 26px !important;
-  width: 26px !important;
-  height: 26px !important;
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
   color: var(--mat-sys-primary);
   flex-shrink: 0;
 }
 
 /* Shift all item content text to the right for pinned items to cleanly clear the pin icon */
-.session-item.pinned .session-name-wrapper,
-.session-item.pinned .session-meta {
-  margin-left: 32px !important;
+.session-item.pinned .session-name-wrapper {
+  margin-left: 24px !important;
 }
 
 .session-divider {
