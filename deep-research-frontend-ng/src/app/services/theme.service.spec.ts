@@ -84,4 +84,10 @@ describe('ThemeService', () => {
       'light'
     );
   });
+
+  it('should apply dark-theme class to document.body when theme is set to dark', () => {
+    service.setTheme('dark');
+    TestBed.flushEffects();
+    expect(document.body.classList.contains('dark-theme')).toBe(true);
+  });
 });

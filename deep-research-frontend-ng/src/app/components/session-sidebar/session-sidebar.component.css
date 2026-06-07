@@ -8,16 +8,10 @@
   min-width: 56px;
   height: 100vh;
   box-sizing: border-box;
-  background: var(--glass-bg-light);
-  backdrop-filter: var(--glass-blur);
-  border-right: 1px solid var(--glass-border-light);
+  background: var(--mat-sys-surface-container);
+  border-right: 1px solid var(--mat-sys-outline-variant);
   z-index: 100;
-  box-shadow: var(--glass-shadow);
-}
-
-body.dark-theme .sidebar-collapsed {
-  background: var(--glass-bg-dark);
-  border-color: var(--glass-border-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-expanded {
@@ -28,18 +22,12 @@ body.dark-theme .sidebar-collapsed {
   min-width: 280px;
   height: 100vh;
   box-sizing: border-box;
-  background: var(--glass-bg-light);
-  backdrop-filter: var(--glass-blur);
-  border-right: 1px solid var(--glass-border-light);
+  background: var(--mat-sys-surface-container);
+  border-right: 1px solid var(--mat-sys-outline-variant);
   overflow: hidden;
   z-index: 100;
-  box-shadow: var(--glass-shadow);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s, border 0.3s;
-}
-
-body.dark-theme .sidebar-expanded {
-  background: var(--glass-bg-dark);
-  border-color: var(--glass-border-dark);
 }
 
 .sidebar-main {
@@ -54,12 +42,8 @@ body.dark-theme .sidebar-expanded {
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  border-bottom: 1px solid var(--glass-border-light);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
   margin-bottom: 0.5rem;
-}
-
-body.dark-theme .sidebar-header {
-  border-color: var(--glass-border-dark);
 }
 
 .sidebar-header h2 {
@@ -67,9 +51,7 @@ body.dark-theme .sidebar-header {
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.3px;
-  background: linear-gradient(135deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--mat-sys-primary);
 }
 
 .sidebar-header-actions {
@@ -81,13 +63,8 @@ body.dark-theme .sidebar-header {
   margin: 0.5rem 1rem 1rem 1rem;
   width: calc(100% - 2rem);
   border-radius: 10px !important;
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border-light) !important;
-  font-weight: 600 !important;
-}
-
-body.dark-theme .new-session-btn {
-  border-color: var(--glass-border-dark) !important;
+  border: 1px solid var(--mat-sys-outline-variant) !important;
+  font-weight: 700 !important;
 }
 
 .sidebar-loading {
@@ -96,7 +73,7 @@ body.dark-theme .new-session-btn {
   justify-content: center;
   gap: 0.5rem;
   padding: 2rem 1rem;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 @keyframes spin {
@@ -114,7 +91,7 @@ body.dark-theme .new-session-btn {
   justify-content: center;
   padding: 3rem 1rem;
   text-align: center;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .sidebar-empty mat-icon {
@@ -127,11 +104,13 @@ body.dark-theme .new-session-btn {
 .sidebar-empty p {
   margin: 0.25rem 0;
   font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .sidebar-empty .hint {
   font-size: 0.75rem;
   opacity: 0.8;
+  font-weight: 400;
 }
 
 /* ==========================================================================
@@ -151,11 +130,8 @@ body.dark-theme .new-session-btn {
   background: transparent;
 }
 .session-list::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--mat-sys-outline-variant);
   border-radius: 2px;
-}
-body.dark-theme .session-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .session-group {
@@ -175,11 +151,7 @@ body.dark-theme .session-list::-webkit-scrollbar-thumb {
 }
 
 .group-header:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-body.dark-theme .group-header:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--mat-sys-surface-container-high);
 }
 
 .group-header-left {
@@ -193,29 +165,24 @@ body.dark-theme .group-header:hover {
   font-size: 18px !important;
   width: 18px !important;
   height: 18px !important;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .group-label {
   font-size: 0.7rem;
-  font-weight: 750;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .group-badge {
   font-size: 0.7rem;
-  font-weight: 650;
-  padding: 0.1rem 0.4rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--mat-sys-surface-container-highest);
   color: var(--mat-sys-on-surface);
-  opacity: 0.75;
-}
-
-body.dark-theme .group-badge {
-  background: rgba(255, 255, 255, 0.08);
 }
 
 .group-list {
@@ -244,20 +211,11 @@ body.dark-theme .group-badge {
 .session-item.selected {
   background: var(--mat-sys-primary-container) !important;
   color: var(--mat-sys-on-primary-container) !important;
-  border: 1px solid var(--glass-border-light) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-
-body.dark-theme .session-item.selected {
-  border-color: var(--glass-border-dark) !important;
+  border: 1px solid var(--mat-sys-outline-variant) !important;
 }
 
 .session-item:hover {
-  background: rgba(0, 0, 0, 0.03) !important;
-}
-
-body.dark-theme .session-item:hover {
-  background: rgba(255, 255, 255, 0.03) !important;
+  background: var(--mat-sys-surface-container-low) !important;
 }
 
 .session-item.selected:hover {
@@ -265,7 +223,7 @@ body.dark-theme .session-item:hover {
 }
 
 .session-name {
-  font-weight: 550;
+  font-weight: 600;
   font-size: 0.88rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -285,27 +243,17 @@ body.dark-theme .session-item:hover {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid var(--glass-border-light);
+  background: var(--mat-sys-surface-container-high) !important;
+  border: 1px solid var(--mat-sys-outline-variant);
   border-radius: 50%;
   width: 26px;
   height: 26px;
-  box-shadow: var(--glass-shadow);
   transition: opacity 0.2s ease, background 0.2s !important;
-}
-
-body.dark-theme .session-item .mdc-list-item__end {
-  background: rgba(30, 30, 35, 0.8) !important;
-  border-color: var(--glass-border-dark);
 }
 
 /* Match background state of the parent list item */
 .session-item:hover .mdc-list-item__end {
-  background: rgba(255, 255, 255, 0.95) !important;
-}
-
-body.dark-theme .session-item:hover .mdc-list-item__end {
-  background: rgba(45, 45, 50, 0.95) !important;
+  background: var(--mat-sys-surface-container-highest) !important;
 }
 
 .session-item.selected .mdc-list-item__end {
@@ -365,25 +313,17 @@ body.dark-theme .session-item:hover .mdc-list-item__end {
 
 .sidebar-footer {
   padding: 0.75rem;
-  border-top: 1px solid var(--glass-border-light);
+  border-top: 1px solid var(--mat-sys-outline-variant);
   display: flex;
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
 }
 
-body.dark-theme .sidebar-footer {
-  border-color: var(--glass-border-dark);
-}
-
 .theme-toggle-btn {
   width: 100%;
   border-radius: 8px !important;
-  border: 1px solid var(--glass-border-light) !important;
-}
-
-body.dark-theme .theme-toggle-btn {
-  border-color: var(--glass-border-dark) !important;
+  border: 1px solid var(--mat-sys-outline-variant) !important;
 }
 
 /* ==========================================================================
@@ -391,7 +331,7 @@ body.dark-theme .theme-toggle-btn {
    ========================================================================== */
 @media (max-width: 768px) {
   .sidebar-collapsed {
-    display: none; /* Hide collapsed state on mobile */
+    display: none;
   }
 
   .sidebar-expanded {
@@ -400,17 +340,13 @@ body.dark-theme .theme-toggle-btn {
     left: 0;
     z-index: 1000;
     height: 100vh;
-    border-right: 1px solid var(--glass-border-light);
-    transform: translateX(-100%); /* Off-screen by default */
-  }
-
-  body.dark-theme .sidebar-expanded {
-    border-right-color: var(--glass-border-dark);
+    border-right: 1px solid var(--mat-sys-outline-variant);
+    transform: translateX(-100%);
   }
 
   /* Target when host-context indicates active sidebar */
   :host-context(.mobile-sidebar-active) .sidebar-expanded {
-    transform: translateX(0); /* Slide in */
-    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.25);
+    transform: translateX(0);
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
   }
 }

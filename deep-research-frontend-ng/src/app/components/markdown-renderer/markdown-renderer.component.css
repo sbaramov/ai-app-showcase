@@ -15,7 +15,7 @@
 .markdown-content h3,
 .markdown-content h4 {
   color: var(--mat-sys-on-surface);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.3px;
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -23,22 +23,14 @@
 
 .markdown-content h1 {
   font-size: 1.75rem;
-  border-bottom: 1px solid var(--glass-border-light);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
   padding-bottom: 0.5rem;
-}
-
-body.dark-theme .markdown-content h1 {
-  border-color: var(--glass-border-dark);
 }
 
 .markdown-content h2 {
   font-size: 1.4rem;
-  border-bottom: 1px solid var(--glass-border-light);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
   padding-bottom: 0.4rem;
-}
-
-body.dark-theme .markdown-content h2 {
-  border-color: var(--glass-border-dark);
 }
 
 .markdown-content h3 {
@@ -56,44 +48,32 @@ body.dark-theme .markdown-content h2 {
   opacity: 0.95;
 }
 
-/* Inline Code Element */
+/* Inline Code Element - Solarized style */
 .markdown-content code {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--mat-sys-surface-variant);
   color: var(--mat-sys-primary);
   padding: 0.2rem 0.45rem;
   border-radius: 6px;
   font-family: var(--font-monospace);
   font-size: 0.85em;
   font-weight: 600;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--mat-sys-outline-variant);
 }
 
-body.dark-theme .markdown-content code {
-  background: rgba(255, 255, 255, 0.08);
-  color: #d5baff;
-  border-color: rgba(255, 255, 255, 0.04);
-}
-
-/* Code Blocks */
+/* Code Blocks - Opaque Solarized Dark style */
 .markdown-content pre {
-  background: rgba(15, 13, 17, 0.8) !important;
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border-light);
+  background: #002b36 !important; /* Solarized Dark background */
+  border: 1px solid var(--mat-sys-outline-variant);
   padding: 1.25rem;
   border-radius: 12px;
   overflow-x: auto;
   margin: 1.5rem 0;
-  box-shadow: var(--glass-shadow);
-}
-
-body.dark-theme .markdown-content pre {
-  border-color: var(--glass-border-dark);
-  background: rgba(10, 8, 12, 0.85) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .markdown-content pre code {
   background: transparent !important;
-  color: #f5eff4 !important;
+  color: #839496 !important; /* Solarized base0 text color */
   padding: 0 !important;
   border: none !important;
   font-family: var(--font-monospace);
@@ -119,16 +99,15 @@ body.dark-theme .markdown-content pre {
 /* Blockquotes */
 .markdown-content blockquote {
   border-left: 4px solid var(--mat-sys-primary);
-  background: rgba(0, 0, 0, 0.02);
+  background: var(--mat-sys-surface-container-low);
   padding: 0.75rem 1.25rem;
   margin: 1.5rem 0;
   border-radius: 0 12px 12px 0;
   color: var(--mat-sys-on-surface-variant);
   font-style: italic;
-}
-
-body.dark-theme .markdown-content blockquote {
-  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
 }
 
 .markdown-content blockquote p:last-child {
@@ -138,7 +117,7 @@ body.dark-theme .markdown-content blockquote {
 .markdown-content a {
   color: var(--mat-sys-primary);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   border-bottom: 1px dashed transparent;
   transition: all 0.2s ease;
 }

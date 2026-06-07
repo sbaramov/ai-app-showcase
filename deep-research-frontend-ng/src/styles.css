@@ -1638,20 +1638,12 @@ body {
   color: var(--mat-sys-on-surface);
   min-height: 100vh;
   margin: 0;
-  background-size: 200% 200% !important;
-  animation: meshGradientMove 20s ease infinite;
-  background: radial-gradient(at 0% 0%, rgba(224, 206, 255, 0.45) 0px, transparent 50%),
-              radial-gradient(at 100% 0%, rgba(199, 219, 255, 0.45) 0px, transparent 50%),
-              radial-gradient(at 50% 100%, rgba(255, 230, 210, 0.45) 0px, transparent 50%),
-              #fcfaff;
-  transition: background 0.4s ease, color 0.3s ease;
+  background: var(--mat-sys-surface) !important;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.dark-theme {
-  background: radial-gradient(at 0% 0%, rgba(88, 28, 135, 0.25) 0px, transparent 50%),
-              radial-gradient(at 100% 0%, rgba(30, 64, 175, 0.25) 0px, transparent 50%),
-              radial-gradient(at 50% 100%, rgba(146, 64, 14, 0.2) 0px, transparent 50%),
-              #0d0b0f !important;
+  background: var(--mat-sys-surface) !important;
 }
 
 html, body {
@@ -1670,4 +1662,113 @@ mat-icon {
   flex-direction: column;
   background: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
+}
+
+/* ==========================================================================
+   Solarized Material Design 3 Custom Overrides
+   ========================================================================== */
+:root {
+  --sol-base03: #002b36;
+  --sol-base02: #073642;
+  --sol-base01: #586e75;
+  --sol-base00: #657b83;
+  --sol-base0:  #839496;
+  --sol-base1:  #93a1a1;
+  --sol-base2:  #eee8d5;
+  --sol-base3:  #fdf6e3;
+  
+  --sol-yellow:  #b58900;
+  --sol-orange:  #cb4b16;
+  --sol-red:     #dc322f;
+  --sol-magenta: #d33682;
+  --sol-violet:  #6c71c4;
+  --sol-blue:    #268bd2;
+  --sol-cyan:    #2aa198;
+  --sol-green:   #859900;
+
+  --font-monospace: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+html {
+  /* MD3 Color overrides for Solarized Light */
+  --mat-sys-primary: var(--sol-blue);
+  --mat-sys-on-primary: var(--sol-base3);
+  --mat-sys-primary-container: var(--sol-base2);
+  --mat-sys-on-primary-container: var(--sol-base02);
+
+  --mat-sys-secondary: var(--sol-violet);
+  --mat-sys-on-secondary: var(--sol-base3);
+  --mat-sys-secondary-container: var(--sol-base2);
+  --mat-sys-on-secondary-container: var(--sol-base02);
+
+  --mat-sys-tertiary: var(--sol-orange);
+  --mat-sys-on-tertiary: var(--sol-base3);
+  --mat-sys-tertiary-container: #ffdcc7;
+  --mat-sys-on-tertiary-container: var(--sol-orange);
+
+  --mat-sys-surface: var(--sol-base3);
+  --mat-sys-on-surface: var(--sol-base00);
+  --mat-sys-surface-variant: var(--sol-base2);
+  --mat-sys-on-surface-variant: var(--sol-base01);
+
+  --mat-sys-surface-container: var(--sol-base2);
+  --mat-sys-surface-container-low: #f5eedb;
+  --mat-sys-surface-container-lowest: var(--sol-base3);
+  --mat-sys-surface-container-high: #e4dcbe;
+  --mat-sys-surface-container-highest: #dcd4b4;
+
+  --mat-sys-outline: var(--sol-base01);
+  --mat-sys-outline-variant: var(--sol-base1);
+
+  --mat-sys-background: var(--sol-base3);
+  --mat-sys-on-background: var(--sol-base00);
+
+  --mat-sys-error: var(--sol-red);
+  --mat-sys-on-error: var(--sol-base3);
+
+  /* App overrides */
+  --mat-app-background-color: var(--sol-base3);
+  --mat-app-text-color: var(--sol-base00);
+}
+
+body.dark-theme {
+  /* MD3 Color overrides for Solarized Dark */
+  --mat-sys-primary: var(--sol-blue);
+  --mat-sys-on-primary: var(--sol-base03);
+  --mat-sys-primary-container: var(--sol-base02);
+  --mat-sys-on-primary-container: var(--sol-base1);
+
+  --mat-sys-secondary: var(--sol-violet);
+  --mat-sys-on-secondary: var(--sol-base03);
+  --mat-sys-secondary-container: var(--sol-base02);
+  --mat-sys-on-secondary-container: var(--sol-base1);
+
+  --mat-sys-tertiary: var(--sol-orange);
+  --mat-sys-on-tertiary: var(--sol-base03);
+  --mat-sys-tertiary-container: var(--sol-base02);
+  --mat-sys-on-tertiary-container: var(--sol-orange);
+
+  --mat-sys-surface: var(--sol-base03);
+  --mat-sys-on-surface: var(--sol-base0);
+  --mat-sys-surface-variant: var(--sol-base02);
+  --mat-sys-on-surface-variant: var(--sol-base1);
+
+  --mat-sys-surface-container: var(--sol-base02);
+  --mat-sys-surface-container-low: #02252e;
+  --mat-sys-surface-container-lowest: var(--sol-base03);
+  --mat-sys-surface-container-high: #0c3e4c;
+  --mat-sys-surface-container-highest: #124754;
+
+  --mat-sys-outline: var(--sol-base1);
+  --mat-sys-outline-variant: var(--sol-base01);
+
+  --mat-sys-background: var(--sol-base03);
+  --mat-sys-on-background: var(--sol-base0);
+
+  --mat-sys-error: var(--sol-red);
+  --mat-sys-on-error: var(--sol-base03);
+
+  /* App overrides */
+  --mat-app-background-color: var(--sol-base03);
+  --mat-app-text-color: var(--sol-base0);
 }
