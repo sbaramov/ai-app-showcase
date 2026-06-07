@@ -2,6 +2,8 @@ import { Component, inject, signal, computed, OnDestroy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { ReportDisplayComponent } from './components/report-display/report-display.component';
 import { SessionSidebarComponent } from './components/session-sidebar/session-sidebar.component';
@@ -16,6 +18,8 @@ import { Subscription } from 'rxjs';
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
+    MatButtonModule,
+    MatIconModule,
     SearchBoxComponent,
     ReportDisplayComponent,
     SessionSidebarComponent,
@@ -33,6 +37,7 @@ export class App implements OnDestroy {
   private readonly _themeService = inject(ThemeService);
 
   protected readonly title = signal('Deep Research');
+  readonly isMobileSidebarOpen = signal(false);
 
   readonly selectedSessionId = signal<string | null>(null);
   readonly sessionEntries = signal<ResearchEntry[]>([]);

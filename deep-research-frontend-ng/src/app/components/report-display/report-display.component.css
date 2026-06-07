@@ -21,21 +21,43 @@
 }
 
 .report-card {
-  border-radius: 12px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
-  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 16px !important;
+  background: var(--glass-bg-light) !important;
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-light) !important;
+  box-shadow: var(--glass-shadow) !important;
   overflow: hidden;
-  padding: 1.5rem;
+  padding: 1.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body.dark-theme .report-card {
+  background: var(--glass-bg-dark) !important;
+  border-color: var(--glass-border-dark) !important;
+}
+
+.report-card:hover {
+  box-shadow: var(--glass-shadow-hover) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+body.dark-theme .report-card:hover {
+  border-color: rgba(255, 255, 255, 0.18) !important;
 }
 
 .report-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--mat-sys-outline-variant);
-  padding-bottom: 0.75rem;
-  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--glass-border-light);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
   gap: 1rem;
+}
+
+body.dark-theme .report-card-header {
+  border-color: var(--glass-border-dark);
 }
 
 .header-left {
@@ -48,43 +70,55 @@
 .step-badge {
   background: var(--mat-sys-primary-container);
   color: var(--mat-sys-on-primary-container);
-  padding: 0.2rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
+  border: 1px solid var(--glass-border-light);
+}
+
+body.dark-theme .step-badge {
+  border-color: var(--glass-border-dark);
 }
 
 .step-query {
   margin: 0;
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--mat-sys-on-surface);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: -0.3px;
 }
 
 .step-date {
   font-size: 0.8rem;
-  opacity: 0.6;
+  opacity: 0.7;
   white-space: nowrap;
 }
 
 .follow-up-section {
   margin-top: 2rem;
-  padding-top: 1.25rem;
-  border-top: 1px dashed var(--mat-sys-outline-variant);
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--glass-border-light);
+}
+
+body.dark-theme .follow-up-section {
+  border-color: var(--glass-border-dark);
 }
 
 .follow-up-label {
   display: block;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  font-size: 0.85rem;
   color: var(--mat-sys-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .follow-up-chips {
@@ -103,25 +137,37 @@
 .unused-chip {
   background-color: var(--mat-sys-primary-container) !important;
   color: var(--mat-sys-on-primary-container) !important;
-  border: 1px solid transparent !important;
-  transition: all 0.2s ease !important;
+  border: 1px solid var(--glass-border-light) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer;
+  border-radius: 8px !important;
+}
+
+body.dark-theme .unused-chip {
+  border-color: var(--glass-border-dark) !important;
 }
 
 .unused-chip:hover {
   background-color: var(--mat-sys-primary) !important;
   color: var(--mat-sys-on-primary) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 /* Styled for Used visited chips */
 .used-chip {
-  background-color: var(--mat-sys-surface-container-high) !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
   color: var(--mat-sys-on-surface-variant) !important;
-  border: 1px solid var(--mat-sys-outline-variant) !important;
-  opacity: 0.85;
-  transition: all 0.2s ease !important;
+  border: 1px solid var(--glass-border-light) !important;
+  opacity: 0.75;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer;
+  border-radius: 8px !important;
+}
+
+body.dark-theme .used-chip {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border-color: var(--glass-border-dark) !important;
 }
 
 .used-chip:hover {
@@ -129,11 +175,12 @@
   background-color: var(--mat-sys-secondary-container) !important;
   color: var(--mat-sys-on-secondary-container) !important;
   border-color: var(--mat-sys-secondary) !important;
+  transform: translateY(-1px);
 }
 
 mat-progress-bar {
-  margin: -1.5rem -1.5rem 1.25rem -1.5rem;
-  width: calc(100% + 3rem);
+  margin: -1.75rem -1.75rem 1.5rem -1.75rem;
+  width: calc(100% + 3.5rem);
 }
 
 .no-report {
@@ -141,7 +188,70 @@ mat-progress-bar {
 }
 
 .no-report mat-card {
-  border-radius: 12px !important;
-  border: 1px solid var(--mat-sys-outline-variant);
-  padding: 1.5rem;
+  border-radius: 16px !important;
+  background: var(--glass-bg-light) !important;
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-light) !important;
+  padding: 2rem;
+  box-shadow: var(--glass-shadow) !important;
+  text-align: center;
+}
+
+body.dark-theme .no-report mat-card {
+  background: var(--glass-bg-dark) !important;
+  border-color: var(--glass-border-dark) !important;
+}
+
+mat-card-actions {
+  border-top: 1px solid var(--glass-border-light);
+  padding-top: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+body.dark-theme mat-card-actions {
+  border-color: var(--glass-border-dark);
+}
+
+mat-card-actions button {
+  border-radius: 8px !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+mat-card-actions button:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+body.dark-theme mat-card-actions button:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Responsive details for small devices */
+@media (max-width: 576px) {
+  .report-card {
+    padding: 1.25rem;
+    border-radius: 12px !important;
+  }
+
+  .report-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .step-query {
+    font-size: 1.1rem;
+  }
+
+  .step-date {
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  mat-progress-bar {
+    margin: -1.25rem -1.25rem 1rem -1.25rem;
+    width: calc(100% + 2.5rem);
+  }
 }

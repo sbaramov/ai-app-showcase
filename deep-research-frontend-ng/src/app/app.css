@@ -1,7 +1,58 @@
 .app-shell {
   display: flex;
-  height: 100vh;      /* Constrain to viewport — prevents shell from growing with content */
-  overflow: hidden;   /* Children scroll internally; the shell itself never scrolls */
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Mobile top header bar */
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow);
+  color: var(--mat-sys-on-surface);
+}
+
+body.dark-theme .mobile-header {
+  background: var(--glass-bg-dark);
+  border-bottom: 1px solid var(--glass-border-dark);
+}
+
+.mobile-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Sidebar backdrop for mobile overlay drawer */
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  cursor: pointer;
+  animation: fadeInBackdrop 0.2s ease-out;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .app-main {
@@ -10,25 +61,40 @@
   flex-direction: column;
   min-width: 0;
   height: 100%;
-  overflow: hidden;   /* Outer main area never scrolls directly */
+  overflow: hidden;
+  position: relative;
 }
 
 .app-header {
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   text-align: center;
-  border-bottom: 1px solid var(--mat-sys-outline-variant);
   flex-shrink: 0;
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow);
+  z-index: 10;
+}
+
+body.dark-theme .app-header {
+  background: var(--glass-bg-dark);
+  border-bottom: 1px solid var(--glass-border-dark);
 }
 
 .app-header h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.5rem;
+  margin: 0 0 0.25rem 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .app-header p {
   margin: 0;
-  opacity: 0.7;
-  font-size: 0.9rem;
+  opacity: 0.8;
+  font-size: 0.85rem;
 }
 
 .app-content {
@@ -39,40 +105,58 @@
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
-  overflow: hidden;   /* Sub-containers control scrolling */
+  overflow: hidden;
   position: relative;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .session-context {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0.5rem;
-  background: var(--mat-sys-surface-container);
-  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 12px;
+  box-shadow: var(--glass-shadow);
+}
+
+body.dark-theme .session-context {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
 }
 
 .session-badge {
   font-size: 0.85rem;
-  font-weight: 500;
-  opacity: 0.7;
+  font-weight: 600;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
 }
 
 .clear-session-btn {
-  background: none;
-  border: 1px solid var(--mat-sys-primary);
-  color: var(--mat-sys-primary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
+  background: var(--mat-sys-primary-container);
+  border: 1px solid var(--glass-border-light);
+  color: var(--mat-sys-on-primary-container);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 0.8rem;
-  transition: background 0.2s;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: var(--glass-shadow);
+}
+
+body.dark-theme .clear-session-btn {
+  border-color: var(--glass-border-dark);
 }
 
 .clear-session-btn:hover {
-  background: var(--mat-sys-primary-container);
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* ==========================================================================
@@ -83,7 +167,7 @@
 .state-new-search .app-content {
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem 1.5rem;
 }
 
 .state-new-search .main-display-area {
@@ -92,8 +176,19 @@
 
 .state-new-search .search-box-container {
   width: 100%;
-  max-width: 600px;
-  animation: fadeIn 0.4s ease-out;
+  max-width: 650px;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-theme .state-new-search .search-box-container {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
 }
 
 /* State 2: Deep Research in Progress (Centered Spinner, Bottom Search Box) */
@@ -112,11 +207,18 @@
 
 .state-searching .search-box-container {
   width: 100%;
-  border-top: 1px solid var(--mat-sys-outline-variant);
-  background: var(--mat-sys-surface-container-low);
-  border-radius: 8px;
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 16px;
   padding: 0.5rem;
   margin-top: 1rem;
+  box-shadow: var(--glass-shadow);
+}
+
+body.dark-theme .state-searching .search-box-container {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
 }
 
 /* State 3: Results Present (Scrollable Reports, Bottom Toolbar Search Box) */
@@ -129,18 +231,40 @@
 
 .state-results .results-scroll-container {
   flex: 1;
-  overflow-y: auto; /* Scroll is here! */
+  overflow-y: auto;
   padding-right: 0.5rem;
+}
+
+/* Custom scrollbar for researchers */
+.state-results .results-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+.state-results .results-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.state-results .results-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+body.dark-theme .state-results .results-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .state-results .search-box-container {
   width: 100%;
-  border-top: 1px solid var(--mat-sys-outline-variant);
-  background: var(--mat-sys-surface-container-low);
-  border-radius: 8px;
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 16px;
   padding: 0.5rem;
   margin-top: 1rem;
   flex-shrink: 0;
+  box-shadow: var(--glass-shadow);
+}
+
+body.dark-theme .state-results .search-box-container {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
 }
 
 /* Centered loading spinner animation container */
@@ -150,22 +274,63 @@
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-light);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+}
+
+body.dark-theme .centered-spinner-container {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
 }
 
 .searching-text {
   font-size: 1.1rem;
-  font-weight: 500;
-  opacity: 0.8;
+  font-weight: 600;
+  opacity: 0.9;
   letter-spacing: 0.5px;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ==========================================================================
+   Responsive: Mobile-First Override Rules
+   ========================================================================== */
 @media (max-width: 768px) {
   .app-shell {
     flex-direction: column;
+    height: 100vh;
+    padding-top: 56px; /* Space for fixed mobile-header */
+    box-sizing: border-box;
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  .app-header {
+    display: none; /* Hide desktop main header */
+  }
+
+  .app-content {
+    padding: 1rem;
+    height: 100%;
+  }
+
+  .state-new-search .search-box-container {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .centered-spinner-container {
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 }

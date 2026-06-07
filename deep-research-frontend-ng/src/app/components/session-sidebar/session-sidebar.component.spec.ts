@@ -79,4 +79,57 @@ describe('SessionSidebarComponent', () => {
     expect(component.getThemeIcon()).toBe('settings_suggest');
     expect(component.getThemeLabel()).toBe('System Theme');
   });
+
+  describe('Date Grouping & Pinned Logic', () => {
+    it('should group unpinned sessions by date correctly', () => {
+      const nowMs = Date.now();
+      const mockSessions: any[] = [
+        { id: '1', name: 'Today Session', pinned: false, createdAt: new Date(nowMs).toISOString() },
+        { id: '2', name: 'Yesterday Session', pinned: false, createdAt: new Date(nowMs - 24 * 60 * 60 * 1000).toISOString() },
+        { id: '3', name: 'Past Week Session', pinned: false, createdAt: new Date(nowMs - 4 * 24 * 60 * 60 * 1000).toISOString() },
+        { id: '4', name: 'Past Month Session', pinned: false, createdAt: new Date(nowMs - 15 * 24 * 60 * 60 * 1000).toISOString() },
+        { id: '5', name: 'Old Session', pinned: false, createdAt: new Date(nowMs - 60 * 24 * 60 * 60 * 1000).toISOString() }
+      ];
+
+      component.sessions.set(mockSessions);
+      const grouped = component.groupedSessions();
+
+      expect(grouped.length).toBe(5);
+      expect(grouped[0].label).toBe('Today');
+      expect(grouped[0].sessions[0].id).toBe('1');
+      expect(grouped[1].label).toBe('Yesterday');
+      expect(grouped[1].sessions[0].id).toBe('2');
+      expect(grouped[2].label).toBe('Past Week');
+      expect(grouped[2].sessions[0].id).toBe('3');
+      expect(grouped[3].label).toBe('Past Month');
+      expect(grouped[3].sessions[0].id).toBe('4');
+      expect(grouped[4].label).toBe('Old');
+      expect(grouped[4].sessions[0].id).toBe('5');
+    });
+
+    it('should put pinned sessions in a Pinned group at the top', () => {
+      const nowMs = Date.now();
+      const mockSessions: any[] = [
+        { id: '1', name: 'Today Session', pinned: false, createdAt: new Date(nowMs).toISOString() },
+        { id: '2', name: 'Pinned Session', pinned: true, createdAt: new Date(nowMs - 60 * 24 * 60 * 60 * 1000).toISOString() }
+      ];
+
+      component.sessions.set(mockSessions);
+      const grouped = component.groupedSessions();
+
+      expect(grouped.length).toBe(2);
+      expect(grouped[0].label).toBe('Pinned');
+      expect(grouped[0].sessions[0].id).toBe('2');
+      expect(grouped[1].label).toBe('Today');
+      expect(grouped[1].sessions[0].id).toBe('1');
+    });
+
+    it('should toggle group collapse state', () => {
+      component.toggleGroup('Today');
+      expect(component.activeCollapsedGroups()['Today']).toBe(true);
+
+      component.toggleGroup('Today');
+      expect(component.activeCollapsedGroups()['Today']).toBe(false);
+    });
+  });
 });

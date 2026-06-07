@@ -2,6 +2,16 @@
 @import "@fontsource/material-icons";
 
 html {
+  /* Glassmorphism Design Tokens */
+  --glass-bg-light: rgba(255, 255, 255, 0.45);
+  --glass-bg-dark: rgba(21, 19, 26, 0.65);
+  --glass-border-light: rgba(255, 255, 255, 0.22);
+  --glass-border-dark: rgba(255, 255, 255, 0.09);
+  --glass-blur: blur(16px) saturate(180%);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+  --glass-shadow-hover: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
+  --font-monospace: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
   --mat-app-background-color: #fef8fc;
   --mat-app-text-color: #1d1b1e;
   --mat-app-elevation-shadow-level-0: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
@@ -1617,10 +1627,31 @@ body.dark-theme {
   color-scheme: dark;
 }
 
+@keyframes meshGradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
+  min-height: 100vh;
+  margin: 0;
+  background-size: 200% 200% !important;
+  animation: meshGradientMove 20s ease infinite;
+  background: radial-gradient(at 0% 0%, rgba(224, 206, 255, 0.45) 0px, transparent 50%),
+              radial-gradient(at 100% 0%, rgba(199, 219, 255, 0.45) 0px, transparent 50%),
+              radial-gradient(at 50% 100%, rgba(255, 230, 210, 0.45) 0px, transparent 50%),
+              #fcfaff;
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+body.dark-theme {
+  background: radial-gradient(at 0% 0%, rgba(88, 28, 135, 0.25) 0px, transparent 50%),
+              radial-gradient(at 100% 0%, rgba(30, 64, 175, 0.25) 0px, transparent 50%),
+              radial-gradient(at 50% 100%, rgba(146, 64, 14, 0.2) 0px, transparent 50%),
+              #0d0b0f !important;
 }
 
 html, body {

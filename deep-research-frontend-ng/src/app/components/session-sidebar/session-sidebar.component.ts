@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject, signal, input, output, computed } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal, input, output, computed, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,6 +42,7 @@ export class SessionSidebarComponent implements OnInit, OnDestroy {
   private readonly _snackBar = inject(MatSnackBar);
 
   readonly selectedSessionId = input<string | null>(null);
+  readonly isMobileOpen = model(false);
 
   readonly sessionSelected = output<string>();
   readonly newSessionRequested = output<void>();
@@ -49,6 +50,68 @@ export class SessionSidebarComponent implements OnInit, OnDestroy {
   readonly sessions = signal<ResearchSessionSummary[]>([]);
   readonly isLoading = signal(false);
   readonly isCollapsed = signal(this._loadCollapseState());
+
+  readonly activeCollapsedGroups = signal<Record<string, boolean>>({});
+
+  readonly groupedSessions = computed(() => {
+    const list = this.sessions();
+    const pinned = list.filter(s => s.pinned);
+    const unpinned = list.filter(s => !s.pinned);
+
+    const groups: Record<string, ResearchSessionSummary[]> = {
+      'Today': [],
+      'Yesterday': [],
+      'Past Week': [],
+      'Past Month': [],
+      'Old': []
+    };
+
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    const yesterdayStart = new Date(todayStart);
+    yesterdayStart.setDate(yesterdayStart.getDate() - 1);
+
+    const pastWeekStart = new Date(todayStart);
+    pastWeekStart.setDate(pastWeekStart.getDate() - 7);
+
+    const pastMonthStart = new Date(todayStart);
+    pastMonthStart.setDate(pastMonthStart.getDate() - 30);
+
+    for (const session of unpinned) {
+      if (!session.createdAt) {
+        groups['Old'].push(session);
+        continue;
+      }
+      const createdDate = new Date(session.createdAt);
+      if (createdDate >= todayStart) {
+        groups['Today'].push(session);
+      } else if (createdDate >= yesterdayStart) {
+        groups['Yesterday'].push(session);
+      } else if (createdDate >= pastWeekStart) {
+        groups['Past Week'].push(session);
+      } else if (createdDate >= pastMonthStart) {
+        groups['Past Month'].push(session);
+      } else {
+        groups['Old'].push(session);
+      }
+    }
+
+    const result: { label: string; sessions: ResearchSessionSummary[] }[] = [];
+
+    if (pinned.length > 0) {
+      result.push({ label: 'Pinned', sessions: pinned });
+    }
+
+    const categoryOrder = ['Today', 'Yesterday', 'Past Week', 'Past Month', 'Old'];
+    for (const cat of categoryOrder) {
+      if (groups[cat].length > 0) {
+        result.push({ label: cat, sessions: groups[cat] });
+      }
+    }
+
+    return result;
+  });
 
   // Exposed theme states directly from state service
   readonly activeThemeMode = computed(() => this._themeService.themeMode());
@@ -79,10 +142,19 @@ export class SessionSidebarComponent implements OnInit, OnDestroy {
 
   onSessionClick(id: string): void {
     this.sessionSelected.emit(id);
+    this.isMobileOpen.set(false); // Auto-close drawer on mobile
   }
 
   onNewSession(): void {
     this.newSessionRequested.emit();
+    this.isMobileOpen.set(false); // Auto-close drawer on mobile
+  }
+
+  toggleGroup(label: string): void {
+    this.activeCollapsedGroups.update(record => ({
+      ...record,
+      [label]: !record[label]
+    }));
   }
 
   onRename(session: ResearchSessionSummary): void {

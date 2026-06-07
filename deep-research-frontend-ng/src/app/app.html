@@ -1,6 +1,21 @@
-<div class="app-shell">
+<div class="app-shell" [class.mobile-sidebar-active]="isMobileSidebarOpen()">
+  <!-- Mobile top header bar -->
+  <header class="mobile-header">
+    <button mat-icon-button (click)="isMobileSidebarOpen.set(true)" aria-label="Open sidebar">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="mobile-title">Deep Research</span>
+    <div style="width: 48px;"></div> <!-- Spacer to balance hamburger button -->
+  </header>
+
+  <!-- Sidebar backdrop for mobile overlay drawer -->
+  @if (isMobileSidebarOpen()) {
+    <div class="sidebar-backdrop" (click)="isMobileSidebarOpen.set(false)" role="presentation"></div>
+  }
+
   <app-session-sidebar
     [selectedSessionId]="selectedSessionId()"
+    [(isMobileOpen)]="isMobileSidebarOpen"
     (sessionSelected)="onSessionSelected($event)"
     (newSessionRequested)="onNewSession()"
   />
