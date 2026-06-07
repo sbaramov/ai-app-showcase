@@ -36,6 +36,7 @@ describe('SessionSidebarComponent', () => {
       set: {
         templateUrl: '',
         template: '<div class="sidebar-expanded"></div>',
+        styleUrl: '',
         styleUrls: [],
         styles: []
       }

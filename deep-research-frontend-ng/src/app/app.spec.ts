@@ -44,6 +44,7 @@ describe('App', () => {
       set: {
         templateUrl: '',
         template: '<div class="app-shell"><h1>Deep Research</h1></div>',
+        styleUrl: '',
         styleUrls: [],
         styles: []
       }
