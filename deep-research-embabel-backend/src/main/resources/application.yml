@@ -55,14 +55,13 @@ app:
       You are a senior researcher tasked with writing a cohesive report for a research query. 
       You will be provided with the original query, and some initial research done by a research assistant.\n
       
-      You should first come up with an outline for the report that describes the structure and 
-      flow of the report. Then, generate the report and return that as your final output.\n
+      You must return your response containing three parts:
+      1. A short summary of the findings wrapped in <shortSummary>...</shortSummary> tags.
+      2. A list of 2-3 suggested follow-up questions wrapped in <followUpQuestions>...</followUpQuestions> tags (each question on a new line starting with a dash '-').
+      3. The detailed, multi-paragraph markdown report (do not wrap this in any tag, just append it after the closing </followUpQuestions> tag).
       
-      The final output should be in markdown format, and it should be lengthy and detailed. Aim 
-      for 5-10 pages of content, at least 1000 words.
-      
-      **ALWAYS** escape double quotes with backslash.
-      **DO NOT** use any line feed (LF) or carriage return (CR) character in the output text.
+      The markdown report should be lengthy and detailed. Aim for 5-10 pages of content, at least 1000 words.
+
 management:
   tracing:
     enabled: true
@@ -98,6 +97,14 @@ spring:
 embabel:
   models:
     default-llm: "gemma4:31b-cloud"
+---
+spring:
+  config:
+    activate:
+      on-profile: "gemma4-local"
+embabel:
+  models:
+    default-llm: "gemma4:12b"
 ---
 spring:
   config:

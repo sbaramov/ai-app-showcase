@@ -88,7 +88,7 @@ class DeepResearchAgent(
     ): ResearchReport {
         val researchResultsText = researchResults.results.joinToString("\n---\n")
         val prompt =
-            "Original query: $${userResearchRequest.researchTopic}\nSummarized search results: \n${researchResultsText}"
+            "Original query: ${userResearchRequest.researchTopic}\nSummarized search results: \n${researchResultsText}"
 
         log.info("[${context.agentProcess.id}] Summarizing research")
         context.processContext.onProcessEvent(
@@ -99,13 +99,12 @@ class DeepResearchAgent(
                 total = 3
             )
         )
-        return context.ai()
+        val rawText = context.ai()
             .withAutoLlm()
             .withSystemPrompt(appProperties.systemPrompts.report)
-            .createObject(
-                prompt,
-                ResearchReport::class.java
-            )
+            .generateText(prompt)
+
+        return parseRawReport(rawText)
     }
 
     companion object {
