@@ -1665,16 +1665,29 @@ mat-icon {
 }
 
 /* ==========================================================================
-   Cove (Light) & Velvet (Dark) Custom Overrides
+   Solarized (Light) & Velvet (Dark) Custom Overrides
    ========================================================================== */
 :root {
-  /* Cove Palette Colors */
-  --cove-blue-deep: #006BBB;
-  --cove-blue-bright: #30A0E0;
-  --cove-orange-warm: #FFC872;
-  --cove-cream-sand: #FFE3B3;
+  /* Solarized Palette Colors (used for Light Theme) */
+  --sol-base03: #002b36;
+  --sol-base02: #073642;
+  --sol-base01: #586e75;
+  --sol-base00: #657b83;
+  --sol-base0:  #839496;
+  --sol-base1:  #93a1a1;
+  --sol-base2:  #eee8d5;
+  --sol-base3:  #fdf6e3;
+  
+  --sol-yellow:  #b58900;
+  --sol-orange:  #cb4b16;
+  --sol-red:     #dc322f;
+  --sol-magenta: #d33682;
+  --sol-violet:  #6c71c4;
+  --sol-blue:    #268bd2;
+  --sol-cyan:    #2aa198;
+  --sol-green:   #859900;
 
-  /* Velvet Palette Colors */
+  /* Velvet Palette Colors (used for Dark Theme) */
   --velvet-navy-deep: #313866;
   --velvet-indigo: #50409A;
   --velvet-purple: #964EC2;
@@ -1684,45 +1697,45 @@ mat-icon {
 }
 
 html {
-  /* MD3 Color overrides for Cove Light */
-  --mat-sys-primary: var(--cove-blue-deep);
-  --mat-sys-on-primary: #ffffff;
-  --mat-sys-primary-container: #e6f3ff;
-  --mat-sys-on-primary-container: #004f8c;
+  /* MD3 Color overrides for Solarized Light */
+  --mat-sys-primary: var(--sol-blue);
+  --mat-sys-on-primary: var(--sol-base3);
+  --mat-sys-primary-container: var(--sol-base2);
+  --mat-sys-on-primary-container: var(--sol-base02);
 
-  --mat-sys-secondary: var(--cove-blue-bright);
-  --mat-sys-on-secondary: #ffffff;
-  --mat-sys-secondary-container: #e1f5fe;
-  --mat-sys-on-secondary-container: #01579b;
+  --mat-sys-secondary: var(--sol-violet);
+  --mat-sys-on-secondary: var(--sol-base3);
+  --mat-sys-secondary-container: var(--sol-base2);
+  --mat-sys-on-secondary-container: var(--sol-base02);
 
-  --mat-sys-tertiary: var(--cove-orange-warm);
-  --mat-sys-on-tertiary: #3e2700;
-  --mat-sys-tertiary-container: var(--cove-cream-sand);
-  --mat-sys-on-tertiary-container: #824f00;
+  --mat-sys-tertiary: var(--sol-orange);
+  --mat-sys-on-tertiary: var(--sol-base3);
+  --mat-sys-tertiary-container: #ffdcc7;
+  --mat-sys-on-tertiary-container: var(--sol-orange);
 
-  --mat-sys-surface: #fffbf5; /* Warm light cream */
-  --mat-sys-on-surface: #222d3b; /* Dark slate text for high contrast */
-  --mat-sys-surface-variant: var(--cove-cream-sand);
-  --mat-sys-on-surface-variant: #42526e;
+  --mat-sys-surface: var(--sol-base3);
+  --mat-sys-on-surface: var(--sol-base00);
+  --mat-sys-surface-variant: var(--sol-base2);
+  --mat-sys-on-surface-variant: var(--sol-base01);
 
-  --mat-sys-surface-container: var(--cove-cream-sand);
-  --mat-sys-surface-container-low: #fff3df;
-  --mat-sys-surface-container-lowest: #ffffff;
-  --mat-sys-surface-container-high: #f5d19a;
-  --mat-sys-surface-container-highest: #ebc082;
+  --mat-sys-surface-container: var(--sol-base2);
+  --mat-sys-surface-container-low: #f5eedb;
+  --mat-sys-surface-container-lowest: var(--sol-base3);
+  --mat-sys-surface-container-high: #e4dcbe;
+  --mat-sys-surface-container-highest: #dcd4b4;
 
-  --mat-sys-outline: #72839b;
-  --mat-sys-outline-variant: #b0c2db;
+  --mat-sys-outline: var(--sol-base01);
+  --mat-sys-outline-variant: var(--sol-base1);
 
-  --mat-sys-background: #fffbf5;
-  --mat-sys-on-background: #222d3b;
+  --mat-sys-background: var(--sol-base3);
+  --mat-sys-on-background: var(--sol-base00);
 
-  --mat-sys-error: #ba1a1a;
-  --mat-sys-on-error: #ffffff;
+  --mat-sys-error: var(--sol-red);
+  --mat-sys-on-error: var(--sol-base3);
 
   /* App overrides */
-  --mat-app-background-color: #fffbf5;
-  --mat-app-text-color: #222d3b;
+  --mat-app-background-color: var(--sol-base3);
+  --mat-app-text-color: var(--sol-base00);
 }
 
 body.dark-theme {
