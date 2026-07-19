@@ -1,3 +1,7 @@
+---
+apply: always
+---
+
 # Agents Instructions
 
 ## Project Overview

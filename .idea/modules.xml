@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ai-app-showcase.iml" filepath="$PROJECT_DIR$/.idea/ai-app-showcase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ai-app-showcase.iml" filepath="$PROJECT_DIR$/ai-app-showcase.iml" />
       <module fileurl="file://$PROJECT_DIR$/deep-research-embabel-jsclient/deep-research-embabel-jsclient.iml" filepath="$PROJECT_DIR$/deep-research-embabel-jsclient/deep-research-embabel-jsclient.iml" />
     </modules>
   </component>
