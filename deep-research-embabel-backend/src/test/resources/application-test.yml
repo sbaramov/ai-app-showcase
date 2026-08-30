@@ -1,6 +1,6 @@
 spring:
   flyway:
-    enabled: false
+    enabled: true
   datasource:
     url: jdbc:tc:postgresql:17:///deep_research
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver

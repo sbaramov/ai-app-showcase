@@ -1,13 +1,13 @@
 package app.session
 
 import app.dr3.ResearchReport
-import com.fasterxml.jackson.databind.ObjectMapper
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import tools.jackson.databind.json.JsonMapper
 import java.util.Optional
 import java.util.UUID
 
@@ -15,7 +15,7 @@ class SessionServiceTest {
 
     private val sessionRepo = mockk<ResearchSessionRepository>()
     private val entryRepo = mockk<ResearchEntryRepository>()
-    private val service = SessionService(sessionRepo, entryRepo, ObjectMapper())
+    private val service = SessionService(sessionRepo, entryRepo, JsonMapper())
 
     @Test
     fun `createSession truncates name to 60 chars`() {

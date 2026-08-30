@@ -70,9 +70,9 @@
     "semantic_hash": "6cf213a77cbadc39febbaf9ee57fac10"
   },
   "deep-research-embabel-backend/pom.xml": {
-    "mtime": 1780177185.7998676,
-    "ast_hash": "e72a0ccb9731e603ceccd1205c1fc0d4",
-    "semantic_hash": "e72a0ccb9731e603ceccd1205c1fc0d4"
+    "mtime": 1788130501.259758,
+    "ast_hash": "87c8330d903cddf910ced69b0379ebee",
+    "semantic_hash": ""
   },
   "deep-research-embabel-backend/src/main/kotlin/app/AppProperties.kt": {
     "mtime": 1777239980.0733728,
@@ -95,7 +95,7 @@
     "semantic_hash": "616f9329433cf4b8cf4aae0571baa4a1"
   },
   "deep-research-embabel-backend/src/main/kotlin/app/dr3/DeepResearchAgent.kt": {
-    "mtime": 1780866183.403809,
+    "mtime": 1785622826.7292373,
     "ast_hash": "e28804d2328397a4d7bd21fbf25bb6f3",
     "semantic_hash": "e28804d2328397a4d7bd21fbf25bb6f3"
   },
@@ -155,9 +155,9 @@
     "semantic_hash": "8621e4135da0e86eda42c89c804a7615"
   },
   "deep-research-embabel-backend/src/main/kotlin/app/session/SessionService.kt": {
-    "mtime": 1780258768.0955331,
-    "ast_hash": "d4c0d21eb922c97662a08f5a6bd43039",
-    "semantic_hash": "d4c0d21eb922c97662a08f5a6bd43039"
+    "mtime": 1788130502.6347666,
+    "ast_hash": "da76d83631d6eae8a9ca9a51bb1b0264",
+    "semantic_hash": ""
   },
   "deep-research-embabel-backend/src/main/resources/db/migration/V1__create_session_history.sql": {
     "mtime": 1779041346.3070917,
@@ -195,19 +195,19 @@
     "semantic_hash": "db87c8709970237cbe2de1d442326eb9"
   },
   "deep-research-embabel-backend/src/test/kotlin/app/session/ResearchSessionRepositoryTest.kt": {
-    "mtime": 1779041104.1458523,
-    "ast_hash": "6b8b472cd9ecb878f3ca3a3d2cfb96d8",
-    "semantic_hash": "6b8b472cd9ecb878f3ca3a3d2cfb96d8"
+    "mtime": 1788130507.4647965,
+    "ast_hash": "9091ccea5ae1204e93b2afa9418ed44e",
+    "semantic_hash": ""
   },
   "deep-research-embabel-backend/src/test/kotlin/app/session/SessionControllerTest.kt": {
-    "mtime": 1780258759.4175012,
-    "ast_hash": "4386245af230bd33b8e113ef01552824",
-    "semantic_hash": "4386245af230bd33b8e113ef01552824"
+    "mtime": 1788130505.8527863,
+    "ast_hash": "8a3d160b47ac92e78c34b7baed29e12d",
+    "semantic_hash": ""
   },
   "deep-research-embabel-backend/src/test/kotlin/app/session/SessionServiceTest.kt": {
-    "mtime": 1779041076.2896934,
-    "ast_hash": "df4d1ff888e06d83fc7f17d47cae8fa1",
-    "semantic_hash": "df4d1ff888e06d83fc7f17d47cae8fa1"
+    "mtime": 1788130504.1207757,
+    "ast_hash": "2eb673f421369d51c55e6d5b9cd23e60",
+    "semantic_hash": ""
   },
   "deep-research-embabel-jsclient/index.js": {
     "mtime": 1777233476.7204382,
@@ -385,9 +385,9 @@
     "semantic_hash": "d9a3845b237c0e2473e0716d0d0b142f"
   },
   "pom.xml": {
-    "mtime": 1780177092.7715611,
-    "ast_hash": "76ffac8d5269af6707178cfe5a2cb5d0",
-    "semantic_hash": "76ffac8d5269af6707178cfe5a2cb5d0"
+    "mtime": 1788130085.0622678,
+    "ast_hash": "9654b13e4bc9f6f1e6896bdd7e39d778",
+    "semantic_hash": ""
   },
   "skills-lock.json": {
     "mtime": 1779633417.0436873,
@@ -400,14 +400,14 @@
     "semantic_hash": "ab50dd89da7da2346b28003352eeeeeb"
   },
   "tavily-search-cli/pom.xml": {
-    "mtime": 1777148644.9242046,
-    "ast_hash": "598cf6d5f67239f3f980d0beb4446637",
-    "semantic_hash": "598cf6d5f67239f3f980d0beb4446637"
+    "mtime": 1788130245.781544,
+    "ast_hash": "5da7d56d416bc187ba09557529f6fd4b",
+    "semantic_hash": ""
   },
   "tavily-search-cli/src/main/kotlin/app/SearchCommand.kt": {
-    "mtime": 1775434540.690838,
-    "ast_hash": "3ad1a42facf1c6455565fc3b78adccf6",
-    "semantic_hash": "3ad1a42facf1c6455565fc3b78adccf6"
+    "mtime": 1788130207.9144382,
+    "ast_hash": "e20e0dd121f3888df261775a6cc30e8d",
+    "semantic_hash": ""
   },
   "tavily-search-cli/src/main/kotlin/app/TavilySearchCliApplication.kt": {
     "mtime": 1775434540.690838,
@@ -420,7 +420,7 @@
     "semantic_hash": "c14a9d44606b48c882a719b96c111cb1"
   },
   "tavily-search-client/pom.xml": {
-    "mtime": 1777148588.9757817,
+    "mtime": 1785622826.7332373,
     "ast_hash": "e8d0976a630e2eadaa410bbb6286b8b5",
     "semantic_hash": "e8d0976a630e2eadaa410bbb6286b8b5"
   },
@@ -445,7 +445,7 @@
     "semantic_hash": "4c654ddec16a3c757c8f287d938d988f"
   },
   "tavily-search-client/src/main/kotlin/org/baramov/search/tavily/TavilyClientConfig.kt": {
-    "mtime": 1775434540.691838,
+    "mtime": 1785622826.7332373,
     "ast_hash": "e2fd863f89ba289509571787a3ea8e12",
     "semantic_hash": "e2fd863f89ba289509571787a3ea8e12"
   },
@@ -835,14 +835,14 @@
     "semantic_hash": "3507c3c296467d5962aa9ff06a407119"
   },
   "deep-research-embabel-backend/src/main/resources/application.yml": {
-    "mtime": 1780866185.091814,
+    "mtime": 1785622802.830109,
     "ast_hash": "8943c3c9e24b399eb082d349511245a0",
     "semantic_hash": "8943c3c9e24b399eb082d349511245a0"
   },
   "deep-research-embabel-backend/src/test/resources/application-test.yml": {
-    "mtime": 1779041402.4643495,
-    "ast_hash": "5b066ace76d3c7bc7f82b81f7ffa4c31",
-    "semantic_hash": "5b066ace76d3c7bc7f82b81f7ffa4c31"
+    "mtime": 1788130551.6040797,
+    "ast_hash": "58cd68fb5b77941024817ae7c3379482",
+    "semantic_hash": ""
   },
   "deep-research-embabel-jsclient/AGENTS.md": {
     "mtime": 1778849966.3837705,
@@ -978,5 +978,15 @@
     "mtime": 1780865174.4718819,
     "ast_hash": "cf7ecf3bb1beac3bb9a9f0b5b8201feb",
     "semantic_hash": "cf7ecf3bb1beac3bb9a9f0b5b8201feb"
+  },
+  "docs/superpowers/plans/2026-08-30-spring-boot-4-1-upgrade.md": {
+    "mtime": 1788130046.500276,
+    "ast_hash": "1e359fe921fb09fe1c7df5f978e797de",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-08-30-spring-boot-4-1-upgrade-design.md": {
+    "mtime": 1788129940.0064814,
+    "ast_hash": "0d216b66170b97696dbfab80714baaf7",
+    "semantic_hash": ""
   }
 }

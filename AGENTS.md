@@ -16,7 +16,7 @@ Docker Compose is used for integration testing.
 - `deep-research-embabel-jsclient` - a simple JS script to test search function of the `deep-research-embabel-backend`
 - `deep-research-frontend-ng` - a Angular based web application with a frontend for the `deep-research-embabel-backend`
 
-**Tech stack:** Kotlin 2.3, Spring Boot 3.5, Spring Shell 3.4, Spring Cloud 2025.0.x, Embabel Agent 0.3.x, JUnit 5, Angular 21, TypeScript
+**Tech stack:** Kotlin 2.3, Spring Boot 4.1, Spring Shell 4.0, Spring Cloud 2025.1.x, Embabel Agent 1.5.x, JUnit 5, Angular 21, TypeScript
 
 
 **Architecture**
@@ -35,6 +35,12 @@ The core architecture is based on the Microservice Pattern where:
 ## General Rules
 * Always obtain explicit approval before transition from plan to implementation.
 * Always follow Test-Driven Development and ensure the user reviews the test before proceeding with implementation.
+
+---
+## Graphify Knowledge Graph
+This project maintains an active Graphify knowledge graph in `graphify-out/`.
+- For codebase architecture, relationships, or questions, use `graphify query "<question>"`, `graphify explain "<symbol>"`, or `graphify path "<A>" "<B>"`.
+- After modifying code files, always run `graphify update .` to keep the AST and relationship graph synchronized.
 
 ---
 ## Context7

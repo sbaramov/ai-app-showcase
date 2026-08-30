@@ -1,23 +1,25 @@
 package app.session
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.autoconfigure.json.AutoConfigureJson
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.put
 import org.springframework.test.web.servlet.delete
+import tools.jackson.databind.ObjectMapper
 import java.time.Instant
 import java.util.UUID
 
 @WebMvcTest(SessionController::class)
+@AutoConfigureJson
 class SessionControllerTest {
 
     @Autowired lateinit var mockMvc: MockMvc

@@ -1,7 +1,7 @@
 package app.session
 
 import app.dr3.ResearchReport
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 import java.time.Instant
 import java.util.UUID
